@@ -10,7 +10,7 @@ export const gmailTransporter = nodemailer.createTransport({
 });
 
 // Verify transporter configuration
-gmailTransporter.verify((error, success) => {
+gmailTransporter.verify((error: any, success: any) => {
   if (error) {
     console.error('Gmail transporter verification failed:', error);
   } else {
