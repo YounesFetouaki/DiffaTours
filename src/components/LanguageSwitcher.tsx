@@ -11,18 +11,23 @@ const LANGUAGE_NAMES: Record<Locale, string> = {
   it: 'Italiano',
 };
 
+interface LanguageSwitcherProps {
+  className?: string;
+}
+
 export const LanguageSwitcher = ({ className }: LanguageSwitcherProps) => {
   const { t, i18n } = useTranslation('common');
   const router = useRouter();
   const pathname = usePathname();
 
   const handleLanguageChange = async (newLocale: Locale) => {
+    // ... logic remains same, but I need to include it or just replace the component start
     await i18n.changeLanguage(newLocale);
-    
+
     // Update URL with new locale
     const pathSegments = pathname?.split('/').filter(Boolean) || [];
     const currentLocale = LOCALES.includes(pathSegments[0] as Locale) ? pathSegments[0] : null;
-    
+
     let newPath: string;
     if (currentLocale) {
       // Replace existing locale
@@ -32,15 +37,15 @@ export const LanguageSwitcher = ({ className }: LanguageSwitcherProps) => {
       // Add locale prefix
       newPath = `/${newLocale}${pathname}`;
     }
-    
+
     router.push(newPath);
   };
 
   return (
     <select
-      value={currentLocale}
-      onChange={handleChange}
-      className="rounded-full border border-border bg-background px-3 py-1.5 text-sm font-medium text-foreground transition-colors hover:bg-accent focus:outline-none focus:ring-2 focus:ring-ring"
+      value={i18n.language as Locale}
+      onChange={(e) => handleLanguageChange(e.target.value as Locale)}
+      className={`rounded-full border border-border bg-background px-3 py-1.5 text-sm font-medium text-foreground transition-colors hover:bg-accent focus:outline-none focus:ring-2 focus:ring-ring ${className}`}
       aria-label="Select language"
     >
       {LOCALES.map((locale) => (
