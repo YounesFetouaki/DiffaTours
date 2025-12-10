@@ -66,8 +66,8 @@ interface User {
 
 interface Service {
   id: number;
-  title: {en: string;fr: string;es: string;it: string;};
-  description: {en: string;fr: string;es: string;it: string;};
+  title: { en: string; fr: string; es: string; it: string; };
+  description: { en: string; fr: string; es: string; it: string; };
   icon: string;
   order: number;
   active: boolean;
@@ -90,18 +90,18 @@ type ExcursionSection = 'marrakech' | 'agadir' | 'taghazout' | 'circuits';
 interface Excursion {
   _id: string;
   id: string;
-  name: {en: string; fr: string; es: string; it: string;} | string;
+  name: { en: string; fr: string; es: string; it: string; } | string;
   section: ExcursionSection;
   images: string[];
   priceMAD: number;
-  location: {en: string; fr: string; es: string; it: string;} | string;
-  duration: {en: string; fr: string; es: string; it: string;} | string;
+  location: { en: string; fr: string; es: string; it: string; } | string;
+  duration: { en: string; fr: string; es: string; it: string; } | string;
   groupSize: string;
   rating: number;
-  description: {en: string; fr: string; es: string; it: string;} | string;
-  highlights: Array<{en: string; fr: string; es: string; it: string;}> | string[];
-  included: Array<{en: string; fr: string; es: string; it: string;}> | string[];
-  notIncluded: Array<{en: string; fr: string; es: string; it: string;}> | string[];
+  description: { en: string; fr: string; es: string; it: string; } | string;
+  highlights: Array<{ en: string; fr: string; es: string; it: string; }> | string[];
+  included: Array<{ en: string; fr: string; es: string; it: string; }> | string[];
+  notIncluded: Array<{ en: string; fr: string; es: string; it: string; }> | string[];
   items?: ExcursionItem[];
   availableDays?: string[];
   timeSlots?: TimeSlot[];
@@ -166,7 +166,7 @@ export default function AdminDashboard() {
 
   // Get current locale from URL
   const [currentLocale, setCurrentLocale] = useState('fr');
-  
+
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const pathSegments = window.location.pathname.split('/');
@@ -206,15 +206,15 @@ export default function AdminDashboard() {
   const [editingExcursion, setEditingExcursion] = useState<Excursion | null>(null);
   const [excursionDialogOpen, setExcursionDialogOpen] = useState(false);
   const [excursionFormData, setExcursionFormData] = useState({
-    id: '', 
+    id: '',
     nameEn: '', nameFr: '', nameEs: '', nameIt: '',
-    section: 'marrakech' as ExcursionSection, 
-    images: '', 
-    priceMAD: '', 
+    section: 'marrakech' as ExcursionSection,
+    images: '',
+    priceMAD: '',
     locationEn: '', locationFr: '', locationEs: '', locationIt: '',
     durationEn: '', durationFr: '', durationEs: '', durationIt: '',
-    groupSize: '', 
-    rating: '0', 
+    groupSize: '',
+    rating: '0',
     descriptionEn: '', descriptionFr: '', descriptionEs: '', descriptionIt: '',
     highlightsEn: '', highlightsFr: '', highlightsEs: '', highlightsIt: '',
     includedEn: '', includedFr: '', includedEs: '', includedIt: '',
@@ -434,7 +434,7 @@ export default function AdminDashboard() {
         },
       });
       const data = await response.json();
-      
+
       if (data.success) {
         setAnalytics(data.data);
       }
@@ -461,7 +461,7 @@ export default function AdminDashboard() {
 
       if (response.ok) {
         toast.success('Order status updated');
-        
+
         // If confirming order, send confirmation email with badge
         if (status === 'confirmed') {
           const emailResponse = await fetch(`/api/admin/orders/${orderId}/send-confirmation`, {
@@ -470,7 +470,7 @@ export default function AdminDashboard() {
               Authorization: `Bearer ${token}`,
             },
           });
-          
+
           if (emailResponse.ok) {
             toast.success('Confirmation email sent with badge!');
           } else {
@@ -478,7 +478,7 @@ export default function AdminDashboard() {
             toast.error(errorData.error || 'Order confirmed but email failed to send');
           }
         }
-        
+
         fetchOrders();
       } else {
         const errorData = await response.json();
@@ -500,7 +500,7 @@ export default function AdminDashboard() {
           Authorization: `Bearer ${token}`,
         },
       });
-      
+
       if (emailResponse.ok) {
         toast.success('Confirmation email sent with badge!');
       } else {
@@ -519,22 +519,22 @@ export default function AdminDashboard() {
 
     try {
       const token = await getToken();
-      
+
       // Fetch current user info directly from API instead of relying on users state
       const userResponse = await fetch('/api/admin/users', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-      
+
       if (!userResponse.ok) {
         toast.error('Failed to fetch user information');
         return;
       }
-      
+
       const userData = await userResponse.json();
       const currentUser = userData.users?.find((u: User) => u.clerkId === clerkUser?.id);
-      
+
       if (!currentUser) {
         toast.error('User information not found');
         return;
@@ -629,10 +629,10 @@ export default function AdminDashboard() {
           Authorization: `Bearer ${token}`,
         },
       });
-      
+
       const data = await response.json();
       const badge = data.badges?.find((b: any) => b.order_number === orderNumber);
-      
+
       if (badge) {
         // Use current locale instead of hardcoded /fr
         const badgeUrl = `/${currentLocale}/badge/${badge.badge_code}`;
@@ -652,7 +652,7 @@ export default function AdminDashboard() {
 
     try {
       const token = await getToken();
-      const response = await fetch(`/api/admin/orders/${orderId}`, { 
+      const response = await fetch(`/api/admin/orders/${orderId}`, {
         method: 'DELETE',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -716,14 +716,14 @@ export default function AdminDashboard() {
     setSyncing(true);
     try {
       const token = await getToken();
-      const response = await fetch('/api/admin/sync-users', { 
+      const response = await fetch('/api/admin/sync-users', {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
       const data = await response.json();
-      
+
       if (response.ok && data.success) {
         toast.success(data.message || 'Users synced successfully!');
         fetchUsers();
@@ -743,7 +743,7 @@ export default function AdminDashboard() {
 
     try {
       const token = await getToken();
-      const response = await fetch(`/api/admin/users/${id}`, { 
+      const response = await fetch(`/api/admin/users/${id}`, {
         method: 'DELETE',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -770,7 +770,7 @@ export default function AdminDashboard() {
       const token = await getToken();
       const response = await fetch(`/api/admin/users/${editingUser.id}`, {
         method: 'PUT',
-        headers: { 
+        headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
@@ -826,7 +826,7 @@ export default function AdminDashboard() {
 
     try {
       const token = await getToken();
-      const response = await fetch(`/api/admin/services/${id}`, { 
+      const response = await fetch(`/api/admin/services/${id}`, {
         method: 'DELETE',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -873,7 +873,7 @@ export default function AdminDashboard() {
 
       const response = await fetch(url, {
         method,
-        headers: { 
+        headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
@@ -899,15 +899,15 @@ export default function AdminDashboard() {
   const handleCreateExcursion = (section: ExcursionSection) => {
     setEditingExcursion(null);
     setExcursionFormData({
-      id: '', 
+      id: '',
       nameEn: '', nameFr: '', nameEs: '', nameIt: '',
-      section: section, 
-      images: '', 
-      priceMAD: '', 
+      section: section,
+      images: '',
+      priceMAD: '',
       locationEn: '', locationFr: '', locationEs: '', locationIt: '',
       durationEn: '', durationFr: '', durationEs: '', durationIt: '',
-      groupSize: '', 
-      rating: '0', 
+      groupSize: '',
+      rating: '0',
       descriptionEn: '', descriptionFr: '', descriptionEs: '', descriptionIt: '',
       highlightsEn: '', highlightsFr: '', highlightsEs: '', highlightsIt: '',
       includedEn: '', includedFr: '', includedEs: '', includedIt: '',
@@ -921,13 +921,13 @@ export default function AdminDashboard() {
 
   const handleEditExcursion = (excursion: Excursion) => {
     setEditingExcursion(excursion);
-    
+
     // Helper to extract text from multi-language or string format
     const getText = (field: any, lang: 'en' | 'fr' | 'es' | 'it') => {
       if (typeof field === 'string') return lang === 'en' ? field : '';
       return field?.[lang] || '';
     };
-    
+
     // Helper for arrays
     const getArrayText = (field: any, lang: 'en' | 'fr' | 'es' | 'it') => {
       if (Array.isArray(field)) {
@@ -937,7 +937,7 @@ export default function AdminDashboard() {
       }
       return '';
     };
-    
+
     setExcursionFormData({
       id: excursion.id,
       nameEn: getText(excursion.name, 'en'),
@@ -985,7 +985,7 @@ export default function AdminDashboard() {
 
     try {
       const token = await getToken();
-      const response = await fetch(`/api/admin/excursions/${id}`, { 
+      const response = await fetch(`/api/admin/excursions/${id}`, {
         method: 'DELETE',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -1009,10 +1009,10 @@ export default function AdminDashboard() {
 
     try {
       const token = await getToken();
-      
+
       // Helper to split comma-separated strings into arrays
       const splitToArray = (str: string) => str.split(',').map((item) => item.trim()).filter(item => item);
-      
+
       // Construct multi-language arrays
       const highlightsArray = splitToArray(excursionFormData.highlightsEn).map((_, index) => ({
         en: splitToArray(excursionFormData.highlightsEn)[index] || '',
@@ -1020,21 +1020,21 @@ export default function AdminDashboard() {
         es: splitToArray(excursionFormData.highlightsEs)[index] || '',
         it: splitToArray(excursionFormData.highlightsIt)[index] || ''
       }));
-      
+
       const includedArray = splitToArray(excursionFormData.includedEn).map((_, index) => ({
         en: splitToArray(excursionFormData.includedEn)[index] || '',
         fr: splitToArray(excursionFormData.includedFr)[index] || '',
         es: splitToArray(excursionFormData.includedEs)[index] || '',
         it: splitToArray(excursionFormData.includedIt)[index] || ''
       }));
-      
+
       const notIncludedArray = splitToArray(excursionFormData.notIncludedEn).map((_, index) => ({
         en: splitToArray(excursionFormData.notIncludedEn)[index] || '',
         fr: splitToArray(excursionFormData.notIncludedFr)[index] || '',
         es: splitToArray(excursionFormData.notIncludedEs)[index] || '',
         it: splitToArray(excursionFormData.notIncludedIt)[index] || ''
       }));
-      
+
       const payload = {
         id: excursionFormData.id,
         name: {
@@ -1080,7 +1080,7 @@ export default function AdminDashboard() {
 
       const response = await fetch(url, {
         method,
-        headers: { 
+        headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
@@ -1201,7 +1201,7 @@ export default function AdminDashboard() {
     } else {
       // Remove 'everyday' if selecting specific days
       const filtered = availableDays.filter(d => d !== 'everyday');
-      
+
       if (filtered.includes(day)) {
         // Remove the day if already selected
         const newDays = filtered.filter(d => d !== day);
@@ -1260,9 +1260,9 @@ export default function AdminDashboard() {
   }
 
   return (
-    <div 
-      className="min-h-screen bg-background flex flex-col section-overlay" 
-      style={{ 
+    <div
+      className="min-h-screen bg-background flex flex-col section-overlay"
+      style={{
         backgroundImage: 'url(https://www.shutterstock.com/image-vector/red-cyber-security-protection-data-600nw-2646525677.jpg)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
@@ -1387,10 +1387,11 @@ export default function AdminDashboard() {
                             cx="50%"
                             cy="50%"
                             labelLine={false}
-                            label={({ status, count }) => `${status}: ${count}`}
+                            label={({ name, value }: any) => `${name}: ${value}`}
                             outerRadius={100}
                             fill="#8884d8"
                             dataKey="count"
+                            nameKey="status"
                           >
                             {analytics.ordersByStatus.map((entry, index) => (
                               <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
@@ -1455,8 +1456,8 @@ export default function AdminDashboard() {
               <div className="bg-white rounded-[20px] shadow p-6">
                 <div className="flex items-center justify-between mb-6">
                   <h2 className="text-2xl font-display font-semibold">{t('users.title')}</h2>
-                  <Button 
-                    onClick={handleSyncUsers} 
+                  <Button
+                    onClick={handleSyncUsers}
                     disabled={syncing}
                     variant="outline"
                     className="gap-2 rounded-full"
@@ -1523,11 +1524,10 @@ export default function AdminDashboard() {
                           <TableCell>{user.email}</TableCell>
                           <TableCell>{user.phone || '-'}</TableCell>
                           <TableCell>
-                            <span className={`px-2 py-1 rounded-full text-xs font-semibold ${
-                              user.role === 'admin' ? 'bg-primary/20 text-primary' : 
-                              user.role === 'staff' ? 'bg-accent/20 text-accent' : 
-                              'bg-gray-100 text-gray-700'
-                            }`}>
+                            <span className={`px-2 py-1 rounded-full text-xs font-semibold ${user.role === 'admin' ? 'bg-primary/20 text-primary' :
+                                user.role === 'staff' ? 'bg-accent/20 text-accent' :
+                                  'bg-gray-100 text-gray-700'
+                              }`}>
                               {user.role.toUpperCase()}
                             </span>
                           </TableCell>
@@ -1621,7 +1621,7 @@ export default function AdminDashboard() {
                         <TableRow key={order._id}>
                           <TableCell className="font-mono font-medium">{order.orderNumber || '-'}</TableCell>
                           <TableCell>
-                            {order.firstName && order.lastName 
+                            {order.firstName && order.lastName
                               ? `${order.firstName} ${order.lastName}`
                               : order.email || order.userClerkId || '-'}
                           </TableCell>
@@ -1629,20 +1629,18 @@ export default function AdminDashboard() {
                             {(order.totalMad ?? 0).toFixed(2)} MAD
                           </TableCell>
                           <TableCell>
-                            <span className={`px-2 py-1 rounded-full text-xs font-semibold ${
-                              order.paymentStatus === 'paid' ? 'bg-green-100 text-green-700' : 
-                              order.paymentStatus === 'pending' ? 'bg-yellow-100 text-yellow-700' : 
-                              'bg-gray-100 text-gray-700'
-                            }`}>
+                            <span className={`px-2 py-1 rounded-full text-xs font-semibold ${order.paymentStatus === 'paid' ? 'bg-green-100 text-green-700' :
+                                order.paymentStatus === 'pending' ? 'bg-yellow-100 text-yellow-700' :
+                                  'bg-gray-100 text-gray-700'
+                              }`}>
                               {(order.paymentMethod || 'UNKNOWN').toUpperCase()} - {(order.paymentStatus || 'UNKNOWN').toUpperCase()}
                             </span>
                           </TableCell>
                           <TableCell>
-                            <span className={`px-2 py-1 rounded-full text-xs font-semibold ${
-                              order.status === 'confirmed' ? 'bg-green-100 text-green-700' : 
-                              order.status === 'cancelled' ? 'bg-red-100 text-red-700' : 
-                              'bg-yellow-100 text-yellow-700'
-                            }`}>
+                            <span className={`px-2 py-1 rounded-full text-xs font-semibold ${order.status === 'confirmed' ? 'bg-green-100 text-green-700' :
+                                order.status === 'cancelled' ? 'bg-red-100 text-red-700' :
+                                  'bg-yellow-100 text-yellow-700'
+                              }`}>
                               {(order.status || 'PENDING').toUpperCase()}
                             </span>
                           </TableCell>
@@ -1769,11 +1767,10 @@ export default function AdminDashboard() {
                           <TableCell className="font-mono">{badge.order_number}</TableCell>
                           <TableCell>{badge.scans_count}</TableCell>
                           <TableCell>
-                            <span className={`px-2 py-1 rounded-full text-xs font-semibold ${
-                              badge.status === 'active' ? 'bg-green-100 text-green-700' : 
-                              badge.status === 'revoked' ? 'bg-red-100 text-red-700' : 
-                              'bg-gray-100 text-gray-700'
-                            }`}>
+                            <span className={`px-2 py-1 rounded-full text-xs font-semibold ${badge.status === 'active' ? 'bg-green-100 text-green-700' :
+                                badge.status === 'revoked' ? 'bg-red-100 text-red-700' :
+                                  'bg-gray-100 text-gray-700'
+                              }`}>
                               {(badge.status || 'unknown').toUpperCase()}
                             </span>
                           </TableCell>
@@ -1824,7 +1821,7 @@ export default function AdminDashboard() {
                     {(['marrakech', 'agadir', 'taghazout'] as ExcursionSection[]).map((section) => {
                       const setting = getCurrentSectionSetting(section);
                       const isVisible = setting?.showPrice ?? true;
-                      
+
                       return (
                         <div key={section} className="flex items-center justify-between p-4 border border-border rounded-[20px]">
                           <div className="flex items-center gap-3">
@@ -2019,7 +2016,7 @@ export default function AdminDashboard() {
                     <Input value={serviceFormData.titleIt} onChange={(e) => setServiceFormData({ ...serviceFormData, titleIt: e.target.value })} required className="rounded-full" />
                   </div>
                 </div>
-                
+
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <Label>{t('form.descriptionEn')}</Label>
@@ -2067,9 +2064,9 @@ export default function AdminDashboard() {
                   </Button>
                   <Button type="submit" disabled={saving} className="rounded-full">
                     {saving ?
-                    <><Loader2 className="w-4 h-4 mr-2 animate-spin" />{editingService ? t('dialog.saving') : t('dialog.creating')}</> :
+                      <><Loader2 className="w-4 h-4 mr-2 animate-spin" />{editingService ? t('dialog.saving') : t('dialog.creating')}</> :
 
-                    editingService ? t('dialog.save') : t('dialog.create')
+                      editingService ? t('dialog.save') : t('dialog.create')
                     }
                   </Button>
                 </DialogFooter>
@@ -2513,7 +2510,7 @@ export default function AdminDashboard() {
                     <CalendarIcon className="w-5 h-5 text-primary" />
                     Schedule & Availability
                   </h3>
-                  
+
                   {/* Available Days */}
                   <div className="space-y-3">
                     <Label>Available Days</Label>
@@ -2521,11 +2518,10 @@ export default function AdminDashboard() {
                       <button
                         type="button"
                         onClick={() => handleToggleDay('everyday')}
-                        className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                          availableDays.includes('everyday')
+                        className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${availableDays.includes('everyday')
                             ? 'bg-primary text-white'
                             : 'bg-secondary text-foreground hover:bg-secondary/80'
-                        }`}
+                          }`}
                       >
                         Every Day
                       </button>
@@ -2534,11 +2530,10 @@ export default function AdminDashboard() {
                           key={day}
                           type="button"
                           onClick={() => handleToggleDay(day)}
-                          className={`px-4 py-2 rounded-full text-sm font-medium transition-colors capitalize ${
-                            availableDays.includes(day) && !availableDays.includes('everyday')
+                          className={`px-4 py-2 rounded-full text-sm font-medium transition-colors capitalize ${availableDays.includes(day) && !availableDays.includes('everyday')
                               ? 'bg-accent text-white'
                               : 'bg-secondary text-foreground hover:bg-secondary/80'
-                          }`}
+                            }`}
                         >
                           {day}
                         </button>
@@ -2558,7 +2553,7 @@ export default function AdminDashboard() {
                         Add Time Slot
                       </Button>
                     </div>
-                    
+
                     {timeSlots.length === 0 ? (
                       <p className="text-sm text-muted">No specific time slots. Available all day.</p>
                     ) : (
@@ -2609,8 +2604,8 @@ export default function AdminDashboard() {
                   </Button>
                   <Button type="submit" disabled={saving} className="rounded-full">
                     {saving ?
-                    <><Loader2 className="w-4 h-4 mr-2 animate-spin" />{t('dialog.saving')}</> :
-                    editingExcursion ? t('dialog.save') : t('dialog.create')
+                      <><Loader2 className="w-4 h-4 mr-2 animate-spin" />{t('dialog.saving')}</> :
+                      editingExcursion ? t('dialog.save') : t('dialog.create')
                     }
                   </Button>
                 </DialogFooter>
