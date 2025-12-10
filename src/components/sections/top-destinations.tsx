@@ -1,0 +1,105 @@
+"use client";
+
+import Image from "next/image";
+import Link from "next/link";
+import { useLocale, useTranslations } from "@/lib/i18n/hooks";
+import { motion } from "framer-motion";
+
+const TopDestinations = () => {
+  const t = useTranslations();
+  const locale = useLocale();
+
+  const destinations = [
+    {
+      id: "marrakech",
+      name: "Marrakech",
+      image: "https://images.unsplash.com/photo-1597212618440-806262de4f6b?q=80&w=2072&auto=format&fit=crop",
+      link: "/marrakech",
+      count: "120+ Experiences"
+    },
+    {
+      id: "agadir",
+      name: "Agadir",
+      image: "https://images.unsplash.com/photo-1577147443647-81856d5151af?q=80&w=2070&auto=format&fit=crop",
+      link: "/agadir",
+      count: "50+ Experiences"
+    },
+    {
+      id: "taghazout",
+      name: "Taghazout",
+      image: "https://images.unsplash.com/photo-1577147443647-81856d5151af?q=80&w=2070&auto=format&fit=crop",
+      link: "/taghazout",
+      count: "30+ Experiences"
+    },
+    {
+      id: "sahara",
+      name: "Sahara Desert",
+      image: "https://images.unsplash.com/photo-1539020140153-e479b8c22e70?q=80&w=2070&auto=format&fit=crop",
+      link: "/circuits",
+      count: "25+ Circuits"
+    }
+  ];
+
+  return (
+    <section className="py-16 md:py-24 relative overflow-hidden">
+      {/* Decorative background element */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-3xl -z-10" />
+
+      <div className="container px-4 mx-auto">
+        <div className="flex flex-col items-center text-center mb-16 space-y-4">
+          <h2 className="text-4xl md:text-5xl font-display font-bold text-foreground drop-shadow-sm">
+            {locale === 'fr' ? "Nos Destinations Phares" : "Top Destinations"}
+          </h2>
+          <div className="w-24 h-1.5 bg-primary rounded-full" />
+          <p className="text-muted-foreground text-xl max-w-2xl font-medium leading-relaxed">
+            {locale === 'fr'
+              ? "Explorez les merveilles du Maroc avec nos circuits sur mesure"
+              : "Explore our most popular destinations and find the perfect adventure for your next trip."
+            }
+          </p>
+
+          <Link
+            href={`/${locale}/nos-excursions`}
+            className="text-primary font-bold hover:underline flex items-center gap-2 text-lg shadow-sm pt-4"
+          >
+            {t('common.viewAll') || (locale === 'fr' ? "Voir toutes les destinations" : "View all destinations")}
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {destinations.map((destination, index) => (
+            <Link
+              key={destination.id}
+              href={`/${locale}${destination.link}`}
+              className="group cursor-pointer block"
+            >
+              <div className="glass p-3 transition-transform duration-300 hover:-translate-y-2">
+                <div className="relative aspect-[3/4] overflow-hidden rounded-[16px] mb-3">
+                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors z-10" />
+                  <Image
+                    src={destination.image}
+                    alt={destination.name}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent z-20">
+                    <h3 className="text-xl font-bold text-white mb-1">
+                      {destination.name}
+                    </h3>
+                    <p className="text-sm text-white/90 font-medium">
+                      {destination.count}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default TopDestinations;

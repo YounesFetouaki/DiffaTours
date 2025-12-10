@@ -1,0 +1,6 @@
+2025-12-09T21:44:15.034Z: ----------------------------------------
+2025-12-09T21:44:15.035Z: New Chat Request Received
+2025-12-09T21:44:15.035Z: OPENAI_API_KEY present: true
+2025-12-09T21:44:15.036Z: OPENAI_API_KEY length: 164
+2025-12-09T21:44:15.036Z: OPENAI_API_KEY prefix: sk-
+2025-12-09T21:44:15.038Z: Parsed request: language=fr, role=user, messages=1

@@ -1,0 +1,770 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "circuits": "Nos Circuits",
+    "excursions": "Nos Excursions",
+    "about": "Qui Sommes-Nous",
+    "services": "Autres Services",
+    "contact": "Contact"
+  },
+  "header": {
+    "clientLogin": "Connexion Client",
+    "signIn": "Se connecter",
+    "myAccount": "Mon Compte",
+    "adminPanel": "Panneau Admin"
+  },
+  "hero": {
+    "title": "Diffa Tours",
+    "subtitle": "Explorez la magie du Maroc avec des expériences inoubliables"
+  },
+  "welcome": {
+    "subtitle": "BIENVENUE CHEZ DIFFA TOURS",
+    "title": "Votre agence de voyage au cœur du Maroc authentique",
+    "description": "Découvrez le Maroc comme jamais auparavant avec Diffa Tours, votre partenaire privilégié pour des aventures inoubliables. Que vous rêviez d'explorer les ruelles animées de Marrakech, de vous détendre sur les plages dorées d'Agadir et Taghazout, ou de vivre l'expérience du désert sous un ciel étoilé, nous créons des circuits et excursions sur mesure qui révèlent la richesse culturelle, les paysages époustouflants et l'hospitalité légendaire du Royaume. Laissez-vous guider par notre passion et notre expertise locale."
+  },
+  "gallery": {
+    "quote": "Des expériences authentiques qui racontent l'histoire du Maroc",
+    "title": "Galerie",
+    "cities": {
+      "all": "Toutes les villes"
+    }
+  },
+  "experiences": {
+    "subtitle": "DES EXPÉRIENCES INOUBLIABLES",
+    "title": "Explorez les merveilles du Maroc avec nos circuits sur mesure",
+    "atlas": {
+      "title": "Excursions dans l'Atlas",
+      "description": "Explorez les montagnes majestueuses de l'Atlas marocain. Randonnées guidées, visites de villages berbères authentiques, cascades spectaculaires et panoramas à couper le souffle. Une immersion totale dans la nature et la culture berbère.",
+      "fullDescription": "Partez à la découverte des montagnes majestueuses de l'Atlas marocain lors d'une excursion inoubliable. Profitez de randonnées guidées à travers des sentiers spectaculaires, visitez des villages berbères authentiques où le temps semble s'être arrêté, admirez des cascades rafraîchissantes et des panoramas à couper le souffle. Cette expérience unique vous offre une immersion totale dans la nature préservée et la riche culture berbère, avec des rencontres authentiques et des paysages exceptionnels.",
+      "duration": "1 journée",
+      "groupSize": "2-8 personnes",
+      "location": "Montagnes de l'Atlas"
+    },
+    "desert": {
+      "title": "Aventures dans le Désert",
+      "description": "Vivez l'expérience magique du désert marocain. Balades à dos de chameau, nuits sous les étoiles dans des camps berbères, safaris en 4x4 et découverte des dunes de Merzouga. Une aventure inoubliable au cœur du Sahara.",
+      "fullDescription": "Plongez dans la magie du désert marocain avec une aventure extraordinaire au cœur du Sahara. Découvrez les dunes dorées de Merzouga lors d'une balade mémorable à dos de chameau au coucher du soleil. Passez des nuits inoubliables sous un ciel étoilé dans des camps berbères traditionnels, savourez la cuisine locale autour d'un feu de camp, et explorez le désert en 4x4 pour des sensations fortes. Une expérience authentique qui restera gravée dans votre mémoire.",
+      "duration": "2-3 jours",
+      "groupSize": "2-12 personnes",
+      "location": "Désert du Sahara"
+    },
+    "cultural": {
+      "title": "Découvertes Culturelles",
+      "description": "Plongez dans la richesse culturelle du Maroc. Visites des médinas historiques, souks traditionnels, palais et monuments emblématiques. Rencontrez les artisans locaux et découvrez l'artisanat marocain authentique.",
+      "fullDescription": "Immergez-vous dans la richesse culturelle extraordinaire du Maroc à travers des visites guidées des médinas historiques classées au patrimoine mondial. Explorez les souks traditionnels colorés où s'entremêlent les senteurs d'épices et les couleurs vibrantes, visitez des palais somptueux et des monuments emblématiques témoins de l'histoire glorieuse du royaume. Rencontrez des artisans talentueux dans leurs ateliers et découvrez les secrets de l'artisanat marocain authentique transmis de génération en génération.",
+      "duration": "Demi-journée",
+      "groupSize": "2-15 personnes",
+      "location": "Marrakech & Médina"
+    }
+  },
+  "testimonial": {
+    "subtitle": "TÉMOIGNAGES DE NOS VOYAGEURS",
+    "quote": "Une expérience exceptionnelle avec Diffa Tours ! L'organisation était parfaite, les guides passionnés et les découvertes inoubliables. Le Maroc nous a révélé toute sa beauté grâce à cette équipe professionnelle. Je recommande vivement !"
+  },
+  "amenities": {
+    "subtitle": "DÉCOUVREZ NOS SERVICES",
+    "transport": "Transport climatisé",
+    "guides": "Guides francophones",
+    "circuits": "Circuits personnalisés",
+    "visits": "Visites guidées",
+    "destinations": "Excursions multi-destinations",
+    "adventures": "Aventures dans le désert",
+    "hotels": "Hébergements de qualité",
+    "support": "Support 24/7"
+  },
+  "propertyPhotos": {
+    "quote": "Inspirés par notre histoire, entourés par la nature pour offrir une expérience différente"
+  },
+  "reservation": {
+    "title": "Réservation",
+    "departDate": "Date de départ",
+    "destination": "Destination",
+    "excursionType": "Type d'excursion",
+    "persons": "Personnes",
+    "adults": "Adulte",
+    "adultsPlural": "Adultes",
+    "children": "Enfant",
+    "childrenPlural": "Enfants",
+    "search": "Rechercher",
+    "bookNow": "Réservez maintenant",
+    "destinations": {
+      "marrakech": "Marrakech",
+      "agadir": "Agadir",
+      "taghazout": "Taghazout",
+      "circuits": "Circuits"
+    },
+    "types": {
+      "circuit": "Circuit",
+      "guidedTour": "Visite guidée",
+      "adventure": "Aventure",
+      "culture": "Culture"
+    }
+  },
+  "excursions": {
+    "subtitle": "DÉCOUVREZ NOS EXCURSIONS ET CIRCUITS EXCEPTIONNELS",
+    "title": "Nos excursions populaires",
+    "viewAll": "Voir Toutes Les Excursions",
+    "learnMore": "En savoir plus",
+    "tours": {
+      "ourika": {
+        "title": "Excursion à la Vallée de l'Ourika",
+        "description": "Partez à la découverte de la magnifique vallée de l'Ourika, nichée au pied de l'Atlas. Admirez les cascades rafraîchissantes, visitez des villages berbères authentiques et profitez de paysages à couper le souffle. Une escapade nature inoubliable à moins d'une heure de Marrakech."
+      },
+      "quad": {
+        "title": "Safari Quad dans le Désert d'Agafay",
+        "description": "Vivez l'aventure ultime avec notre safari en quad à travers les dunes dorées du désert d'Agafay. Sensations fortes garanties avec un guide expérimenté, tea à la menthe traditionnel et coucher de soleil spectaculaire sur les dunes. Parfait pour les amateurs d'adrénaline."
+      },
+      "imperial": {
+        "title": "Circuit Complet 7 Jours - Villes Impériales",
+        "description": "Découvrez l'essence du Maroc avec notre circuit des villes impériales : Marrakech, Fès, Meknès et Rabat. Explorez les médinas millénaires, les palais somptueux et les souks animés. Hébergement en riads de charme, guide francophone et transport climatisé inclus pour une expérience tout confort."
+      }
+    },
+    "features": {
+      "location": "Marrakech",
+      "agadir": "Agadir",
+      "multiCity": "Multi-villes",
+      "fullDay": "Journée complète",
+      "threeHours": "3 heures",
+      "sevenDays": "7 jours",
+      "group": "Groupe",
+      "private": "Privé",
+      "popular": "Populaire"
+    }
+  },
+  "newsletter": {
+    "subtitle": "RESTEZ INFORMÉS AVEC DIFFA TOURS",
+    "title": "Inscrivez-vous à notre newsletter pour recevoir nos meilleures offres de voyages, nouveaux circuits et promotions exclusives.",
+    "emailPlaceholder": "Email",
+    "subscribe": "S'inscrire"
+  },
+  "footer": {
+    "address": "ADRESSE",
+    "addressText": "Diffa Tours, Avenue Mohammed V, Quartier Gueliz, Marrakech, Maroc",
+    "phone": "TÉLÉPHONE",
+    "email": "EMAIL",
+    "social": "RÉSEAUX SOCIAUX",
+    "copyright": "© Copyright Diffa Tours. Tous droits réservés.",
+    "privacy": "CONFIDENTIALITÉ",
+    "terms": "CONDITIONS D'UTILISATION",
+    "policy": "POLITIQUE"
+  },
+  "contact": {
+    "hero": {
+      "subtitle": "CONTACTEZ-NOUS",
+      "title": "Contact",
+      "description": "Nous sommes là pour écouter toute demande d'information"
+    },
+    "info": {
+      "address": "Adresse",
+      "addressText": "Diffa Tours\nAvenue Mohammed V\nQuartier Gueliz\n40000 Marrakech",
+      "phone": "Téléphone",
+      "email": "Email",
+      "hours": "Horaires",
+      "hoursText": "7 jours sur 7\n24h/24"
+    },
+    "form": {
+      "subtitle": "ENVOYEZ-NOUS UN MESSAGE",
+      "title": "Contactez-nous",
+      "description": "Que ce soit pour une réservation, une demande d'information ou toute autre question, notre équipe se fera un plaisir de vous répondre dans les plus brefs délais.",
+      "firstName": "Prénom",
+      "lastName": "Nom",
+      "email": "Email",
+      "phone": "Téléphone",
+      "phonePlaceholder": "+212 600 123 456",
+      "phoneHelper": "Exemple: +212 600 123 456",
+      "subject": "Sujet",
+      "selectSubject": "Sélectionnez un sujet",
+      "message": "Message",
+      "subjects": {
+        "reservation": "Réservation",
+        "information": "Demande d'information",
+        "event": "Événement",
+        "other": "Autre"
+      },
+      "send": "Envoyer le message",
+      "sending": "Envoi en cours...",
+      "success": "Votre message a été envoyé avec succès!",
+      "error": "Une erreur s'est produite",
+      "phoneError": "Le numéro de téléphone doit contenir au moins 8 chiffres",
+      "location": {
+        "title": "Notre localisation",
+        "description": "Situé au cœur de Marrakech, à proximité des principaux sites touristiques"
+      },
+      "call": {
+        "title": "Appelez-nous",
+        "description": "Disponibles 24h/24 et 7j/7 pour répondre à toutes vos questions"
+      },
+      "write": {
+        "title": "Écrivez-nous",
+        "description": "Nous vous répondrons dans les 24 heures"
+      }
+    },
+    "cta": {
+      "subtitle": "RÉSERVEZ VOTRE AVENTURE",
+      "title": "Prêt à vivre une expérience inoubliable ?",
+      "description": "Réservez dès maintenant votre excursion avec Diffa Tours et découvrez les merveilles du Maroc.",
+      "bookNow": "Réserver maintenant",
+      "discoverRooms": "Découvrir nos excursions"
+    },
+    "emailSubject": "[DifaTours] {subject} - De {firstName} {lastName}",
+    "emailTitle": "Nouveau Message de Contact",
+    "emailFrom": "De:",
+    "emailFooter": "Ce message a été envoyé via le formulaire de contact DifaTours"
+  },
+  "excursionsPage": {
+    "hero": {
+      "title": "Nos Excursions",
+      "description": "Découvrez nos destinations exceptionnelles à travers le Maroc"
+    },
+    "categories": {
+      "subtitle": "CHOISISSEZ VOTRE DESTINATION",
+      "title": "Explorez nos excursions par région",
+      "marrakech": {
+        "title": "Excursions à Marrakech",
+        "description": "Découvrez la ville rouge, ses souks colorés et ses monuments historiques"
+      },
+      "agadir": {
+        "title": "Excursions à Agadir",
+        "description": "Profitez des plages magnifiques et du climat ensoleillé d'Agadir"
+      },
+      "circuits": {
+        "title": "Circuits",
+        "description": "Explorez le Maroc avec nos circuits guidés à travers le pays"
+      },
+      "taghazout": {
+        "title": "Excursions à Taghazout",
+        "description": "Vivez l'expérience du paradis des surfeurs à Taghazout"
+      },
+      "discover": "Découvrir les excursions"
+    },
+    "cta": {
+      "quote": "Créez des souvenirs inoubliables avec Diffa Tours",
+      "bookNow": "Réserver maintenant"
+    }
+  },
+  "marrakechPage": {
+    "hero": {
+      "title": "Excursions à Marrakech",
+      "description": "Découvrez la perle du sud, entre souks animés et monuments majestueux"
+    },
+    "subtitle": "LA VILLE ROUGE",
+    "title": "Explorez les merveilles de Marrakech",
+    "description": "Marrakech, la ville rouge, est une destination incontournable au Maroc. Découvrez ses médinas historiques, ses jardins luxuriants, ses palais somptueux et ses souks colorés. Nos excursions vous emmènent au cœur de cette ville fascinante pour une expérience authentique et mémorable.",
+    "popularTitle": "Nos excursions populaires à Marrakech",
+    "activities": {
+      "medina": "Visite guidée de la médina et des souks traditionnels",
+      "majorelle": "Découverte des jardins Majorelle et du musée Yves Saint Laurent",
+      "palaces": "Exploration des palais Bahia et El Badi",
+      "ourika": "Excursion dans la vallée de l'Ourika et les montagnes de l'Atlas",
+      "jemaa": "Balade en calèche et visite de la place Jemaa el-Fna",
+      "cooking": "Expérience culinaire et cours de cuisine marocaine",
+      "agafay": "Excursion dans le désert d'Agafay avec dîner sous les étoiles"
+    }
+  },
+  "agadirPage": {
+    "hero": {
+      "title": "Excursions à Agadir",
+      "description": "Profitez du soleil, de la plage et des aventures côtières"
+    },
+    "subtitle": "LA PERLE DU SUD",
+    "title": "Découvrez les trésors d'Agadir",
+    "description": "Agadir, station balnéaire moderne du Maroc, offre un climat ensoleillé toute l'année, des plages dorées et une multitude d'activités. De la détente au bord de l'océan aux excursions dans l'arrière-pays, nos tours vous feront découvrir toutes les facettes de cette ville magnifique.",
+    "popularTitle": "Nos excursions populaires à Agadir",
+    "activities": {
+      "beach": "Journée détente sur les plages d'Agadir",
+      "souk": "Visite du Souk El Had et découverte de l'artisanat local",
+      "paradise": "Excursion à Paradise Valley et baignade dans les cascades",
+      "camel": "Balade en chameau au coucher du soleil",
+      "kasbah": "Visite de la Kasbah et panorama sur la baie",
+      "souss": "Découverte du parc national de Souss-Massa",
+      "essaouira": "Excursion à Essaouira, la cité des vents"
+    }
+  },
+  "circuitsPage": {
+    "hero": {
+      "title": "Circuits au Maroc",
+      "description": "Parcourez le Maroc de bout en bout avec nos circuits organisés"
+    },
+    "subtitle": "VOYAGES ORGANISÉS",
+    "title": "Circuits complets à travers le Maroc",
+    "description": "Explorez le Maroc en profondeur avec nos circuits organisés. Du désert du Sahara aux villes impériales, des montagnes de l'Atlas aux côtes atlantiques, nos itinéraires soigneusement conçus vous offrent une immersion complète dans la culture et les paysages marocains.",
+    "popularTitle": "Nos circuits populaires",
+    "carousel": {
+      "title": "Découvrez nos circuits",
+      "subtitle": "Cliquez sur une carte pour révéler plus de détails",
+      "contactForPricing": "Contactez-nous pour le tarif",
+      "clickToSeeDetails": "Cliquez pour voir les détails",
+      "viewDetails": "Voir les détails",
+      "highlights": "Points forts",
+      "navigation": "Utilisez les flèches ou glissez pour naviguer • Cliquez sur la carte pour la retourner"
+    },
+    "activities": {
+      "desert": "Circuit Désert 3 jours : Marrakech - Ouarzazate - Merzouga",
+      "imperial": "Villes Impériales 5 jours : Fès, Meknès, Rabat et Marrakech",
+      "south": "Grand Sud Marocain 7 jours : De Casablanca à Merzouga",
+      "north": "Nord du Maroc 4 jours : Tanger, Chefchaouen et Tétouan",
+      "atlas": "Circuit Atlas et Vallées 6 jours : Montagnes et oasis",
+      "complete": "Tour Complet du Maroc 10 jours : L'essentiel du royaume"
+    },
+    "included": {
+      "title": "Ce qui est inclus",
+      "transport": "✓ Transport en véhicule climatisé",
+      "accommodation": "✓ Hébergement en hôtels et riads",
+      "meals": "✓ Petits déjeuners et dîners",
+      "guide": "✓ Guide francophone expérimenté",
+      "visits": "✓ Visites et entrées aux sites"
+    }
+  },
+  "taghazoutPage": {
+    "hero": {
+      "title": "Excursions à Taghazout",
+      "description": "Le paradis des surfeurs et des amoureux de la nature"
+    },
+    "subtitle": "VILLAGE DE SURFEURS",
+    "title": "Vivez l'esprit Taghazout",
+    "description": "Taghazout, petit village de pêcheurs devenu spot de surf mondialement reconnu, offre des vagues parfaites toute l'année. Entre sessions de surf, yoga sur la plage et exploration des criques sauvages, découvrez ce lieu authentique où se mêlent culture berbère et ambiance bohème.",
+    "popularTitle": "Nos excursions populaires à Taghazout",
+    "activities": {
+      "surf": "Cours de surf pour tous niveaux sur les meilleurs spots",
+      "yoga": "Yoga et méditation face à l'océan",
+      "beaches": "Exploration des plages : Anchor Point, Killer Point, Hash Point",
+      "village": "Visite du village de pêcheurs et découverte de l'artisanat local",
+      "hike": "Randonnée côtière et points de vue panoramiques",
+      "paradise": "Excursion à Paradise Valley depuis Taghazout",
+      "cooking": "Cours de cuisine marocaine traditionnelle"
+    }
+  },
+  "common": {
+    "readMore": "En savoir plus",
+    "bookNow": "Réserver maintenant",
+    "exploreMore": "Explorer plus",
+    "discover": "Découvrir",
+    "viewAll": "Voir tout",
+    "backToTop": "Retour en haut",
+    "reserve": "Réserver",
+    "book_now": "Réserver maintenant",
+    "from": "À partir de",
+    "per_person": "par personne",
+    "duration": "Durée",
+    "group_size": "Taille du groupe",
+    "language": "Langue",
+    "difficulty": "Difficulté",
+    "select_date": "Sélectionner une date",
+    "price": "Prix",
+    "available": "Disponible",
+    "unavailable": "Non disponible",
+    "loading": "Chargement..."
+  },
+  "calendar": {
+    "select_activity": "Sélectionnez une activité",
+    "select_date_time": "Sélectionnez la date et l'heure",
+    "participants": "Nombre de participants",
+    "book_now": "Réserver maintenant",
+    "price_per_person": "Prix par personne",
+    "select_time": "Sélectionnez l'heure",
+    "persons": "personnes",
+    "person": "personne",
+    "total": "Total",
+    "booking_confirmed": "Réservation confirmée !"
+  },
+  "days": {
+    "sunday": "Dim",
+    "monday": "Lun",
+    "tuesday": "Mar",
+    "wednesday": "Mer",
+    "thursday": "Jeu",
+    "friday": "Ven",
+    "saturday": "Sam"
+  },
+  "months": {
+    "january": "Janvier",
+    "february": "Février",
+    "march": "Mars",
+    "april": "Avril",
+    "may": "Mai",
+    "june": "Juin",
+    "july": "Juillet",
+    "august": "Août",
+    "september": "Septembre",
+    "october": "Octobre",
+    "november": "Novembre",
+    "december": "Décembre"
+  },
+  "reservationPage": {
+    "title": "Nos Circuits Disponibles",
+    "subtitle": "Découvrez nos circuits exceptionnels à travers le Maroc",
+    "clearFilter": "Effacer le filtre",
+    "price": "Prix (DHS)",
+    "ok": "Ok",
+    "noTours": "Aucun circuit disponible dans cette gamme de prix."
+  },
+  "excursionDetail": {
+    "backButton": "Retour",
+    "notFound": {
+      "title": "Excursion Non Trouvée",
+      "description": "L'excursion que vous recherchez n'existe pas."
+    },
+    "selectMoreItems": "Vous pouvez sélectionner plus d'articles",
+    "numberOfPeople": "NOMBRE DE PERSONNES",
+    "ageGroups": {
+      "baby": "0 à 4 ans",
+      "child": "4 à 12 ans",
+      "adult": "Adulte"
+    },
+    "numberOfAdults": "Nombre de personnes adultes",
+    "dateOfBooking": "DATE DE RÉSERVATION",
+    "addToCart": "AJOUTER AU PANIER",
+    "shareWithFriends": "Partager avec des amis",
+    "description": "Description",
+    "time": "Heure",
+    "priceIncludes": "Le prix inclut",
+    "priceIncludesText": "Transport, chauffeur/guide.",
+    "cancellation": "Annulation : Il n'y a pas de remboursement en cas d'annulation.",
+    "minParticipants": "NB : Les excursions sont autorisées à un nombre minimum de participants",
+    "pleaseSelectDate": "Veuillez sélectionner une date pour votre réservation",
+    "addedToCart": "Ajouté au panier avec succès !",
+    "highlights": "Points Forts",
+    "included": "Ce Qui Est Inclus",
+    "notIncluded": "Non Inclus"
+  },
+  "account": {
+    "title": "Mon Compte",
+    "subtitle": "Gérez vos informations personnelles et vos réservations",
+    "memberSince": "Membre depuis",
+    "tabs": {
+      "personalInfo": "Informations personnelles",
+      "reservations": "Mes réservations",
+      "reviews": "Mes avis"
+    },
+    "buttons": {
+      "manageProfile": "Gérer mon profil",
+      "signOut": "Se déconnecter"
+    },
+    "personalInfo": {
+      "title": "Informations personnelles",
+      "fullName": "Nom complet",
+      "email": "Email",
+      "phone": "Téléphone",
+      "notProvided": "Non renseigné"
+    },
+    "activity": {
+      "title": "Votre activité",
+      "totalReservations": "Réservations totales",
+      "publishedReviews": "Avis publiés"
+    },
+    "reservations": {
+      "ongoing": "Réservations en cours",
+      "history": "Historique des réservations",
+      "reservationNumber": "Réservation",
+      "viewDetails": "Voir les détails",
+      "none": "Aucune réservation",
+      "noneDescription": "Découvrez nos excursions et réservez votre prochaine aventure",
+      "viewExcursions": "Voir les excursions",
+      "loadingError": "Échec du chargement des réservations"
+    },
+    "reviews": {
+      "title": "Mes avis",
+      "verified": "Vérifié",
+      "none": "Aucun avis",
+      "noneDescription": "Partagez votre expérience après vos excursions",
+      "loadingError": "Échec du chargement des avis"
+    },
+    "status": {
+      "confirmed": "Confirmée",
+      "pending": "En attente",
+      "completed": "Terminée",
+      "cancelled": "Annulée"
+    }
+  },
+  "admin": {
+    "title": "Tableau de bord Admin",
+    "subtitle": "Gérer tout le contenu du site",
+    "tabs": {
+      "users": "Utilisateurs",
+      "services": "Services",
+      "excursions": "Excursions"
+    },
+    "users": {
+      "title": "Gestion des utilisateurs",
+      "addUser": "Ajouter un utilisateur",
+      "searchPlaceholder": "Rechercher par nom ou email...",
+      "filter": {
+        "all": "Tous les utilisateurs",
+        "admin": "Administrateurs",
+        "user": "Utilisateurs"
+      },
+      "table": {
+        "name": "Nom",
+        "email": "Email",
+        "phone": "Téléphone",
+        "role": "Rôle",
+        "createdAt": "Créé le",
+        "actions": "Actions"
+      },
+      "role": {
+        "admin": "Administrateur",
+        "user": "Utilisateur"
+      },
+      "deleteConfirm": "Êtes-vous sûr de vouloir supprimer cet utilisateur?",
+      "deleteSuccess": "Utilisateur supprimé avec succès",
+      "updateSuccess": "Utilisateur mis à jour avec succès",
+      "noUsers": "Aucun utilisateur trouvé"
+    },
+    "services": {
+      "title": "Gestion des services",
+      "addService": "Ajouter un service",
+      "table": {
+        "title": "Titre",
+        "icon": "Icône",
+        "order": "Ordre",
+        "active": "Statut",
+        "actions": "Actions"
+      },
+      "status": {
+        "active": "Actif",
+        "inactive": "Inactif"
+      },
+      "deleteConfirm": "Êtes-vous sûr de vouloir supprimer ce service?",
+      "deleteSuccess": "Service supprimé avec succès",
+      "createSuccess": "Service créé avec succès",
+      "updateSuccess": "Service mis à jour avec succès",
+      "noServices": "Aucun service trouvé"
+    },
+    "excursions": {
+      "title": "Gestion des excursions",
+      "addExcursion": "Créer une nouvelle excursion",
+      "sections": {
+        "all": "Toutes les sections",
+        "marrakech": "Marrakech",
+        "agadir": "Agadir",
+        "taghazout": "Taghazout",
+        "circuits": "Circuits"
+      },
+      "table": {
+        "id": "ID",
+        "name": "Nom",
+        "section": "Section",
+        "location": "Localisation",
+        "price": "Prix (MAD)",
+        "duration": "Durée",
+        "actions": "Actions"
+      },
+      "deleteConfirm": "Êtes-vous sûr de vouloir supprimer cette excursion?",
+      "deleteSuccess": "Excursion supprimée avec succès",
+      "createSuccess": "Excursion créée avec succès",
+      "updateSuccess": "Excursion mise à jour avec succès",
+      "noExcursions": "Aucune excursion trouvée"
+    },
+    "dialog": {
+      "editUser": "Modifier l'utilisateur",
+      "editService": "Modifier le service",
+      "createService": "Créer un service",
+      "editExcursion": "Modifier l'excursion",
+      "createExcursion": "Créer une excursion",
+      "cancel": "Annuler",
+      "save": "Enregistrer",
+      "create": "Créer",
+      "saving": "Enregistrement...",
+      "creating": "Création..."
+    },
+    "form": {
+      "name": "Nom",
+      "email": "Email",
+      "phone": "Téléphone",
+      "role": "Rôle",
+      "section": "Section",
+      "titleEn": "Titre (Anglais)",
+      "titleFr": "Titre (Français)",
+      "titleEs": "Titre (Espagnol)",
+      "titleIt": "Titre (Italien)",
+      "descriptionEn": "Description (Anglais)",
+      "descriptionFr": "Description (Français)",
+      "descriptionEs": "Description (Espagnol)",
+      "descriptionIt": "Description (Italien)",
+      "icon": "Nom de l'icône",
+      "order": "Ordre d'affichage",
+      "active": "Actif",
+      "required": "Requis"
+    },
+    "loading": "Chargement...",
+    "error": "Une erreur s'est produite"
+  },
+  "cart": {
+    "title": "Mon Panier",
+    "empty": {
+      "title": "Votre panier est vide",
+      "description": "Ajoutez des excursions à votre panier pour commencer votre aventure",
+      "browseExcursions": "Parcourir les excursions"
+    },
+    "backButton": "Retour",
+    "date": "Date",
+    "people": "Personnes",
+    "baby": "Bébé",
+    "child": "Enfant",
+    "adult": "Adulte(s)",
+    "extras": "Extras",
+    "clearAll": "Vider le panier",
+    "summary": "Récapitulatif",
+    "items": "Articles",
+    "total": "Total",
+    "proceedToCheckout": "Passer au paiement",
+    "continueShopping": "Continuer les achats",
+    "checkoutComingSoon": "Le paiement sera bientôt disponible !"
+  },
+  "checkout": {
+    "tabs": {
+      "personal": "Informations personnelles",
+      "confirm": "Confirmer la commande"
+    },
+    "personalInfo": {
+      "title": "Informations personnelles",
+      "firstName": "Prénom",
+      "lastName": "Nom",
+      "phone": "Téléphone",
+      "email": "Email",
+      "passport": "Passeport ou CIN",
+      "city": "Ville",
+      "accommodationType": "Type d'hébergement",
+      "hotel": "Hôtel",
+      "riad": "Riad",
+      "hotelName": "Nom de l'hôtel",
+      "hotelNamePlaceholder": "Entrez le nom de votre hôtel",
+      "address": "Adresse",
+      "addressPlaceholder": "Entrez votre adresse",
+      "ageConfirm": "J'ai plus de 18 ans",
+      "termsAccept": "J'ai lu et j'accepte les",
+      "termsLink": "termes et conditions",
+      "name": "Nom",
+      "type": "Type"
+    },
+    "confirm": {
+      "information": "Information",
+      "paymentMethod": "Méthode de paiement",
+      "paymentCash": "CMI",
+      "method": "Méthode",
+      "orderItems": "Articles commandés",
+      "youSelected": "Vous avez sélectionné ces articles",
+      "adults": "Adulte"
+    },
+    "summary": {
+      "title": "Récapitulatif de la commande",
+      "total": "Total"
+    },
+    "validation": {
+      "firstName": "Le prénom est requis",
+      "lastName": "Le nom est requis",
+      "phone": "Le téléphone est requis",
+      "email": "Un email valide est requis",
+      "passport": "Le passeport ou CIN est requis",
+      "city": "La ville est requise",
+      "age": "Vous devez avoir plus de 18 ans",
+      "terms": "Vous devez accepter les termes et conditions"
+    },
+    "continue": "Continuer",
+    "confirmButton": "Confirmer votre information",
+    "success": "Commande confirmée avec succès !"
+  },
+  "orderConfirmation": {
+    "title": "Récapitulatif de la commande",
+    "orderNumber": "Order Number :",
+    "personalInfo": "Personal Information",
+    "name": "Name :",
+    "email": "Email :",
+    "phone": "Phone :",
+    "passport": "Passport or CIN :",
+    "type": "Type :",
+    "hotelName": "Hotel name :",
+    "city": "City :",
+    "address": "Address :",
+    "paymentMethod": "Payment Method",
+    "method": "Method :",
+    "orderItems": "Order Items",
+    "youSelected": "You select these items:",
+    "adults": "Adult :",
+    "orderSummary": "Order Summary",
+    "total": "Total",
+    "payNow": "Pay Now"
+  },
+  "payment": {
+    "title": "DEMANDE DE PAIEMENT",
+    "paymentDetails": "DÉTAIL DE PAIEMENT",
+    "paymentDate": "mardi, novembre 25, 2025 23:59:12",
+    "paymentMethods": "Modes de paiement :",
+    "cardholderName": "Nom du porteur de la carte",
+    "cardholderPlaceholder": "NOM DU PORTEUR DE LA CARTE",
+    "cardNumber": "Numéro de carte de paiement",
+    "cardNumberPlaceholder": "NUMÉRO DE CARTE DE PAIEMENT",
+    "expiryDate": "Date d'expiration",
+    "verificationCode": "Code de vérification",
+    "acceptTerms": "Confirmer l'acceptation des",
+    "termsLink": "conditions générales d'utilisation du service",
+    "confidentialityNotice": "Les informations sur le paiement vous concernant resteront confidentielles.",
+    "orderDetails": "DÉTAIL DE LA COMMANDE",
+    "identifier": "Identifiant",
+    "amount": "Montant",
+    "merchantDetails": "DÉTAIL MARCHAND",
+    "merchantName": "Nom du marchand",
+    "clientInfo": "INFORMATIONS DU CLIENT",
+    "name": "Nom",
+    "address": "Adresse",
+    "phone": "Tél",
+    "email": "E-mail",
+    "validatePayment": "Valider le paiement",
+    "cancel": "Annuler",
+    "cmiFooter": "Centre Monétique Interbancaire",
+    "loading": "Chargement...",
+    "orderNotFound": "Commande Non Trouvée",
+    "orderNotFoundMessage": "La commande que vous recherchez n'existe pas.",
+    "returnHome": "Retour à l'accueil",
+    "securePaymentNotice": "Paiement Sécurisé via CMI",
+    "redirectNotice": "Vous serez redirigé vers la passerelle de paiement sécurisée CMI pour effectuer votre paiement.",
+    "processing": "Traitement en cours...",
+    "payNow": "Payer Maintenant"
+  },
+  "terms": {
+    "title": "Conditions Générales d'Utilisation",
+    "lastUpdated": "Dernière mise à jour",
+    "section1": {
+      "title": "1. Acceptation des Conditions",
+      "content": "En accédant et en utilisant le site web de Diffa Tours, vous acceptez d'être lié par ces conditions générales d'utilisation. Si vous n'acceptez pas ces conditions, veuillez ne pas utiliser notre site."
+    },
+    "section2": {
+      "title": "2. Réservations et Paiements",
+      "content": "Toutes les réservations effectuées via notre site sont soumises aux conditions suivantes:",
+      "item1": "Les prix affichés sont en dirhams marocains (MAD) et peuvent être sujets à modifications.",
+      "item2": "Un acompte peut être requis pour confirmer votre réservation.",
+      "item3": "Le paiement peut être effectué en espèces lors de la prise en charge ou en ligne via notre système de paiement sécurisé.",
+      "item4": "Les réservations de circuits sont confirmées après validation par notre équipe."
+    },
+    "section3": {
+      "title": "3. Annulations et Remboursements",
+      "content": "Les politiques d'annulation varient selon le type d'excursion réservée. En général, les annulations effectuées au moins 48 heures avant la date prévue peuvent donner droit à un remboursement partiel ou complet. Les annulations tardives peuvent ne pas être remboursables. Veuillez nous contacter pour plus de détails sur notre politique d'annulation."
+    },
+    "section4": {
+      "title": "4. Responsabilités",
+      "content": "Diffa Tours s'engage à fournir des services de qualité. Cependant, nous ne pouvons être tenus responsables des événements indépendants de notre volonté, tels que les conditions météorologiques, les retards de transport ou les fermetures de sites touristiques. Nous vous recommandons de souscrire une assurance voyage appropriée."
+    },
+    "section5": {
+      "title": "5. Protection des Données Personnelles",
+      "content": "Vos données personnelles sont collectées et traitées conformément à notre politique de confidentialité. Nous nous engageons à protéger votre vie privée et à ne pas partager vos informations avec des tiers sans votre consentement, sauf si la loi l'exige."
+    },
+    "section6": {
+      "title": "6. Propriété Intellectuelle",
+      "content": "Tout le contenu de ce site, y compris les textes, images, logos et graphiques, est la propriété de Diffa Tours et est protégé par les lois sur la propriété intellectuelle. Toute utilisation non autorisée de ce contenu est strictement interdite."
+    },
+    "section7": {
+      "title": "7. Modifications des Conditions",
+      "content": "Diffa Tours se réserve le droit de modifier ces conditions générales à tout moment. Les modifications entreront en vigueur dès leur publication sur le site. Il est de votre responsabilité de consulter régulièrement ces conditions."
+    },
+    "section8": {
+      "title": "8. Droit Applicable",
+      "content": "Ces conditions générales sont régies par les lois marocaines. Tout litige découlant de l'utilisation de ce site sera soumis à la juridiction exclusive des tribunaux marocains."
+    },
+    "contact": {
+      "title": "Contact",
+      "content": "Pour toute question concernant ces conditions générales, veuillez nous contacter:",
+      "phone": "Téléphone",
+      "address": "Adresse"
+    }
+  }
+}
