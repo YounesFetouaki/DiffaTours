@@ -9,7 +9,7 @@ import { randomUUID } from 'crypto';
 export async function GET(request: NextRequest) {
   try {
     await connectDB();
-    
+
     const { searchParams } = new URL(request.url);
     const id = searchParams.get('id');
 
@@ -75,7 +75,7 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     await connectDB();
-    
+
     const body = await request.json();
 
     // Validate required fields
@@ -237,7 +237,7 @@ export async function POST(request: NextRequest) {
     // Check availability before creating order
     for (const item of parsedCartItems) {
       const totalPeople = (item.ageGroups?.['0-4'] || 0) + (item.ageGroups?.['4-12'] || 0) + (item.ageGroups?.['adult'] || 0);
-      
+
       const capacity = await ExcursionCapacity.findOne({
         excursionId: item.excursionId,
         date: item.date
@@ -245,7 +245,7 @@ export async function POST(request: NextRequest) {
 
       if (capacity) {
         const availableSpots = capacity.maxCapacity - capacity.currentBookings;
-        
+
         if (!capacity.isAvailable || availableSpots < totalPeople) {
           return NextResponse.json(
             {
@@ -290,7 +290,7 @@ export async function POST(request: NextRequest) {
     try {
       for (const item of parsedCartItems) {
         const totalPeople = (item.ageGroups?.['0-4'] || 0) + (item.ageGroups?.['4-12'] || 0) + (item.ageGroups?.['adult'] || 0);
-        
+
         const capacity = await ExcursionCapacity.findOne({
           excursionId: item.excursionId,
           date: item.date
@@ -302,7 +302,7 @@ export async function POST(request: NextRequest) {
             $inc: { currentBookings: totalPeople },
             updatedAt: new Date()
           });
-          
+
           console.log(`✅ Updated capacity for ${item.excursionId} on ${item.date}: +${totalPeople} bookings`);
         }
       }
@@ -314,14 +314,14 @@ export async function POST(request: NextRequest) {
     // Create notification for all admins
     try {
       const admins = await User.find({ role: 'admin' }).lean();
-      
+
       const adminNotifications = admins.map(admin => ({
         userId: admin.clerkId,
         type: 'order_created' as const,
         title: 'Nouvelle commande reçue',
         message: `Nouvelle commande de ${firstName} ${lastName} (${orderNumber.substring(0, 8)}...) - ${totalMad} MAD`,
-        orderId: newOrder._id.toString(),
-        orderNumber: newOrder.orderNumber,
+        orderId: (newOrder as any)._id.toString(),
+        orderNumber: (newOrder as any).orderNumber,
         read: false,
       }));
 
@@ -342,8 +342,8 @@ export async function POST(request: NextRequest) {
           type: 'order_created' as const,
           title: 'Commande créée avec succès',
           message: `Votre commande ${orderNumber.substring(0, 8)}... a été créée. Montant: ${totalMad} MAD`,
-          orderId: newOrder._id.toString(),
-          orderNumber: newOrder.orderNumber,
+          orderId: (newOrder as any)._id.toString(),
+          orderNumber: (newOrder as any).orderNumber,
           read: false,
         });
         console.log(`✅ Created user notification for ${userClerkId}`);
@@ -355,7 +355,7 @@ export async function POST(request: NextRequest) {
 
     // Automatically send confirmation email
     try {
-      const confirmationResponse = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/orders/${newOrder._id.toString()}/send-confirmation`, {
+      const confirmationResponse = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/orders/${(newOrder as any)._id.toString()}/send-confirmation`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -373,7 +373,7 @@ export async function POST(request: NextRequest) {
       // Don't fail the order creation if email fails
     }
 
-    return NextResponse.json(newOrder.toObject(), { status: 201 });
+    return NextResponse.json((newOrder as any).toObject(), { status: 201 });
   } catch (error) {
     console.error('POST error:', error);
     return NextResponse.json(
