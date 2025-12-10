@@ -5,11 +5,13 @@ import { auth, clerkClient } from '@clerk/nextjs/server';
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+
+  context: { params: Promise<{ id: string }> }
 ) {
+  const params = await context.params;
   try {
     await connectDB();
-    
+
     // Check Clerk authentication
     const { userId: clerkUserId } = await auth();
 
