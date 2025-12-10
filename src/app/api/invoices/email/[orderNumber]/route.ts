@@ -17,6 +17,16 @@ export async function POST(
     const requestLocale = body?.locale;
 
     console.log('[EMAIL] Starting email send for order:', orderNumber);
+    console.log('[EMAIL] EMAIL_USER configured:', !!process.env.EMAIL_USER);
+    console.log('[EMAIL] EMAIL_PASSWORD configured:', !!process.env.EMAIL_PASSWORD);
+
+    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASSWORD) {
+      console.error('[EMAIL] Missing email configuration');
+      return NextResponse.json(
+        { error: 'Server email configuration missing' },
+        { status: 500 }
+      );
+    }
 
     await connectDB();
     const order = await Order.findOne({ orderNumber });
