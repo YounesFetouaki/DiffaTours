@@ -27,7 +27,7 @@ const TopDestinations = () => {
     {
       id: "taghazout",
       name: "Taghazout",
-      image: "https://images.unsplash.com/photo-1577147443647-81856d5151af?q=80&w=2070&auto=format&fit=crop",
+      image: "https://images.unsplash.com/photo-1539020140153-e479b8c22e70?q=80&w=2070&auto=format&fit=crop",
       link: "/taghazout",
       count: "30+ Experiences"
     },
@@ -53,8 +53,8 @@ const TopDestinations = () => {
           <div className="w-24 h-1.5 bg-primary rounded-full" />
           <p className="text-muted-foreground text-xl max-w-2xl font-medium leading-relaxed">
             {locale === 'fr'
-              ? "Explorez les merveilles du Maroc avec nos circuits sur mesure"
-              : "Explore our most popular destinations and find the perfect adventure for your next trip."
+              ? "Explorez les merveilles du Maroc avec nos excursions soigneusement sélectionnées"
+              : "Explore the wonders of Morocco with our carefully selected excursions"
             }
           </p>
 
@@ -67,7 +67,7 @@ const TopDestinations = () => {
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {destinations.map((destination, index) => (
             <Link
               key={destination.id}
