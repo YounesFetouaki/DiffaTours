@@ -53,8 +53,8 @@ const TopDestinations = () => {
           <div className="w-24 h-1.5 bg-primary rounded-full" />
           <p className="text-muted-foreground text-xl max-w-2xl font-medium leading-relaxed">
             {locale === 'fr'
-              ? "Explorez les merveilles du Maroc avec nos excursions soigneusement sélectionnées"
-              : "Explore the wonders of Morocco with our carefully selected excursions"
+              ? "Explorez les merveilles du Maroc."
+              : "Explore the wonders of Morocco."
             }
           </p>
 
