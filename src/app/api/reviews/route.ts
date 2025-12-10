@@ -5,7 +5,7 @@ import Review from '@/models/Review';
 export async function GET(request: NextRequest) {
   try {
     await connectDB();
-    
+
     const searchParams = request.nextUrl.searchParams;
     const limit = Math.min(parseInt(searchParams.get('limit') ?? '10'), 100);
     const offset = parseInt(searchParams.get('offset') ?? '0');
@@ -55,7 +55,7 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     await connectDB();
-    
+
     const body = await request.json();
     const {
       userId,
@@ -152,7 +152,7 @@ export async function POST(request: NextRequest) {
 
     const newReview = await Review.create(insertData);
 
-    return NextResponse.json(newReview.toObject(), { status: 201 });
+    return NextResponse.json((newReview as any).toObject(), { status: 201 });
   } catch (error) {
     console.error('POST error:', error);
     return NextResponse.json(
