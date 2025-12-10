@@ -2,11 +2,9 @@ import { NextRequest, NextResponse } from 'next/server';
 import { connectDB } from '@/lib/mongodb';
 import Order from '@/models/Order';
 import { generateInvoicePDF } from '@/lib/invoice-generator';
-import { Resend } from 'resend';
+import { gmailTransporter } from '@/lib/gmail';
 
 export const maxDuration = 60;
-
-const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(
   request: NextRequest,
@@ -19,8 +17,6 @@ export async function POST(
     const requestLocale = body?.locale;
 
     console.log('[EMAIL] Starting email send for order:', orderNumber);
-    console.log('[EMAIL] Resend API Key configured:', !!process.env.RESEND_API_KEY);
-    console.log('[EMAIL] From email:', process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev');
 
     await connectDB();
     const order = await Order.findOne({ orderNumber });
@@ -39,7 +35,13 @@ export async function POST(
     console.log('[EMAIL] Order found, generating PDF with locale:', locale);
 
     // Parse cart items
-    const cartItems = JSON.parse(order.cartItems || '[]');
+    let cartItems = [];
+    try {
+      cartItems = JSON.parse(order.cartItems || '[]');
+    } catch (e) {
+      console.warn('Failed to parse cart items:', e);
+      cartItems = [];
+    }
 
     // Transform cart items to match PDF generator interface
     const transformedCartItems = cartItems.map((item: any) => {
@@ -85,9 +87,6 @@ export async function POST(
     );
 
     console.log('[EMAIL] PDF generated successfully, size:', pdfBuffer.length, 'bytes');
-
-    // Convert to base64 for Resend
-    const base64PDF = pdfBuffer.toString('base64');
 
     // Email translations
     const translations = {
@@ -166,9 +165,9 @@ export async function POST(
     console.log('[EMAIL] Sending email to:', order.email);
     console.log('[EMAIL] Subject:', t.subject);
 
-    // Send email with Resend
-    const { data, error } = await resend.emails.send({
-      from: 'onboarding@resend.dev',
+    // Send email with Gmail Transporter
+    const mailOptions = {
+      from: `"DiffaTours Facturation" <${process.env.EMAIL_USER}>`,
       to: order.email,
       subject: t.subject,
       html: `
@@ -231,29 +230,18 @@ export async function POST(
       attachments: [
         {
           filename: `invoice-${orderNumber}.pdf`,
-          content: base64PDF,
+          content: pdfBuffer,
         },
       ],
-    });
+    };
 
-    if (error) {
-      console.error('[EMAIL] Resend error:', JSON.stringify(error, null, 2));
-      return NextResponse.json(
-        {
-          error: 'Failed to send email',
-          details: error.message || JSON.stringify(error),
-          resendError: error
-        },
-        { status: 500 }
-      );
-    }
+    await gmailTransporter.sendMail(mailOptions);
 
-    console.log('[EMAIL] Email sent successfully, ID:', data?.id);
+    console.log('[EMAIL] Email sent successfully via Gmail');
 
     return NextResponse.json({
       success: true,
       message: 'Invoice sent successfully',
-      emailId: data?.id,
     });
   } catch (error) {
     console.error('[EMAIL] Email invoice error:', error);

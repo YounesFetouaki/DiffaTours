@@ -17,18 +17,21 @@ export async function GET(
     // Validate badgeCode
     if (!badgeCode || badgeCode.trim() === '') {
       return NextResponse.json(
-        { 
+        {
           error: 'Badge code is required',
-          code: 'INVALID_BADGE_CODE' 
+          code: 'INVALID_BADGE_CODE'
         },
         { status: 400 }
       );
     }
 
-    // Query badge by badgeCode
-    const badgeData = await TouristBadge.findOne({ badgeCode }).lean();
+    // Query badge by badgeCode (case insensitive)
+    const badgeData = await TouristBadge.findOne({
+      badgeCode: { $regex: new RegExp(`^${badgeCode}$`, 'i') }
+    }).lean();
 
     if (!badgeData) {
+      console.log(`Badge not found for code: ${badgeCode}`);
       return NextResponse.json(
         { error: 'Badge not found' },
         { status: 404 }
@@ -89,9 +92,9 @@ export async function PUT(
 
     if (!clerkUserId) {
       return NextResponse.json(
-        { 
+        {
           error: 'Authentication required',
-          code: 'AUTH_REQUIRED' 
+          code: 'AUTH_REQUIRED'
         },
         { status: 401 }
       );
@@ -110,9 +113,9 @@ export async function PUT(
     // Check if user is admin
     if (user.role !== 'admin') {
       return NextResponse.json(
-        { 
+        {
           error: 'Admin access required',
-          code: 'ADMIN_ACCESS_REQUIRED' 
+          code: 'ADMIN_ACCESS_REQUIRED'
         },
         { status: 403 }
       );
@@ -123,9 +126,9 @@ export async function PUT(
     // Validate badgeCode
     if (!badgeCode || badgeCode.trim() === '') {
       return NextResponse.json(
-        { 
+        {
           error: 'Badge code is required',
-          code: 'INVALID_BADGE_CODE' 
+          code: 'INVALID_BADGE_CODE'
         },
         { status: 400 }
       );
@@ -150,9 +153,9 @@ export async function PUT(
     if (status !== undefined) {
       if (!validStatuses.includes(status)) {
         return NextResponse.json(
-          { 
+          {
             error: `Invalid status. Must be one of: ${validStatuses.join(', ')}`,
-            code: 'INVALID_STATUS' 
+            code: 'INVALID_STATUS'
           },
           { status: 400 }
         );
@@ -166,9 +169,9 @@ export async function PUT(
         const testDate = new Date(validUntil);
         if (isNaN(testDate.getTime())) {
           return NextResponse.json(
-            { 
+            {
               error: 'Invalid validUntil date format. Must be a valid ISO date string',
-              code: 'INVALID_DATE_FORMAT' 
+              code: 'INVALID_DATE_FORMAT'
             },
             { status: 400 }
           );
@@ -226,9 +229,9 @@ export async function DELETE(
 
     if (!clerkUserId) {
       return NextResponse.json(
-        { 
+        {
           error: 'Authentication required',
-          code: 'AUTH_REQUIRED' 
+          code: 'AUTH_REQUIRED'
         },
         { status: 401 }
       );
@@ -247,9 +250,9 @@ export async function DELETE(
     // Check if user is admin
     if (user.role !== 'admin') {
       return NextResponse.json(
-        { 
+        {
           error: 'Admin access required',
-          code: 'ADMIN_ACCESS_REQUIRED' 
+          code: 'ADMIN_ACCESS_REQUIRED'
         },
         { status: 403 }
       );
@@ -260,9 +263,9 @@ export async function DELETE(
     // Validate badgeCode
     if (!badgeCode || badgeCode.trim() === '') {
       return NextResponse.json(
-        { 
+        {
           error: 'Badge code is required',
-          code: 'INVALID_BADGE_CODE' 
+          code: 'INVALID_BADGE_CODE'
         },
         { status: 400 }
       );
