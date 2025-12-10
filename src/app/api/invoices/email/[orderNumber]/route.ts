@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { connectDB } from '@/lib/mongodb';
 import Order from '@/models/Order';
-import { generateInvoicePDF } from '@/lib/invoice-generator.tsx';
+import { generateInvoicePDF } from '@/lib/invoice-generator';
 import { Resend } from 'resend';
 
 export const maxDuration = 60;
@@ -37,7 +37,7 @@ export async function POST(
     const locale = requestLocale || order.locale || 'fr';
 
     console.log('[EMAIL] Order found, generating PDF with locale:', locale);
-    
+
     // Parse cart items
     const cartItems = JSON.parse(order.cartItems || '[]');
 
@@ -46,12 +46,12 @@ export async function POST(
       // Transform ageGroups from object to array
       const ageGroupsArray = item.ageGroups
         ? Object.entries(item.ageGroups)
-            .filter(([_, count]) => count > 0)
-            .map(([ageGroup, count]) => ({
-              ageGroup,
-              count: count as number,
-              price: 0, // Price is already included in total
-            }))
+          .filter(([_, count]) => (count as number) > 0)
+          .map(([ageGroup, count]) => ({
+            ageGroup,
+            count: count as number,
+            price: 0, // Price is already included in total
+          }))
         : [];
 
       return {
@@ -239,10 +239,10 @@ export async function POST(
     if (error) {
       console.error('[EMAIL] Resend error:', JSON.stringify(error, null, 2));
       return NextResponse.json(
-        { 
-          error: 'Failed to send email', 
+        {
+          error: 'Failed to send email',
           details: error.message || JSON.stringify(error),
-          resendError: error 
+          resendError: error
         },
         { status: 500 }
       );
