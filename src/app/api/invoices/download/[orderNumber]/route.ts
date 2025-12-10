@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { connectDB } from '@/lib/mongodb';
 import Order from '@/models/Order';
-import { generateInvoicePDF } from '@/lib/invoice-generator.tsx';
+import { generateInvoicePDF } from '@/lib/invoice-generator';
 
 export const maxDuration = 60; // Vercel serverless timeout
 
@@ -35,12 +35,12 @@ export async function GET(
       // Transform ageGroups from object to array
       const ageGroupsArray = item.ageGroups
         ? Object.entries(item.ageGroups)
-            .filter(([_, count]) => count > 0)
-            .map(([ageGroup, count]) => ({
-              ageGroup,
-              count: count as number,
-              price: 0, // Price is already included in total
-            }))
+          .filter(([_, count]) => (count as number) > 0)
+          .map(([ageGroup, count]) => ({
+            ageGroup,
+            count: count as number,
+            price: 0, // Price is already included in total
+          }))
         : [];
 
       return {
@@ -74,7 +74,7 @@ export async function GET(
     );
 
     // Return PDF as download
-    return new NextResponse(pdfBuffer, {
+    return new NextResponse(pdfBuffer as any, {
       headers: {
         'Content-Type': 'application/pdf',
         'Content-Disposition': `attachment; filename="invoice-${orderNumber}.pdf"`,
@@ -84,7 +84,7 @@ export async function GET(
   } catch (error) {
     console.error('Invoice download error:', error);
     return NextResponse.json(
-      { 
+      {
         error: 'Failed to generate invoice',
         details: error instanceof Error ? error.message : 'Unknown error'
       },
