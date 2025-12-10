@@ -16,7 +16,7 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  outputFileTracingRoot: path.resolve(__dirname, '../../'),
+
   // Temporarily disable turbopack loader to fix compilation issue
   // ...(process.env.NODE_ENV === 'development' && {
   //   turbopack: {
