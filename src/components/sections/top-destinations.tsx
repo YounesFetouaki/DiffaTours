@@ -42,8 +42,8 @@ const TopDestinations = () => {
 
   const translations = {
     fr: {
-      title: "Nos Meilleures Excursions",
-      subtitle: "Vivez des expériences uniques à travers des activités authentiques et soigneusement sélectionnées.",
+      title: "Nos Destinations Phares",
+      subtitle: "Découvrez les lieux incontournables du Maroc, entre paysages majestueux et richesses culturelles.",
       viewAll: "Voir toutes les destinations"
     },
     en: {
