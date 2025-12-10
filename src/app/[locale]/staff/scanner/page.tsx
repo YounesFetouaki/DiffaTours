@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
 import { ArrowLeft, Camera, CheckCircle, XCircle, Loader2 } from "lucide-react";
@@ -26,7 +26,7 @@ export default function ScannerPage() {
 
   useEffect(() => {
     if (!isLoaded) return;
-    
+
     if (!user) {
       router.push("/sign-in?redirect=/staff/scanner");
       return;
@@ -46,7 +46,7 @@ export default function ScannerPage() {
 
     // Extract badge code from URL if it's a full URL
     let cleanedBadgeCode = badgeCode.trim();
-    
+
     // Check if it's a URL containing /badge/
     if (cleanedBadgeCode.includes('/badge/')) {
       const parts = cleanedBadgeCode.split('/badge/');
@@ -54,7 +54,7 @@ export default function ScannerPage() {
         cleanedBadgeCode = parts[1].split('?')[0].split('#')[0].trim(); // Remove query params and hash
       }
     }
-    
+
     // Also check for http:// or https:// and extract just the badge code
     if (cleanedBadgeCode.startsWith('http://') || cleanedBadgeCode.startsWith('https://')) {
       try {
@@ -68,9 +68,9 @@ export default function ScannerPage() {
         console.error("Failed to parse URL:", e);
       }
     }
-    
+
     console.log("Cleaned badge code:", cleanedBadgeCode);
-    
+
     if (!cleanedBadgeCode) {
       setScanResult({
         success: false,
@@ -83,12 +83,12 @@ export default function ScannerPage() {
     setIsScanning(false);
 
     try {
-      const requestBody = { 
+      const requestBody = {
         badgeCode: cleanedBadgeCode,
         scanLocation: "Scanner App",
         deviceInfo: navigator.userAgent
       };
-      
+
       console.log("Sending request:", requestBody);
 
       const response = await fetch("/api/badges/scan", {
@@ -131,19 +131,19 @@ export default function ScannerPage() {
   };
 
   // Improved helper function to parse trip details
-  const parseTripDetails = (tripDetails: any): JSX.Element => {
+  const parseTripDetails = (tripDetails: any): React.ReactNode => {
     if (!tripDetails) {
       return <span className="text-muted">No excursion details available</span>;
     }
-    
+
     try {
       let parsed = tripDetails;
-      
+
       // If it's a string, try to parse it
       if (typeof tripDetails === 'string') {
         parsed = JSON.parse(tripDetails);
       }
-      
+
       // If it's an array of excursions
       if (Array.isArray(parsed)) {
         return (
@@ -155,10 +155,10 @@ export default function ScannerPage() {
                 </p>
                 <div className="text-sm text-muted space-y-1">
                   {item.date && item.date !== 'N/A' && (
-                    <p>📅 Date: {new Date(item.date).toLocaleDateString('en-US', { 
-                      year: 'numeric', 
-                      month: 'long', 
-                      day: 'numeric' 
+                    <p>📅 Date: {new Date(item.date).toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric'
                     })}</p>
                   )}
                   <p>
@@ -171,7 +171,7 @@ export default function ScannerPage() {
           </div>
         );
       }
-      
+
       // If it's a single object
       if (typeof parsed === 'object' && parsed !== null) {
         return (
@@ -181,10 +181,10 @@ export default function ScannerPage() {
             </p>
             <div className="text-sm text-muted space-y-1">
               {parsed.date && parsed.date !== 'N/A' && (
-                <p>📅 Date: {new Date(parsed.date).toLocaleDateString('en-US', { 
-                  year: 'numeric', 
-                  month: 'long', 
-                  day: 'numeric' 
+                <p>📅 Date: {new Date(parsed.date).toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
                 })}</p>
               )}
               <p>
@@ -195,10 +195,10 @@ export default function ScannerPage() {
           </div>
         );
       }
-      
+
       // Fallback: display as string
       return <span>{String(parsed)}</span>;
-      
+
     } catch (e) {
       console.error('Error parsing trip details:', e, tripDetails);
       // Return the raw string if parsing fails
@@ -227,7 +227,7 @@ export default function ScannerPage() {
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <Header />
-      <main 
+      <main
         className="flex-1 pt-40 pb-8 px-4 sm:px-6 lg:px-8 bg-cover bg-center bg-fixed"
         style={{
           backgroundImage: 'url(https://plus.unsplash.com/premium_photo-1701534008693-0eee0632d47a?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8d2Vic2l0ZSUyMGJhY2tncm91bmR8ZW58MHx8MHx8fDA%3D)'
@@ -277,9 +277,8 @@ export default function ScannerPage() {
             ) : (
               <div>
                 <div
-                  className={`p-8 mb-6 ${
-                    scanResult.success ? "bg-green-50" : "bg-red-50"
-                  }`}
+                  className={`p-8 mb-6 ${scanResult.success ? "bg-green-50" : "bg-red-50"
+                    }`}
                 >
                   <div className="flex flex-col items-center text-center">
                     {scanResult.success ? (
@@ -288,9 +287,8 @@ export default function ScannerPage() {
                       <XCircle className="w-20 h-20 text-red-600 mb-4" />
                     )}
                     <h2
-                      className={`text-3xl font-bold mb-2 ${
-                        scanResult.success ? "text-green-600" : "text-red-600"
-                      }`}
+                      className={`text-3xl font-bold mb-2 ${scanResult.success ? "text-green-600" : "text-red-600"
+                        }`}
                     >
                       {scanResult.success ? "VALID BADGE" : "INVALID BADGE"}
                     </h2>
@@ -327,10 +325,10 @@ export default function ScannerPage() {
                       <p className="text-lg">
                         {scanResult.data.validUntil
                           ? new Date(scanResult.data.validUntil).toLocaleDateString('en-US', {
-                              year: 'numeric',
-                              month: 'long',
-                              day: 'numeric'
-                            })
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric'
+                          })
                           : "No expiration"}
                       </p>
                     </div>
