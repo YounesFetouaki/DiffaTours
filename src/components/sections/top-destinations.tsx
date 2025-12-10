@@ -31,13 +31,13 @@ const TopDestinations = () => {
       link: "/taghazout",
       count: "30+ Experiences"
     },
-    {
+    /* {
       id: "sahara",
       name: "Sahara Desert",
       image: "https://images.unsplash.com/photo-1539020140153-e479b8c22e70?q=80&w=2070&auto=format&fit=crop",
       link: "/circuits",
       count: "25+ Circuits"
-    }
+    } */
   ];
 
   return (
