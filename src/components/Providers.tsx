@@ -16,7 +16,7 @@ export const Providers = ({ children, locale }: ProvidersProps) => {
     <ClerkProvider
       signInUrl={`/${locale}/sign-in`}
       signUpUrl={`/${locale}/sign-up`}
-      fallbackRedirectUrl={`/${locale}`}
+      signInFallbackRedirectUrl={`/${locale}`}
     >
       <CurrencyProvider>
         <CartProvider>
