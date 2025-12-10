@@ -40,6 +40,31 @@ const TopDestinations = () => {
     } */
   ];
 
+  const translations = {
+    fr: {
+      title: "Nos Meilleures Excursions",
+      subtitle: "Vivez des expériences uniques à travers des activités authentiques et soigneusement sélectionnées.",
+      viewAll: "Voir toutes les destinations"
+    },
+    en: {
+      title: "Our Top Destinations",
+      subtitle: "Discover Morocco’s must-see locations, from majestic landscapes to rich cultural treasures.",
+      viewAll: "View all destinations"
+    },
+    it: {
+      title: "Le Nostre Destinazioni Principali",
+      subtitle: "Scoprite i luoghi imperdibili del Marocco, tra paesaggi maestosi e ricchezze culturali.",
+      viewAll: "Vedi tutte le destinazioni"
+    },
+    es: {
+      title: "Nuestros Destinos Destacados",
+      subtitle: "Descubra los lugares imprescindibles de Marruecos, entre paisajes majestuosos y riquezas culturales.",
+      viewAll: "Ver todos los destinos"
+    }
+  };
+
+  const text = translations[locale as keyof typeof translations] || translations.fr;
+
   return (
     <section className="py-16 md:py-24 relative overflow-hidden">
       {/* Decorative background element */}
@@ -48,21 +73,18 @@ const TopDestinations = () => {
       <div className="container px-4 mx-auto">
         <div className="flex flex-col items-center text-center mb-16 space-y-4">
           <h2 className="text-4xl md:text-5xl font-display font-bold text-foreground drop-shadow-sm">
-            {locale === 'fr' ? "Nos Destinations Phares" : "Top Destinations"}
+            {text.title}
           </h2>
           <div className="w-24 h-1.5 bg-primary rounded-full" />
           <p className="text-muted-foreground text-xl max-w-2xl font-medium leading-relaxed">
-            {locale === 'fr'
-              ? "Explorez les merveilles du Maroc."
-              : "Explore the wonders of Morocco."
-            }
+            {text.subtitle}
           </p>
 
           <Link
             href={`/${locale}/nos-excursions`}
             className="text-primary font-bold hover:underline flex items-center gap-2 text-lg shadow-sm pt-4"
           >
-            {t('common.viewAll') || (locale === 'fr' ? "Voir toutes les destinations" : "View all destinations")}
+            {text.viewAll}
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
           </Link>
         </div>

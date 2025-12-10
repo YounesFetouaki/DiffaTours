@@ -65,20 +65,48 @@ const PopularExperiences = () => {
 
     if (excursions.length === 0) return null;
 
+    const translations = {
+        fr: {
+            title: "Nos Meilleures Excursions",
+            subtitle: "Vivez des expériences uniques à travers des activités authentiques et soigneusement sélectionnées.",
+            viewAll: "Voir toutes les excursions"
+        },
+        en: {
+            title: "Our Best Excursions",
+            subtitle: "Experience unique adventures through authentic and carefully selected activities.",
+            viewAll: "See all"
+        },
+        it: {
+            title: "Le Nostre Migliori Escursioni",
+            subtitle: "Vivete esperienze uniche attraverso attività autentiche e accuratamente selezionate.",
+            viewAll: "Vedi tutte"
+        },
+        es: {
+            title: "Nuestras Mejores Excursiones",
+            subtitle: "Viva experiencias únicas a través de actividades auténticas y cuidadosamente seleccionadas.",
+            viewAll: "Ver todas"
+        }
+    };
+
+    const text = translations[locale as keyof typeof translations] || translations.fr;
+
     return (
         <section className="py-12 md:py-20">
             <div className="container px-4 mx-auto">
                 <div className="flex flex-col md:flex-row justify-between items-end mb-8 gap-4">
                     <div>
                         <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4 drop-shadow-sm">
-                            {t('experiences.title') || "Unforgettable Experiences"}
+                            {text.title}
                         </h2>
+                        <p className="text-muted-foreground text-lg max-w-2xl font-medium leading-relaxed">
+                            {text.subtitle}
+                        </p>
                     </div>
                     <Link
                         href={`/${locale}/nos-excursions`}
                         className="text-primary font-bold hover:underline flex items-center gap-2 text-lg shadow-sm"
                     >
-                        {t('common.viewAll') || "See all"}
+                        {text.viewAll}
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
                     </Link>
                 </div>
