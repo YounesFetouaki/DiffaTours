@@ -530,7 +530,7 @@ function InvoiceDocument({ data, locale = 'en' }: { data: InvoiceData; locale?: 
         <View
           style={[
             styles.paymentInfo,
-            data.paymentStatus === 'pending' && styles.paymentInfoPending,
+            data.paymentStatus === 'pending' ? styles.paymentInfoPending : {},
           ]}
         >
           <View style={styles.paymentRow}>
