@@ -64,17 +64,17 @@ export default function FavorisPage() {
       try {
         setLoading(true);
         const response = await fetch(`/api/wishlists/user/${user.id}`);
-        
+
         if (response.ok) {
           const data = await response.json();
           setWishlistItems(data);
 
           // Fetch excursion details for each wishlist item
-          const excursionIds = [...new Set(data.map((item: WishlistItem) => item.excursionId))];
+          const excursionIds = [...new Set(data.map((item: WishlistItem) => item.excursionId))] as string[];
           const excursionsMap = new Map<string, ExcursionData>();
 
           await Promise.all(
-            excursionIds.map(async (excursionId) => {
+            excursionIds.map(async (excursionId: string) => {
               try {
                 const excursionResponse = await fetch(`/api/excursions/${excursionId}`);
                 if (excursionResponse.ok) {
