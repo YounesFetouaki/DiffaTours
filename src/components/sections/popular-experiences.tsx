@@ -93,18 +93,17 @@ const PopularExperiences = () => {
     return (
         <section className="py-12 md:py-20">
             <div className="container px-4 mx-auto">
-                <div className="flex flex-col md:flex-row justify-between items-end mb-8 gap-4">
-                    <div>
-                        <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4 drop-shadow-sm">
-                            {text.title}
-                        </h2>
-                        <p className="text-muted-foreground text-lg max-w-2xl font-medium leading-relaxed">
-                            {text.subtitle}
-                        </p>
-                    </div>
+                <div className="flex flex-col items-center text-center mb-16 space-y-4">
+                    <h2 className="text-3xl md:text-5xl font-display font-bold text-foreground drop-shadow-sm">
+                        {text.title}
+                    </h2>
+                    <div className="w-24 h-1.5 bg-primary rounded-full" />
+                    <p className="text-muted-foreground text-xl max-w-2xl font-medium leading-relaxed">
+                        {text.subtitle}
+                    </p>
                     <Link
                         href={`/${locale}/nos-excursions`}
-                        className="text-primary font-bold hover:underline flex items-center gap-2 text-lg shadow-sm"
+                        className="text-primary font-bold hover:underline flex items-center gap-2 text-lg shadow-sm pt-4"
                     >
                         {text.viewAll}
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
