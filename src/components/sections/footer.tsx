@@ -34,7 +34,7 @@ const Footer = () => {
     {
       name: 'WhatsApp',
       icon: MessageCircle,
-      href: 'https://wa.me/212708073799',
+      href: 'https://wa.me/212691583171',
     },
   ];
 
@@ -122,17 +122,7 @@ const Footer = () => {
 
             <div className="flex items-center flex-col sm:flex-row gap-4">
               <div className="flex items-center gap-2">
-                <Link href="/terms" className="text-xs text-white/60 uppercase hover:text-white transition-colors">
-                  {t('footer.privacy')}
-                </Link>
-                <span className="text-white/30">|</span>
-                <Link href="/terms" className="text-xs text-white/60 uppercase hover:text-white transition-colors">
-                  {t('footer.terms')}
-                </Link>
-                <span className="text-white/30">|</span>
-                <Link href="/terms" className="text-xs text-white/60 uppercase hover:text-white transition-colors">
-                  {t('footer.policy')}
-                </Link>
+                <span className="text-white/30 hidden">|</span>
               </div>
 
               <a href="#" aria-label="Scroll to top" className="group">

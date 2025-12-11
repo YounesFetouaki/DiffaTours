@@ -30,9 +30,9 @@ const values = [
 
 const timeline = [
   {
-    year: "2015",
+    year: "1987",
     title: "Fondation",
-    description: "Création de Diffa Tours avec une vision : faire découvrir le Maroc authentique"
+    description: "Création de Diffa Tours avec une vision : faire découvrir le monde avec passion"
   },
   {
     year: "2017",
@@ -52,7 +52,7 @@ const timeline = [
 ];
 
 const stats = [
-  { number: "10+", label: "Années d'expérience", icon: Clock },
+  { number: "35+", label: "Années d'expérience", icon: Clock },
   { number: "15,000+", label: "Voyageurs satisfaits", icon: Users },
   { number: "200+", label: "Circuits différents", icon: Route },
   { number: "50+", label: "Guides experts", icon: UserCheck }
@@ -144,7 +144,7 @@ export default function QuiSommesNousPage() {
               NOTRE HISTOIRE
             </h6>
             <h2 className="text-3xl md:text-4xl font-display text-foreground mb-6">
-              Diffa Tours, experts du tourisme marocain
+              Diffa Tours, experts du tourisme mondial
             </h2>
             <p className="text-body-lg text-muted leading-relaxed mb-6">
               <strong className="text-primary">Diffa Tours</strong> est une agence de voyage spécialisée dans l'organisation

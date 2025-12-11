@@ -70,12 +70,27 @@ const Hero = () => {
       <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 flex flex-col items-center text-center pt-20">
 
         {/* Headlines */}
-        <h1 className="font-display font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl shadow-sm mb-6 max-w-4xl tracking-tight animate-fadeInDown">
-          {t('hero.title') || "Discover the real Morocco"}
-        </h1>
-        <p className="text-lg sm:text-xl md:text-2xl text-white/90 font-medium max-w-2xl mb-12 shadow-sm animate-fadeInUp delay-100">
-          {t('hero.subtitle') || "Unforgettable tours, activities and authenticated experiences"}
-        </p>
+        {/* Headlines wrapped in Glass Card */}
+        <div
+          className="mb-12 p-8 md:p-12 lg:p-16 animate-scaleIn max-w-5xl mx-auto rounded-none md:rounded-lg"
+          style={{
+            background: 'linear-gradient(180deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2))',
+            backdropFilter: 'blur(8px) saturate(110%)',
+            WebkitBackdropFilter: 'blur(8px) saturate(110%)',
+            border: '1px solid rgba(255, 255, 255, 0.15)',
+            boxShadow: '0 4px 12px rgba(2, 8, 23, 0.4), 0 0 20px rgba(0, 0, 0, 0.1) inset'
+          }}
+        >
+          <h1
+            className="font-display font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl shadow-sm mb-6 tracking-tight text-white"
+            style={{ fontFamily: 'var(--font-display)' }}
+          >
+            {t('hero.title') || "Discover the real Morocco"}
+          </h1>
+          <p className="font-secondary italic text-lg sm:text-xl md:text-2xl text-white/95 font-normal shadow-sm">
+            {t('hero.subtitle') || "Unforgettable tours, activities and authenticated experiences"}
+          </p>
+        </div>
 
         {/* Search Box - Big & Central */}
         <div className="w-full max-w-5xl animate-fadeInUp delay-200">
@@ -95,7 +110,6 @@ const Hero = () => {
                 <option value="Marrakech">Marrakech</option>
                 <option value="Agadir">Agadir</option>
                 <option value="Taghazout">Taghazout</option>
-                <option value="Circuits">Sahara Desert / Circuits</option>
               </select>
             </div>
 

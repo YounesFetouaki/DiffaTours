@@ -42,22 +42,22 @@ const TopDestinations = () => {
 
   const translations = {
     fr: {
-      title: "Nos Destinations Phares",
+      title: "Évasions Incontournables",
       subtitle: "Découvrez les lieux incontournables du Maroc, entre paysages majestueux et richesses culturelles.",
       viewAll: "Voir toutes les destinations"
     },
     en: {
-      title: "Our Top Destinations",
+      title: "Unmissable Escapes",
       subtitle: "Discover Morocco’s must-see locations, from majestic landscapes to rich cultural treasures.",
       viewAll: "View all destinations"
     },
     it: {
-      title: "Le Nostre Destinazioni Principali",
+      title: "I Nostri Viaggi Imperdibili",
       subtitle: "Scoprite i luoghi imperdibili del Marocco, tra paesaggi maestosi e ricchezze culturali.",
       viewAll: "Vedi tutte le destinazioni"
     },
     es: {
-      title: "Nuestros Destinos Destacados",
+      title: "Escapadas Imprescindibles",
       subtitle: "Descubra los lugares imprescindibles de Marruecos, entre paisajes majestuosos y riquezas culturales.",
       viewAll: "Ver todos los destinos"
     }
@@ -82,10 +82,10 @@ const TopDestinations = () => {
 
           <Link
             href={`/${locale}/nos-excursions`}
-            className="text-primary font-bold hover:underline flex items-center gap-2 text-lg shadow-sm pt-4"
+            className="group mt-8 inline-flex items-center gap-2 px-8 py-3 rounded-full bg-white text-primary font-bold shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-primary/20"
           >
             {text.viewAll}
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transition-transform group-hover:translate-x-1"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
           </Link>
         </div>
 

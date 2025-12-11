@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
-type Currency = 'MAD' | 'USD' | 'EUR';
+type Currency = 'MAD' | 'USD' | 'EUR' | 'GBP';
 
 interface CurrencyContextType {
   currency: Currency;
@@ -15,12 +15,14 @@ const exchangeRates = {
   MAD: 1,
   USD: 0.10, // 1 MAD = 0.10 USD (approximate)
   EUR: 0.092, // 1 MAD = 0.092 EUR (approximate)
+  GBP: 0.078, // 1 MAD = 0.078 GBP (approximate)
 };
 
 const currencySymbols = {
   MAD: 'DH',
   USD: '$',
   EUR: '€',
+  GBP: '£',
 };
 
 const CurrencyContext = createContext<CurrencyContextType | undefined>(undefined);
@@ -33,7 +35,7 @@ export const CurrencyProvider = ({ children }: { children: React.ReactNode }) =>
   useEffect(() => {
     setMounted(true);
     const saved = localStorage.getItem('currency') as Currency;
-    if (saved && (saved === 'MAD' || saved === 'USD' || saved === 'EUR')) {
+    if (saved && (saved === 'MAD' || saved === 'USD' || saved === 'EUR' || saved === 'GBP')) {
       setCurrencyState(saved);
     }
   }, []);
@@ -52,7 +54,7 @@ export const CurrencyProvider = ({ children }: { children: React.ReactNode }) =>
   const formatPrice = (priceInMAD: number): string => {
     const converted = convertPrice(priceInMAD);
     const symbol = currencySymbols[currency];
-    
+
     if (currency === 'MAD') {
       return `${converted.toFixed(2)} ${symbol}`;
     }

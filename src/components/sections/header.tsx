@@ -27,7 +27,7 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isClient, setIsClient] = useState(false);
   const [userRole, setUserRole] = useState<string | null>(null);
-  
+
   const params = useParams();
   const locale = (params.locale as string) || 'fr';
   const router = useRouter();
@@ -37,7 +37,7 @@ export default function Header() {
   const { cartCount } = useCart();
   const { user, isLoaded } = useUser();
   const { signOut } = useClerk();
-  
+
   const isAdmin = userRole === 'admin';
   const isStaff = userRole === 'staff';
   const isStaffOrAdmin = isAdmin || isStaff;
@@ -108,7 +108,7 @@ export default function Header() {
         } : undefined}
       >
         <div className="mx-auto max-w-none">
-          
+
           {/* Desktop Double Header */}
           <div className="hidden md:block">
             {/* First Bar - Translation, Currency, Client Login */}
@@ -171,13 +171,20 @@ export default function Header() {
                     >
                       EUR
                     </button>
+                    <span className={isScrolled ? 'text-gray-300' : 'text-white/30'}>|</span>
+                    <button
+                      onClick={() => setCurrency('GBP')}
+                      className={`text-xs font-semibold transition-all ${currency === 'GBP' ? (isScrolled ? 'text-black scale-110' : 'text-white scale-110') : (isScrolled ? 'text-gray-600 hover:text-black' : 'text-white/60 hover:text-white')}`}
+                    >
+                      GBP
+                    </button>
                   </div>
                 </div>
 
                 {/* Right side - Cart, Wishlist, Notifications and Auth */}
                 <div className="flex items-center gap-2 animate-fadeInDown">
                   {isAdmin && (
-                    <Link 
+                    <Link
                       href="/admin"
                       className={`text-xs px-4 py-2 rounded-full flex items-center gap-1.5 font-semibold transition-all ${isScrolled ? 'bg-gray-100 hover:bg-gray-200 text-gray-900' : 'glass-light hover:glass-strong text-white'}`}
                     >
@@ -185,9 +192,9 @@ export default function Header() {
                       <span className="hidden lg:inline">Admin</span>
                     </Link>
                   )}
-                  
+
                   {isStaffOrAdmin && (
-                    <Link 
+                    <Link
                       href="/staff"
                       className={`text-xs px-4 py-2 rounded-full flex items-center gap-1.5 font-semibold transition-all ${isScrolled ? 'bg-gray-100 hover:bg-gray-200 text-gray-900' : 'glass-light hover:glass-strong text-white'}`}
                     >
@@ -195,9 +202,9 @@ export default function Header() {
                       <span className="hidden lg:inline">Staff</span>
                     </Link>
                   )}
-                  
+
                   {/* Cart Icon */}
-                  <Link 
+                  <Link
                     href="/cart"
                     className={`relative p-2 rounded-full transition-all ${isScrolled ? 'bg-gray-100 hover:bg-gray-200' : 'glass-light hover:glass-strong'}`}
                   >
@@ -208,10 +215,10 @@ export default function Header() {
                       </span>
                     )}
                   </Link>
-                  
+
                   {/* Wishlist/Favorites Icon - Only for signed in users */}
                   {user && (
-                    <Link 
+                    <Link
                       href="/favoris"
                       className={`p-2 rounded-full transition-all ${isScrolled ? 'bg-gray-100 hover:bg-gray-200' : 'glass-light hover:glass-strong'}`}
                       title={locale === 'fr' ? 'Mes Favoris' : 'My Favorites'}
@@ -219,14 +226,14 @@ export default function Header() {
                       <Heart className={`w-4 h-4 ${isScrolled ? 'text-gray-900' : 'text-white'}`} />
                     </Link>
                   )}
-                  
+
                   {/* Notification Bell - Only for signed in users */}
                   {user && (
                     <NotificationBell isScrolled={isScrolled} />
                   )}
-                  
+
                   {!user && isLoaded && (
-                    <Link 
+                    <Link
                       href="/sign-in"
                       className={`text-xs px-4 py-2 rounded-full font-semibold transition-all ${isScrolled ? 'bg-gray-100 hover:bg-gray-200 text-gray-900' : 'glass-light hover:glass-strong text-white'}`}
                     >
@@ -235,7 +242,7 @@ export default function Header() {
                   )}
                   {user && (
                     <>
-                      <Link 
+                      <Link
                         href="/mon-compte"
                         className={`text-xs px-4 py-2 rounded-full flex items-center gap-1.5 font-semibold transition-all ${isScrolled ? 'bg-gray-100 hover:bg-gray-200 text-gray-900' : 'glass-light hover:glass-strong text-white'}`}
                       >
@@ -258,8 +265,8 @@ export default function Header() {
             <div className="px-5 lg:px-20">
               <div className="h-20 w-full flex items-center">
                 <div className="flex-1 animate-scaleIn">
-                  <Link href="/" className="inline-block hover:scale-105 transition-transform">
-                    <Image 
+                  <Link href="/" className="inline-block hover:scale-105 transition-transform bg-white/10 backdrop-blur-sm p-2 rounded-lg">
+                    <Image
                       src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/diffatours-logo2-1764026359909.png"
                       alt="Diffa Tours"
                       width={80}
@@ -269,14 +276,14 @@ export default function Header() {
                     />
                   </Link>
                 </div>
-                
+
                 <div className="flex-none animate-fadeInUp">
                   <nav>
                     <ul className="flex items-center space-x-8">
                       {navLinks.map((link) => (
                         <li key={link.href}>
-                          <Link 
-                            href={link.href} 
+                          <Link
+                            href={link.href}
                             className={`text-sm font-semibold uppercase tracking-[0.05em] transition-all hover:text-[#FFB73F] hover:scale-105 relative group ${isScrolled ? 'text-black' : 'text-white'}`}
                           >
                             {t(link.label)}
@@ -289,8 +296,8 @@ export default function Header() {
                 </div>
 
                 <div className="flex flex-1 justify-end animate-scaleIn">
-                  <Link 
-                    href="/contact" 
+                  <Link
+                    href="/contact"
                     className={`btn ${isScrolled ? 'btn-primary' : 'btn-primary'}`}
                   >
                     Contact
@@ -305,9 +312,9 @@ export default function Header() {
             <button onClick={() => setIsMenuOpen(true)} aria-label="Open menu" className={`p-2 rounded-full transition-all ${isScrolled ? 'bg-gray-100 hover:bg-gray-200' : 'glass-light hover:glass-strong'}`}>
               <Menu className={`h-6 w-6 ${isScrolled ? 'text-black' : 'text-white'}`} />
             </button>
-            
+
             <Link href="/" className="absolute left-1/2 -translate-x-1/2">
-              <Image 
+              <Image
                 src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/diffatours-logo2-1764026359909.png"
                 alt="Diffa Tours"
                 width={60}
@@ -319,8 +326,8 @@ export default function Header() {
 
             <div className="flex items-center gap-2">
               {/* Mobile Cart Icon */}
-              <Link 
-                href="/cart" 
+              <Link
+                href="/cart"
                 className={`relative p-2 rounded-full transition-all ${isScrolled ? 'bg-gray-100 hover:bg-gray-200' : 'glass-light hover:glass-strong'}`}
               >
                 <ShoppingCart className={`h-5 w-5 ${isScrolled ? 'text-black' : 'text-white'}`} />
@@ -330,14 +337,14 @@ export default function Header() {
                   </span>
                 )}
               </Link>
-              
+
               {/* Mobile Wishlist Icon */}
               {user && (
                 <Link href="/favoris" className={`p-2 rounded-full transition-all ${isScrolled ? 'bg-gray-100 hover:bg-gray-200' : 'glass-light hover:glass-strong'}`}>
                   <Heart className={`h-5 w-5 ${isScrolled ? 'text-black' : 'text-white'}`} />
                 </Link>
               )}
-              
+
               {/* Mobile Notification Bell */}
               {user && (
                 <NotificationBell isScrolled={isScrolled} />
@@ -346,168 +353,175 @@ export default function Header() {
           </div>
         </div>
       </header>
-      
+
       {/* Mobile Menu Panel - Full Screen Glass */}
-      <div 
+      <div
         className={`fixed inset-0 z-[100] md:hidden transition-all duration-500 ease-out ${isMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}
         aria-modal="true"
       >
         <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setIsMenuOpen(false)} />
-        
-        <div 
+
+        <div
           className={`absolute right-0 top-0 h-full w-full max-w-sm glass-strong shadow-2xl transition-transform duration-500 ease-out overflow-y-auto ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}
           onClick={(e) => e.stopPropagation()}
         >
-            <div className="flex justify-end p-6">
-                <button onClick={() => setIsMenuOpen(false)} aria-label="Close menu" className="p-2 rounded-full glass-light hover:glass-strong transition-all">
-                    <X className="h-6 w-6 text-white" />
-                </button>
+          <div className="flex justify-end p-6">
+            <button onClick={() => setIsMenuOpen(false)} aria-label="Close menu" className="p-2 rounded-full glass-light hover:glass-strong transition-all">
+              <X className="h-6 w-6 text-white" />
+            </button>
+          </div>
+
+          {/* Language & Currency Switchers */}
+          <div className="px-6 space-y-4 border-b border-white/10 pb-6">
+            <div className="glass-light rounded-full px-4 py-3 flex items-center justify-center gap-3">
+              <Globe className="w-4 h-4 text-white" />
+              <button
+                onClick={() => switchLocale('en')}
+                className={`text-sm font-semibold ${locale === 'en' ? 'text-white scale-110' : 'text-white/60'}`}
+              >
+                EN
+              </button>
+              <span className="text-white/30">|</span>
+              <button
+                onClick={() => switchLocale('fr')}
+                className={`text-sm font-semibold ${locale === 'fr' ? 'text-white scale-110' : 'text-white/60'}`}
+              >
+                FR
+              </button>
+              <span className="text-white/30">|</span>
+              <button
+                onClick={() => switchLocale('es')}
+                className={`text-sm font-semibold ${locale === 'es' ? 'text-white scale-110' : 'text-white/60'}`}
+              >
+                ES
+              </button>
+              <span className="text-white/30">|</span>
+              <button
+                onClick={() => switchLocale('it')}
+                className={`text-sm font-semibold ${locale === 'it' ? 'text-white scale-110' : 'text-white/60'}`}
+              >
+                IT
+              </button>
             </div>
-            
-            {/* Language & Currency Switchers */}
-            <div className="px-6 space-y-4 border-b border-white/10 pb-6">
-              <div className="glass-light rounded-full px-4 py-3 flex items-center justify-center gap-3">
-                <Globe className="w-4 h-4 text-white" />
-                <button
-                  onClick={() => switchLocale('en')}
-                  className={`text-sm font-semibold ${locale === 'en' ? 'text-white scale-110' : 'text-white/60'}`}
-                >
-                  EN
-                </button>
-                <span className="text-white/30">|</span>
-                <button
-                  onClick={() => switchLocale('fr')}
-                  className={`text-sm font-semibold ${locale === 'fr' ? 'text-white scale-110' : 'text-white/60'}`}
-                >
-                  FR
-                </button>
-                <span className="text-white/30">|</span>
-                <button
-                  onClick={() => switchLocale('es')}
-                  className={`text-sm font-semibold ${locale === 'es' ? 'text-white scale-110' : 'text-white/60'}`}
-                >
-                  ES
-                </button>
-                <span className="text-white/30">|</span>
-                <button
-                  onClick={() => switchLocale('it')}
-                  className={`text-sm font-semibold ${locale === 'it' ? 'text-white scale-110' : 'text-white/60'}`}
-                >
-                  IT
-                </button>
-              </div>
-              
-              <div className="glass-light rounded-full px-4 py-3 flex items-center justify-center gap-3">
-                <DollarSign className="w-4 h-4 text-white" />
-                <button
-                  onClick={() => setCurrency('MAD')}
-                  className={`text-sm font-semibold ${currency === 'MAD' ? 'text-white scale-110' : 'text-white/60'}`}
-                >
-                  MAD
-                </button>
-                <span className="text-white/30">|</span>
-                <button
-                  onClick={() => setCurrency('USD')}
-                  className={`text-sm font-semibold ${currency === 'USD' ? 'text-white scale-110' : 'text-white/60'}`}
-                >
-                  USD
-                </button>
-                <span className="text-white/30">|</span>
-                <button
-                  onClick={() => setCurrency('EUR')}
-                  className={`text-sm font-semibold ${currency === 'EUR' ? 'text-white scale-110' : 'text-white/60'}`}
-                >
-                  EUR
-                </button>
-              </div>
+
+            <div className="glass-light rounded-full px-4 py-3 flex items-center justify-center gap-3">
+              <DollarSign className="w-4 h-4 text-white" />
+              <button
+                onClick={() => setCurrency('MAD')}
+                className={`text-sm font-semibold ${currency === 'MAD' ? 'text-white scale-110' : 'text-white/60'}`}
+              >
+                MAD
+              </button>
+              <span className="text-white/30">|</span>
+              <button
+                onClick={() => setCurrency('USD')}
+                className={`text-sm font-semibold ${currency === 'USD' ? 'text-white scale-110' : 'text-white/60'}`}
+              >
+                USD
+              </button>
+              <span className="text-white/30">|</span>
+              <button
+                onClick={() => setCurrency('EUR')}
+                className={`text-sm font-semibold ${currency === 'EUR' ? 'text-white scale-110' : 'text-white/60'}`}
+              >
+                EUR
+              </button>
+              <span className="text-white/30">|</span>
+              <button
+                onClick={() => setCurrency('GBP')}
+                className={`text-sm font-semibold ${currency === 'GBP' ? 'text-white scale-110' : 'text-white/60'}`}
+              >
+                GBP
+              </button>
             </div>
-            
-            <nav className="mt-10 px-6">
-                <ul className="flex flex-col items-center space-y-6">
-                    {navLinks.map((link, index) => (
-                        <li key={link.href} className="w-full animate-fadeInUp" style={{ animationDelay: `${index * 0.1}s` }}>
-                            <Link 
-                              href={link.href} 
-                              onClick={() => setIsMenuOpen(false)} 
-                              className="block text-center glass-light rounded-[20px] px-6 py-4 text-lg font-semibold uppercase tracking-wider text-white transition-all hover:glass-strong hover:scale-105"
-                            >
-                                {t(link.label)}
-                            </Link>
-                        </li>
-                    ))}
-                </ul>
-            </nav>
-            
-            <div className="mt-10 px-6 pt-6 border-t border-white/10 space-y-4">
-                {isAdmin && (
-                  <Link 
-                    href="/admin"
+          </div>
+
+          <nav className="mt-10 px-6">
+            <ul className="flex flex-col items-center space-y-6">
+              {navLinks.map((link, index) => (
+                <li key={link.href} className="w-full animate-fadeInUp" style={{ animationDelay: `${index * 0.1}s` }}>
+                  <Link
+                    href={link.href}
                     onClick={() => setIsMenuOpen(false)}
-                    className="btn-glass w-full py-4 flex items-center justify-center gap-2"
+                    className="block text-center glass-light rounded-[20px] px-6 py-4 text-lg font-semibold uppercase tracking-wider text-white transition-all hover:glass-strong hover:scale-105"
                   >
-                    <Settings className="w-4 h-4" />
-                    Admin Panel
+                    {t(link.label)}
                   </Link>
-                )}
-                
-                {isStaffOrAdmin && (
-                  <Link 
-                    href="/staff"
-                    onClick={() => setIsMenuOpen(false)}
-                    className="btn-glass w-full py-4 flex items-center justify-center gap-2"
-                  >
-                    <QrCode className="w-4 h-4" />
-                    Staff Panel
-                  </Link>
-                )}
-                
-                {user && (
-                  <Link 
-                    href="/favoris"
-                    onClick={() => setIsMenuOpen(false)}
-                    className="btn-glass w-full py-4 flex items-center justify-center gap-2"
-                  >
-                    <Heart className="w-4 h-4" />
-                    {locale === 'fr' ? 'Mes Favoris' : 'My Favorites'}
-                  </Link>
-                )}
-                
-                {!user && isLoaded && (
-                  <Link 
-                    href="/sign-in"
-                    onClick={() => setIsMenuOpen(false)}
-                    className="btn-primary w-full py-4"
-                  >
-                    {t('header.signIn')}
-                  </Link>
-                )}
-                {user && (
-                  <>
-                    <Link 
-                      href="/mon-compte"
-                      onClick={() => setIsMenuOpen(false)}
-                      className="btn-secondary w-full py-4 flex items-center justify-center gap-2"
-                    >
-                      <User className="w-4 h-4" />
-                      {t('header.myAccount')}
-                    </Link>
-                    <button
-                      onClick={() => {
-                        handleSignOut();
-                        setIsMenuOpen(false);
-                      }}
-                      className="btn-glass w-full py-4 flex items-center justify-center gap-2 text-red-300"
-                    >
-                      <LogOut className="w-4 h-4" />
-                      {t('header.signOut') || 'Sign Out'}
-                    </button>
-                  </>
-                )}
-                
-                <Link href="/contact" className="btn-primary w-full py-4" onClick={() => setIsMenuOpen(false)}>
-                    Contact
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          <div className="mt-10 px-6 pt-6 border-t border-white/10 space-y-4">
+            {isAdmin && (
+              <Link
+                href="/admin"
+                onClick={() => setIsMenuOpen(false)}
+                className="btn-glass w-full py-4 flex items-center justify-center gap-2"
+              >
+                <Settings className="w-4 h-4" />
+                Admin Panel
+              </Link>
+            )}
+
+            {isStaffOrAdmin && (
+              <Link
+                href="/staff"
+                onClick={() => setIsMenuOpen(false)}
+                className="btn-glass w-full py-4 flex items-center justify-center gap-2"
+              >
+                <QrCode className="w-4 h-4" />
+                Staff Panel
+              </Link>
+            )}
+
+            {user && (
+              <Link
+                href="/favoris"
+                onClick={() => setIsMenuOpen(false)}
+                className="btn-glass w-full py-4 flex items-center justify-center gap-2"
+              >
+                <Heart className="w-4 h-4" />
+                {locale === 'fr' ? 'Mes Favoris' : 'My Favorites'}
+              </Link>
+            )}
+
+            {!user && isLoaded && (
+              <Link
+                href="/sign-in"
+                onClick={() => setIsMenuOpen(false)}
+                className="btn-primary w-full py-4"
+              >
+                {t('header.signIn')}
+              </Link>
+            )}
+            {user && (
+              <>
+                <Link
+                  href="/mon-compte"
+                  onClick={() => setIsMenuOpen(false)}
+                  className="btn-secondary w-full py-4 flex items-center justify-center gap-2"
+                >
+                  <User className="w-4 h-4" />
+                  {t('header.myAccount')}
                 </Link>
-            </div>
+                <button
+                  onClick={() => {
+                    handleSignOut();
+                    setIsMenuOpen(false);
+                  }}
+                  className="btn-glass w-full py-4 flex items-center justify-center gap-2 text-red-300"
+                >
+                  <LogOut className="w-4 h-4" />
+                  {t('header.signOut') || 'Sign Out'}
+                </button>
+              </>
+            )}
+
+            <Link href="/contact" className="btn-primary w-full py-4" onClick={() => setIsMenuOpen(false)}>
+              Contact
+            </Link>
+          </div>
         </div>
       </div>
     </>
