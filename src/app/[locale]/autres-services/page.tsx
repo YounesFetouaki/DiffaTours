@@ -45,7 +45,14 @@ const services = [
   }
 ];
 
-const premiumServices = [
+interface PremiumService {
+  icon: any;
+  title: string;
+  description: string;
+  image?: string;
+}
+
+const premiumServices: PremiumService[] = [
   {
     icon: Crown,
     title: "Gold Palace",
@@ -321,21 +328,24 @@ export default function AutresServicesPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {premiumServices.map((service, index) => {
                 const Icon = service.icon;
+
                 return (
                   <div
                     key={index}
-                    className={`bg-white p-10 shadow-[0_8px_30px_rgba(0,0,0,0.08)] hover:shadow-[0_12px_40px_rgba(255,183,63,0.15)] transition-all duration-300 hover:-translate-y-2 scroll-fade ${premiumVisible ? 'visible' : ''}`}
+                    className={`bg-white overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.08)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.12)] transition-all duration-300 hover:-translate-y-2 scroll-fade ${premiumVisible ? 'visible' : ''}`}
                     style={{ animationDelay: `${index * 0.15}s` }}
                   >
-                    <div className="w-20 h-20 bg-gradient-to-br from-primary to-accent flex items-center justify-center mb-6">
-                      <Icon className="w-10 h-10 text-white" />
+                    <div className="p-10 text-center">
+                      <div className="w-20 h-20 mx-auto bg-gradient-to-br from-primary to-accent flex items-center justify-center mb-6 rounded-lg transform rotate-3 hover:rotate-6 transition-transform duration-300">
+                        <Icon className="w-10 h-10 text-white" />
+                      </div>
+                      <h3 className="font-display text-2xl mb-4 text-foreground">
+                        {getStringValue(service.title)}
+                      </h3>
+                      <p className="text-muted leading-relaxed text-lg">
+                        {getStringValue(service.description)}
+                      </p>
                     </div>
-                    <h3 className="font-display text-2xl mb-4 text-foreground">
-                      {getStringValue(service.title)}
-                    </h3>
-                    <p className="text-muted leading-relaxed text-lg">
-                      {getStringValue(service.description)}
-                    </p>
                   </div>
                 );
               })}
@@ -351,7 +361,7 @@ export default function AutresServicesPage() {
               <div className={`scroll-fade ${venueVisible ? 'visible' : ''}`}>
                 <div className="relative h-[400px] mb-8 overflow-hidden">
                   <Image
-                    src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/project-uploads/9954d743-8735-4b3b-868c-4bb1cfd3cbf8/generated_images/luxurious-moroccan-wedding-hall-gold-pa-6aff0f4c-20251128223845.jpg"
+                    src="/gold_palace.jpg"
                     alt="Gold Palace"
                     fill
                     style={{ objectFit: 'cover' }}
@@ -404,7 +414,7 @@ export default function AutresServicesPage() {
               <div className={`scroll-fade ${venueVisible ? 'visible' : ''}`} style={{ animationDelay: '0.2s' }}>
                 <div className="relative h-[400px] mb-8 overflow-hidden">
                   <Image
-                    src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/project-uploads/9954d743-8735-4b3b-868c-4bb1cfd3cbf8/generated_images/modern-moroccan-congress-center-with-st-4bc9cf64-20251128223845.jpg"
+                    src="/congresse_palace.jpg"
                     alt="Congress Palace"
                     fill
                     style={{ objectFit: 'cover' }}
