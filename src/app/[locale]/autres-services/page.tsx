@@ -358,11 +358,13 @@ export default function AutresServicesPage() {
                     className="transition-transform duration-500 hover:scale-105"
                     unoptimized
                   />
-                  <div className="absolute top-6 left-6 px-6 py-3" style={{
-                    background: 'linear-gradient(135deg, #D4AF37, #F4E5B3, #D4AF37)',
-                    border: '2px solid #B8941F'
+                  <div className="absolute top-6 left-6 px-8 py-3 shadow-xl transition-transform hover:scale-105 cursor-pointer z-10" style={{
+                    background: 'linear-gradient(180deg, #E6C874 0%, #FBF5C6 50%, #D4AF37 100%)',
+                    border: '2px solid #C5A038',
+                    boxShadow: '0 4px 15px rgba(212, 175, 55, 0.4), inset 0 0 20px rgba(255,255,255,0.4)',
+                    borderRadius: '2px'
                   }}>
-                    <span className="text-white font-bold uppercase tracking-wider text-sm drop-shadow-md" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.3)' }}>Gold Palace</span>
+                    <span className="text-white font-black uppercase tracking-widest text-base block text-center" style={{ textShadow: '1px 1px 2px rgba(184, 148, 31, 0.8)' }}>GOLD PALACE</span>
                   </div>
                 </div>
                 <h3 className="font-display text-3xl mb-4 text-foreground">
@@ -409,8 +411,12 @@ export default function AutresServicesPage() {
                     className="transition-transform duration-500 hover:scale-105"
                     unoptimized
                   />
-                  <div className="absolute top-6 left-6 bg-gradient-to-r from-accent to-primary px-6 py-3">
-                    <span className="text-white font-bold uppercase tracking-wider text-sm">Congress Palace</span>
+                  <div className="absolute top-6 left-6 px-8 py-3 shadow-xl transition-transform hover:scale-105 cursor-pointer z-10" style={{
+                    background: 'linear-gradient(90deg, #38BDF8 0%, #FB923C 100%)', // Sky Blue to Orange
+                    boxShadow: '0 4px 15px rgba(56, 189, 248, 0.3)',
+                    borderRadius: '2px'
+                  }}>
+                    <span className="text-white font-black uppercase tracking-widest text-base block text-center" style={{ textShadow: '0 1px 2px rgba(0,0,0,0.1)' }}>CONGRESS PALACE</span>
                   </div>
                 </div>
                 <h3 className="font-display text-3xl mb-4 text-foreground">
