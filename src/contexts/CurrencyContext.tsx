@@ -9,6 +9,7 @@ interface CurrencyContextType {
   setCurrency: (curr: Currency) => void;
   convertPrice: (priceInMAD: number) => number;
   formatPrice: (priceInMAD: number) => string;
+  exchangeRate: number;
 }
 
 const exchangeRates = {
@@ -61,8 +62,10 @@ export const CurrencyProvider = ({ children }: { children: React.ReactNode }) =>
     return `${symbol}${converted.toFixed(2)}`;
   };
 
+  const exchangeRate = exchangeRates[currency];
+
   return (
-    <CurrencyContext.Provider value={{ currency, setCurrency, convertPrice, formatPrice }}>
+    <CurrencyContext.Provider value={{ currency, setCurrency, convertPrice, formatPrice, exchangeRate }}>
       {children}
     </CurrencyContext.Provider>
   );

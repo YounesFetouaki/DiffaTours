@@ -32,8 +32,8 @@ export async function PUT(
       );
     }
 
-    // Check if user is admin
-    if (authUser.role !== 'admin') {
+    // Check if user is admin or super_admin
+    if (authUser.role !== 'admin' && authUser.role !== 'super_admin') {
       return NextResponse.json(
         { error: 'Admin access required', code: 'ADMIN_ACCESS_REQUIRED' },
         { status: 403 }
@@ -42,8 +42,18 @@ export async function PUT(
 
     const { id } = params;
 
-    // Check if target user exists
-    const targetUser = await User.findById(id);
+    // Check if target user exists (try by ID first, then valid Clerk ID or generic lookup)
+    let targetUser = null;
+    try {
+      targetUser = await User.findById(id);
+    } catch (e) {
+      // If ID parsing fails, it might be a Clerk ID
+      console.log('Not a valid MongoDB ID, checking by clerkId');
+    }
+
+    if (!targetUser) {
+      targetUser = await User.findOne({ clerkId: id });
+    }
 
     if (!targetUser) {
       return NextResponse.json(
@@ -52,12 +62,22 @@ export async function PUT(
       );
     }
 
+    // Protection Logic:
+    // 1. Only Super Admin can change the role of an Admin or Super Admin.
+    // 2. Admin cannot change role OF an existing Admin/Super Admin.
+    if ((targetUser.role === 'admin' || targetUser.role === 'super_admin') && authUser.role !== 'super_admin') {
+      return NextResponse.json(
+        { error: 'You do not have permission to modify this user\'s role.', code: 'FORBIDDEN_SUPER_ADMIN_ONLY' },
+        { status: 403 }
+      );
+    }
+
     // Parse request body
     const body = await request.json();
     const { role } = body;
 
     // Validate role
-    const validRoles = ['user', 'staff', 'admin'];
+    const validRoles = ['user', 'staff', 'admin', 'super_admin'];
     if (!role || !validRoles.includes(role)) {
       return NextResponse.json(
         {
@@ -65,6 +85,17 @@ export async function PUT(
           code: 'INVALID_ROLE',
         },
         { status: 400 }
+      );
+    }
+
+    // Protection Logic:
+    // 3. Admin cannot assign 'super_admin' role or 'admin' role?
+    // The prompt says "other admin can do all admin things without the ability to touch the same role".
+    // Let's prevent Admin from promoting anyone to Super Admin.
+    if (role === 'super_admin' && authUser.role !== 'super_admin') {
+      return NextResponse.json(
+        { error: 'Only Super Admin can assign the Super Admin role.', code: 'FORBIDDEN_SUPER_ADMIN_REQUIRED' },
+        { status: 403 }
       );
     }
 

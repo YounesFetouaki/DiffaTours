@@ -22,6 +22,9 @@ export interface IOrder extends Document {
   paymentResponse?: string;
   paidAt?: number;
   locale?: string;
+  currency?: string;
+  totalInCurrency?: number;
+  exchangeRate?: number;
   createdAt: Date;
   updatedAt?: Date;
 }
@@ -48,6 +51,9 @@ const OrderSchema = new Schema<IOrder>({
   paymentResponse: { type: String },
   paidAt: { type: Number },
   locale: { type: String, default: 'fr' },
+  currency: { type: String, default: 'MAD' },
+  totalInCurrency: { type: Number },
+  exchangeRate: { type: Number },
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date },
 });

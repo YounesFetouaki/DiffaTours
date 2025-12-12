@@ -55,7 +55,7 @@ const getStringValue = (field: any, locale: string = 'en'): string => {
 
 // Types
 interface User {
-  id: number;
+  _id: string;
   clerkId: string;
   email: string;
   name: string | null;
@@ -106,6 +106,9 @@ interface Excursion {
   availableDays?: string[];
   timeSlots?: TimeSlot[];
   isAdultsOnly?: boolean;
+  priceIncludes?: { en: string; fr: string; es: string; it: string; } | string;
+  cancellationPolicy?: { en: string; fr: string; es: string; it: string; } | string;
+  minParticipants?: { en: string; fr: string; es: string; it: string; } | string;
 }
 
 interface ExcursionSetting {
@@ -181,7 +184,8 @@ export default function AdminDashboard() {
   const [loading, setLoading] = useState(true);
 
   // Check if user is admin from Clerk's publicMetadata
-  const isAdmin = clerkUser?.publicMetadata?.role === 'admin';
+  const isAdmin = clerkUser?.publicMetadata?.role === 'admin' || clerkUser?.publicMetadata?.role === 'super_admin';
+  const isSuperAdmin = clerkUser?.publicMetadata?.role === 'super_admin';
 
   // Users state
   const [users, setUsers] = useState<User[]>([]);
@@ -220,6 +224,9 @@ export default function AdminDashboard() {
     highlightsEn: '', highlightsFr: '', highlightsEs: '', highlightsIt: '',
     includedEn: '', includedFr: '', includedEs: '', includedIt: '',
     notIncludedEn: '', notIncludedFr: '', notIncludedEs: '', notIncludedIt: '',
+    priceIncludesEn: '', priceIncludesFr: '', priceIncludesEs: '', priceIncludesIt: '',
+    cancellationPolicyEn: '', cancellationPolicyFr: '', cancellationPolicyEs: '', cancellationPolicyIt: '',
+    minParticipantsEn: '', minParticipantsFr: '', minParticipantsEs: '', minParticipantsIt: '',
     isAdultsOnly: false
   });
   const [items, setItems] = useState<ExcursionItem[]>([]);
@@ -259,7 +266,7 @@ export default function AdminDashboard() {
     }
 
     // Check admin role from Clerk's publicMetadata
-    if (clerkUser.publicMetadata?.role !== 'admin') {
+    if (clerkUser.publicMetadata?.role !== 'admin' && clerkUser.publicMetadata?.role !== 'super_admin') {
       toast.error('Access denied. Admin role required.');
       router.push('/');
       return;
@@ -595,7 +602,7 @@ export default function AdminDashboard() {
   };
 
   // Assign staff role with sign-out reminder
-  const handleAssignStaffRole = async (userId: number) => {
+  const handleAssignStaffRole = async (userId: string) => {
     if (!confirm('Assign staff role to this user?\n\nNote: The user will need to sign out and sign back in for the staff panel to appear.')) return;
 
     try {
@@ -741,7 +748,7 @@ export default function AdminDashboard() {
     }
   };
 
-  const handleDeleteUser = async (id: number) => {
+  const handleDeleteUser = async (id: string) => {
     if (!confirm(t('users.deleteConfirm'))) return;
 
     try {
@@ -771,7 +778,7 @@ export default function AdminDashboard() {
     setSaving(true);
     try {
       const token = await getToken();
-      const response = await fetch(`/api/admin/users/${editingUser.id}`, {
+      const response = await fetch(`/api/admin/users/${editingUser._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -915,6 +922,9 @@ export default function AdminDashboard() {
       highlightsEn: '', highlightsFr: '', highlightsEs: '', highlightsIt: '',
       includedEn: '', includedFr: '', includedEs: '', includedIt: '',
       notIncludedEn: '', notIncludedFr: '', notIncludedEs: '', notIncludedIt: '',
+      priceIncludesEn: '', priceIncludesFr: '', priceIncludesEs: '', priceIncludesIt: '',
+      cancellationPolicyEn: '', cancellationPolicyFr: '', cancellationPolicyEs: '', cancellationPolicyIt: '',
+      minParticipantsEn: '', minParticipantsFr: '', minParticipantsEs: '', minParticipantsIt: '',
       isAdultsOnly: false
     });
     setItems([{ id: 'standard', label: 'Standard Tour', price: 0, defaultChecked: true }]);
@@ -977,6 +987,18 @@ export default function AdminDashboard() {
       notIncludedFr: getArrayText(excursion.notIncluded, 'fr'),
       notIncludedEs: getArrayText(excursion.notIncluded, 'es'),
       notIncludedIt: getArrayText(excursion.notIncluded, 'it'),
+      priceIncludesEn: getText(excursion.priceIncludes, 'en'),
+      priceIncludesFr: getText(excursion.priceIncludes, 'fr'),
+      priceIncludesEs: getText(excursion.priceIncludes, 'es'),
+      priceIncludesIt: getText(excursion.priceIncludes, 'it'),
+      cancellationPolicyEn: getText(excursion.cancellationPolicy, 'en'),
+      cancellationPolicyFr: getText(excursion.cancellationPolicy, 'fr'),
+      cancellationPolicyEs: getText(excursion.cancellationPolicy, 'es'),
+      cancellationPolicyIt: getText(excursion.cancellationPolicy, 'it'),
+      minParticipantsEn: getText(excursion.minParticipants, 'en'),
+      minParticipantsFr: getText(excursion.minParticipants, 'fr'),
+      minParticipantsEs: getText(excursion.minParticipants, 'es'),
+      minParticipantsIt: getText(excursion.minParticipants, 'it'),
       isAdultsOnly: excursion.isAdultsOnly || false
     });
     setItems(excursion.items || [{ id: 'standard', label: 'Standard Tour', price: excursion.priceMAD, defaultChecked: true }]);
@@ -1525,16 +1547,17 @@ export default function AdminDashboard() {
                       </TableRow>
                     ) : (
                       users.map((user) => (
-                        <TableRow key={user.id}>
+                        <TableRow key={user._id}>
                           <TableCell className="font-medium">{user.name || '-'}</TableCell>
                           <TableCell>{user.email}</TableCell>
                           <TableCell>{user.phone || '-'}</TableCell>
                           <TableCell>
                             <span className={`px-2 py-1 rounded-full text-xs font-semibold ${user.role === 'admin' ? 'bg-primary/20 text-primary' :
-                              user.role === 'staff' ? 'bg-accent/20 text-accent' :
-                                'bg-gray-100 text-gray-700'
+                              user.role === 'super_admin' ? 'bg-purple-100 text-purple-700' :
+                                user.role === 'staff' ? 'bg-accent/20 text-accent' :
+                                  'bg-gray-100 text-gray-700'
                               }`}>
-                              {user.role.toUpperCase()}
+                              {user.role.toUpperCase().replace('_', ' ')}
                             </span>
                           </TableCell>
                           <TableCell>{new Date(user.createdAt).toLocaleDateString()}</TableCell>
@@ -1544,21 +1567,27 @@ export default function AdminDashboard() {
                                 <Button
                                   variant="outline"
                                   size="sm"
-                                  onClick={() => handleAssignStaffRole(user.id)}
+                                  onClick={() => handleAssignStaffRole(user._id)}
                                   title="Assign Staff Role"
                                   className="rounded-full"
                                 >
                                   <Badge className="w-4 h-4 text-accent" />
                                 </Button>
                               )}
-                              <Button variant="outline" size="sm" onClick={() => handleEditUser(user)} className="rounded-full">
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                onClick={() => handleEditUser(user)}
+                                disabled={((user.role === 'admin' || user.role === 'super_admin') && !isSuperAdmin)}
+                                className="rounded-full"
+                              >
                                 <Edit className="w-4 h-4" />
                               </Button>
                               <Button
                                 variant="outline"
                                 size="sm"
-                                onClick={() => handleDeleteUser(user.id)}
-                                disabled={user.clerkId === clerkUser?.id}
+                                onClick={() => handleDeleteUser(user._id)}
+                                disabled={user.clerkId === clerkUser?.id || ((user.role === 'admin' || user.role === 'super_admin') && !isSuperAdmin)}
                                 className="rounded-full"
                               >
                                 <Trash2 className="w-4 h-4 text-destructive" />
@@ -2190,6 +2219,30 @@ export default function AdminDashboard() {
                           rows={2}
                           className="rounded-[20px]" />
                       </div>
+                      <div>
+                        <Label>Price Includes (English)</Label>
+                        <Textarea
+                          value={excursionFormData.priceIncludesEn}
+                          onChange={(e) => setExcursionFormData({ ...excursionFormData, priceIncludesEn: e.target.value })}
+                          rows={2}
+                          className="rounded-[20px]" />
+                      </div>
+                      <div>
+                        <Label>Cancellation Policy (English)</Label>
+                        <Textarea
+                          value={excursionFormData.cancellationPolicyEn}
+                          onChange={(e) => setExcursionFormData({ ...excursionFormData, cancellationPolicyEn: e.target.value })}
+                          rows={2}
+                          className="rounded-[20px]" />
+                      </div>
+                      <div>
+                        <Label>Min Participants (English)</Label>
+                        <Textarea
+                          value={excursionFormData.minParticipantsEn}
+                          onChange={(e) => setExcursionFormData({ ...excursionFormData, minParticipantsEn: e.target.value })}
+                          rows={1}
+                          className="rounded-[20px]" />
+                      </div>
                     </TabsContent>
 
                     {/* French Tab */}
@@ -2249,6 +2302,30 @@ export default function AdminDashboard() {
                           value={excursionFormData.notIncludedFr}
                           onChange={(e) => setExcursionFormData({ ...excursionFormData, notIncludedFr: e.target.value })}
                           rows={2}
+                          className="rounded-[20px]" />
+                      </div>
+                      <div>
+                        <Label>Le prix inclut (Français)</Label>
+                        <Textarea
+                          value={excursionFormData.priceIncludesFr}
+                          onChange={(e) => setExcursionFormData({ ...excursionFormData, priceIncludesFr: e.target.value })}
+                          rows={2}
+                          className="rounded-[20px]" />
+                      </div>
+                      <div>
+                        <Label>Politique d'annulation (Français)</Label>
+                        <Textarea
+                          value={excursionFormData.cancellationPolicyFr}
+                          onChange={(e) => setExcursionFormData({ ...excursionFormData, cancellationPolicyFr: e.target.value })}
+                          rows={2}
+                          className="rounded-[20px]" />
+                      </div>
+                      <div>
+                        <Label>Min Participants (Français)</Label>
+                        <Textarea
+                          value={excursionFormData.minParticipantsFr}
+                          onChange={(e) => setExcursionFormData({ ...excursionFormData, minParticipantsFr: e.target.value })}
+                          rows={1}
                           className="rounded-[20px]" />
                       </div>
                     </TabsContent>
@@ -2312,6 +2389,30 @@ export default function AdminDashboard() {
                           rows={2}
                           className="rounded-[20px]" />
                       </div>
+                      <div>
+                        <Label>Precio incluye (Español)</Label>
+                        <Textarea
+                          value={excursionFormData.priceIncludesEs}
+                          onChange={(e) => setExcursionFormData({ ...excursionFormData, priceIncludesEs: e.target.value })}
+                          rows={2}
+                          className="rounded-[20px]" />
+                      </div>
+                      <div>
+                        <Label>Política de cancelación (Español)</Label>
+                        <Textarea
+                          value={excursionFormData.cancellationPolicyEs}
+                          onChange={(e) => setExcursionFormData({ ...excursionFormData, cancellationPolicyEs: e.target.value })}
+                          rows={2}
+                          className="rounded-[20px]" />
+                      </div>
+                      <div>
+                        <Label>Min Participantes (Español)</Label>
+                        <Textarea
+                          value={excursionFormData.minParticipantsEs}
+                          onChange={(e) => setExcursionFormData({ ...excursionFormData, minParticipantsEs: e.target.value })}
+                          rows={1}
+                          className="rounded-[20px]" />
+                      </div>
                     </TabsContent>
 
                     {/* Italian Tab */}
@@ -2371,6 +2472,30 @@ export default function AdminDashboard() {
                           value={excursionFormData.notIncludedIt}
                           onChange={(e) => setExcursionFormData({ ...excursionFormData, notIncludedIt: e.target.value })}
                           rows={2}
+                          className="rounded-[20px]" />
+                      </div>
+                      <div>
+                        <Label>Il prezzo include (Italiano)</Label>
+                        <Textarea
+                          value={excursionFormData.priceIncludesIt}
+                          onChange={(e) => setExcursionFormData({ ...excursionFormData, priceIncludesIt: e.target.value })}
+                          rows={2}
+                          className="rounded-[20px]" />
+                      </div>
+                      <div>
+                        <Label>Politica di cancellazione (Italiano)</Label>
+                        <Textarea
+                          value={excursionFormData.cancellationPolicyIt}
+                          onChange={(e) => setExcursionFormData({ ...excursionFormData, cancellationPolicyIt: e.target.value })}
+                          rows={2}
+                          className="rounded-[20px]" />
+                      </div>
+                      <div>
+                        <Label>Min Partecipanti (Italiano)</Label>
+                        <Textarea
+                          value={excursionFormData.minParticipantsIt}
+                          onChange={(e) => setExcursionFormData({ ...excursionFormData, minParticipantsIt: e.target.value })}
+                          rows={1}
                           className="rounded-[20px]" />
                       </div>
                     </TabsContent>

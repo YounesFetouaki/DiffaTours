@@ -44,6 +44,9 @@ export interface IExcursion extends Document {
   createdAt: Date;
   updatedAt: Date;
   isAdultsOnly: boolean;
+  priceIncludes?: MultilingualText;
+  cancellationPolicy?: MultilingualText;
+  minParticipants?: MultilingualText;
 }
 
 const excursionItemSchema = new Schema<IExcursionItem>({
@@ -162,6 +165,18 @@ const excursionSchema = new Schema<IExcursion>(
     timeSlots: {
       type: [timeSlotSchema],
       default: [],
+    },
+    priceIncludes: {
+      type: Schema.Types.Mixed,
+      required: false,
+    },
+    cancellationPolicy: {
+      type: Schema.Types.Mixed,
+      required: false,
+    },
+    minParticipants: {
+      type: Schema.Types.Mixed,
+      required: false,
     },
   },
   {

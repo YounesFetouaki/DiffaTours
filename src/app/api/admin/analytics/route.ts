@@ -35,8 +35,8 @@ export async function GET(request: NextRequest) {
 
     console.log('✅ User found:', user.email, '| Role:', user.role);
 
-    // Check if user is admin
-    if (user.role !== 'admin') {
+    // Check if user is admin or super_admin
+    if (user.role !== 'admin' && user.role !== 'super_admin') {
       console.log(`❌ Unauthorized access attempt by user ${userId} with role: ${user.role}`);
       return NextResponse.json(
         { error: 'Forbidden - Admin access required', code: 'ADMIN_ACCESS_REQUIRED' },
@@ -65,19 +65,19 @@ export async function GET(request: NextRequest) {
     const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     const revenueByMonth = [];
     const now = new Date();
-    
+
     for (let i = 5; i >= 0; i--) {
       const date = new Date(now.getFullYear(), now.getMonth() - i, 1);
       const monthStart = new Date(date.getFullYear(), date.getMonth(), 1);
       const monthEnd = new Date(date.getFullYear(), date.getMonth() + 1, 0);
-      
+
       const monthRevenue = orders
         .filter(order => {
           const orderDate = new Date(order.createdAt);
           return orderDate >= monthStart && orderDate <= monthEnd;
         })
         .reduce((sum, order) => sum + (order.totalMad || 0), 0);
-      
+
       revenueByMonth.push({
         month: monthNames[date.getMonth()],
         revenue: Math.round(monthRevenue)
@@ -94,7 +94,7 @@ export async function GET(request: NextRequest) {
 
     // Top excursions
     const excursionStats: { [key: string]: { bookings: number; revenue: number } } = {};
-    
+
     orders.forEach(order => {
       try {
         const cartItems = typeof order.cartItems === 'string' ? JSON.parse(order.cartItems) : order.cartItems;
@@ -129,13 +129,13 @@ export async function GET(request: NextRequest) {
 
     // Revenue by payment method
     const paymentMethodStats: { [key: string]: number } = {};
-    
+
     orders.forEach(order => {
       const method = order.paymentMethod || 'unknown';
-      const normalizedMethod = method === 'cash' ? 'Cash' : 
-                              method === 'cmi' ? 'Card' : 
-                              method === 'bank_transfer' ? 'Bank Transfer' : 
-                              'Other';
+      const normalizedMethod = method === 'cash' ? 'Cash' :
+        method === 'cmi' ? 'Card' :
+          method === 'bank_transfer' ? 'Bank Transfer' :
+            'Other';
       if (!paymentMethodStats[normalizedMethod]) {
         paymentMethodStats[normalizedMethod] = 0;
       }

@@ -36,12 +36,12 @@ export async function POST(
 
     if (!badge) {
       console.log(`Badge not found for order ${order.orderNumber}, creating automatically...`);
-      
+
       // Parse cart items to get excursion details
       let cartItems: any[] = [];
       try {
-        cartItems = typeof order.cartItems === 'string' 
-          ? JSON.parse(order.cartItems) 
+        cartItems = typeof order.cartItems === 'string'
+          ? JSON.parse(order.cartItems)
           : order.cartItems || [];
       } catch (parseError) {
         console.error('Error parsing cart items:', parseError);
@@ -61,7 +61,7 @@ export async function POST(
       try {
         // Generate unique badge code
         const badgeCode = `BADGE-${randomUUID().substring(0, 8).toUpperCase()}`;
-        
+
         badge = await TouristBadge.create({
           badgeCode,
           touristName: `${order.firstName} ${order.lastName}`,
@@ -92,7 +92,7 @@ export async function POST(
     const origin = request.headers.get('origin') || request.headers.get('host') || 'http://localhost:3000';
     const protocol = origin.includes('localhost') ? 'http://' : 'https://';
     const baseUrl = origin.startsWith('http') ? origin : `${protocol}${origin}`;
-    
+
     // Build full badge URL with user's locale
     const badgeUrl = `${baseUrl}/${locale}/badge/${badge.badgeCode}`;
 
@@ -112,8 +112,8 @@ export async function POST(
     // Parse cart items
     let cartItems: any[] = [];
     try {
-      cartItems = typeof order.cartItems === 'string' 
-        ? JSON.parse(order.cartItems) 
+      cartItems = typeof order.cartItems === 'string'
+        ? JSON.parse(order.cartItems)
         : order.cartItems || [];
     } catch (parseError) {
       console.error('Error parsing cart items:', parseError);
@@ -133,6 +133,8 @@ export async function POST(
       badgeQrCodeUrl: qrCodeDataUrl,
       paymentMethod: order.paymentMethod || 'N/A',
       status: order.status || 'confirmed',
+      currency: order.currency || 'MAD',
+      totalInCurrency: order.totalInCurrency,
     }, locale);
 
     // Localized subject lines
@@ -166,7 +168,7 @@ export async function POST(
       const firstExcursion = cartItems[0];
       const excursionName = firstExcursion?.name || firstExcursion?.excursionName || 'Excursion';
       const excursionDate = firstExcursion?.date || 'Date à confirmer';
-      
+
       // Calculate total participants
       const totalParticipants = cartItems.reduce((sum, item) => {
         return sum + (item.adults || 0) + (item.children || 0);
@@ -192,7 +194,7 @@ export async function POST(
           try {
             const excursionDate = new Date(item.date);
             const pickupTime = item.pickupTime || '08:00';
-            const pickupLocation = order.accommodationType === 'hotel' 
+            const pickupLocation = order.accommodationType === 'hotel'
               ? (order.hotelName || 'Votre hôtel')
               : (order.address || 'Votre adresse');
 
@@ -223,7 +225,7 @@ export async function POST(
       const firstExcursion = cartItems[0];
       const excursionName = firstExcursion?.name || firstExcursion?.excursionName || 'Excursion';
       const excursionDate = firstExcursion?.date || 'Date à confirmer';
-      
+
       // Calculate total participants
       const totalParticipants = cartItems.reduce((sum, item) => {
         return sum + (item.adults || 0) + (item.children || 0);
@@ -231,12 +233,12 @@ export async function POST(
 
       // Format excursion date
       const formattedDate = excursionDate !== 'Date à confirmer'
-        ? new Date(excursionDate).toLocaleDateString(locale === 'fr' ? 'fr-FR' : locale === 'es' ? 'es-ES' : locale === 'it' ? 'it-IT' : 'en-US', { 
-            weekday: 'long', 
-            year: 'numeric', 
-            month: 'long', 
-            day: 'numeric' 
-          })
+        ? new Date(excursionDate).toLocaleDateString(locale === 'fr' ? 'fr-FR' : locale === 'es' ? 'es-ES' : locale === 'it' ? 'it-IT' : 'en-US', {
+          weekday: 'long',
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        })
         : excursionDate;
 
       // Send booking confirmation WhatsApp
@@ -262,15 +264,15 @@ export async function POST(
           try {
             const excursionDate = new Date(item.date);
             const pickupTime = item.pickupTime || '08:00';
-            const pickupLocation = order.accommodationType === 'hotel' 
+            const pickupLocation = order.accommodationType === 'hotel'
               ? (order.hotelName || 'Votre hôtel')
               : (order.address || 'Votre adresse');
 
-            const formattedExcursionDate = excursionDate.toLocaleDateString(locale === 'fr' ? 'fr-FR' : locale === 'es' ? 'es-ES' : locale === 'it' ? 'it-IT' : 'en-US', { 
-              weekday: 'long', 
-              year: 'numeric', 
-              month: 'long', 
-              day: 'numeric' 
+            const formattedExcursionDate = excursionDate.toLocaleDateString(locale === 'fr' ? 'fr-FR' : locale === 'es' ? 'es-ES' : locale === 'it' ? 'it-IT' : 'en-US', {
+              weekday: 'long',
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric'
             });
 
             const reminderResult = await scheduleWhatsAppReminder({

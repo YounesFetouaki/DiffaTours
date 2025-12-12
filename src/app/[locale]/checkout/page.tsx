@@ -27,7 +27,7 @@ const getStringValue = (field: any, locale: string = 'en'): string => {
 
 export default function CheckoutPage() {
   const { cart, cartTotal, clearCart } = useCart();
-  const { formatPrice } = useCurrency();
+  const { formatPrice, currency, exchangeRate, convertPrice } = useCurrency();
   const t = useTranslations();
   const params = useParams();
   const locale = params.locale as string;
@@ -40,16 +40,16 @@ export default function CheckoutPage() {
   const [isConfirmingOrder, setIsConfirmingOrder] = useState(false);
   const [availabilityWarnings, setAvailabilityWarnings] = useState<string[]>([]);
   const [checkingAvailability, setCheckingAvailability] = useState(false);
-  
+
   // Check if cart contains circuits
   const hasCircuits = cart.some(item => {
     const id = item.excursionId?.toLowerCase() || '';
     const name = item.excursionName?.toLowerCase() || '';
     // More precise circuit detection - check if it starts with 'circuit' or is in circuits section
-    return id.startsWith('circuit-') || 
-           id === 'circuit' || 
-           item.excursionId?.includes('circuits/') ||
-           (name.startsWith('circuit ') || name === 'circuit');
+    return id.startsWith('circuit-') ||
+      id === 'circuit' ||
+      item.excursionId?.includes('circuits/') ||
+      (name.startsWith('circuit ') || name === 'circuit');
   });
 
   // Check if prices are hidden (total is 0)
@@ -71,7 +71,7 @@ export default function CheckoutPage() {
     console.log('hasPricesHidden:', hasPricesHidden);
     console.log('shouldShowPaymentMethods:', shouldShowPaymentMethods);
   }, [cart, hasCircuits, cartTotal, hasPricesHidden, shouldShowPaymentMethods]);
-  
+
   // Check if CMI payment is enabled (based on environment variable)
   const [isCMIEnabled, setIsCMIEnabled] = useState(false);
 
@@ -137,16 +137,16 @@ export default function CheckoutPage() {
     try {
       for (const item of cart) {
         const totalPeople = item.ageGroups['0-4'] + item.ageGroups['4-12'] + item.ageGroups['adult'];
-        
+
         const response = await fetch(
           `/api/capacity/check?excursion_id=${encodeURIComponent(item.excursionId)}&date=${item.date}&people_count=${totalPeople}`
         );
-        
+
         if (response.ok) {
           const data = await response.json();
-          
+
           const excursionName = getStringValue(item.excursionName, locale);
-          
+
           if (!data.canBook) {
             warnings.push(
               locale === 'fr'
@@ -200,13 +200,13 @@ export default function CheckoutPage() {
     const phoneDigits = formData.phone.replace(/\D/g, '');
     if (phoneDigits.length < 8) {
       toast.error(
-        locale === 'fr' 
+        locale === 'fr'
           ? 'Le numéro de téléphone doit contenir au moins 8 chiffres'
           : locale === 'es'
-          ? 'El número de teléfono debe contener al menos 8 dígitos'
-          : locale === 'it'
-          ? 'Il numero di telefono deve contenere almeno 8 cifre'
-          : 'Phone number must contain at least 8 digits'
+            ? 'El número de teléfono debe contener al menos 8 dígitos'
+            : locale === 'it'
+              ? 'Il numero di telefono deve contenere almeno 8 cifre'
+              : 'Phone number must contain at least 8 digits'
       );
       return false;
     }
@@ -237,12 +237,12 @@ export default function CheckoutPage() {
     if (validatePersonalInfo()) {
       // Check availability before moving to confirm step
       const warnings = await checkAllAvailability();
-      
+
       // Block if any items are unavailable (canBook = false)
-      const hasUnavailableItems = warnings.some(w => 
+      const hasUnavailableItems = warnings.some(w =>
         w.includes('insuffisantes') || w.includes('Insufficient')
       );
-      
+
       if (hasUnavailableItems) {
         toast.error(
           locale === 'fr'
@@ -251,17 +251,17 @@ export default function CheckoutPage() {
         );
         return;
       }
-      
+
       setCurrentStep('confirm');
     }
   };
 
   const handleConfirmOrder = async () => {
     if (isSubmitting) return;
-    
+
     setIsSubmitting(true);
     setIsConfirmingOrder(true);
-    
+
     try {
       const orderData = {
         firstName: formData.firstName.trim(),
@@ -278,6 +278,9 @@ export default function CheckoutPage() {
         totalMad: cartTotal,
         userClerkId: user?.id || undefined,
         locale: locale, // Add locale to order data
+        currency,
+        exchangeRate,
+        totalInCurrency: convertPrice(cartTotal),
       };
 
       const response = await fetch('/api/orders', {
@@ -294,14 +297,14 @@ export default function CheckoutPage() {
       }
 
       const order = await response.json();
-      
+
       // For circuits, always go to confirmation (no payment gateway)
       if (hasCircuits) {
         clearCart();
         router.push(`/${locale}/order-confirmation/${order.orderNumber}`);
         return;
       }
-      
+
       // For non-circuits with CMI payment
       if (formData.paymentMethod === 'cmi') {
         if (order.paymentUrl) {
@@ -311,7 +314,7 @@ export default function CheckoutPage() {
           throw new Error('Payment URL not provided for online payment');
         }
       }
-      
+
       // For cash payment
       clearCart();
       router.push(`/${locale}/order-confirmation/${order.orderNumber}`);
@@ -342,7 +345,7 @@ export default function CheckoutPage() {
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <Header />
-      <main 
+      <main
         className="flex-1 pt-40 pb-16 px-4 bg-cover bg-center bg-fixed"
         style={{
           backgroundImage: 'url(https://plus.unsplash.com/premium_photo-1701534008693-0eee0632d47a?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8d2Vic2l0ZSUyMGJhY2tncm91bmR8ZW58MHx8MHx8fDA%3D)'
@@ -356,7 +359,7 @@ export default function CheckoutPage() {
           >
             <ArrowLeft className="w-5 h-5" />
             <span className="font-medium">
-              {currentStep === 'personal' 
+              {currentStep === 'personal'
                 ? (locale === 'fr' ? 'Retour au panier' : 'Back to Cart')
                 : (locale === 'fr' ? 'Retour aux informations' : 'Back to Information')}
             </span>
@@ -366,21 +369,19 @@ export default function CheckoutPage() {
           <div className="flex justify-center mb-8 border-b border-border">
             <button
               onClick={() => setCurrentStep('personal')}
-              className={`px-6 py-3 font-medium transition-colors rounded-t-[20px] ${
-                currentStep === 'personal'
+              className={`px-6 py-3 font-medium transition-colors rounded-t-[20px] ${currentStep === 'personal'
                   ? 'text-foreground border-b-2 border-foreground'
                   : 'text-muted'
-              }`}
+                }`}
             >
               {t('checkout.tabs.personal')}
             </button>
             <button
               onClick={() => currentStep === 'confirm' && setCurrentStep('confirm')}
-              className={`px-6 py-3 font-medium transition-colors rounded-t-[20px] ${
-                currentStep === 'confirm'
+              className={`px-6 py-3 font-medium transition-colors rounded-t-[20px] ${currentStep === 'confirm'
                   ? 'text-foreground border-b-2 border-foreground'
                   : 'text-muted'
-              }`}
+                }`}
               disabled={currentStep === 'personal'}
             >
               {t('checkout.tabs.confirm')}
@@ -437,13 +438,13 @@ export default function CheckoutPage() {
                         required
                       />
                       <p className="text-xs text-muted mt-1">
-                        {locale === 'fr' 
+                        {locale === 'fr'
                           ? 'Exemple: +212 600 123 456'
                           : locale === 'es'
-                          ? 'Ejemplo: +212 600 123 456'
-                          : locale === 'it'
-                          ? 'Esempio: +212 600 123 456'
-                          : 'Example: +212 600 123 456'}
+                            ? 'Ejemplo: +212 600 123 456'
+                            : locale === 'it'
+                              ? 'Esempio: +212 600 123 456'
+                              : 'Example: +212 600 123 456'}
                       </p>
                     </div>
 
@@ -587,7 +588,7 @@ export default function CheckoutPage() {
                       className="w-full bg-primary hover:bg-primary/90 text-white mt-6 rounded-full"
                       size="lg"
                     >
-                      {checkingAvailability 
+                      {checkingAvailability
                         ? (locale === 'fr' ? 'Vérification de la disponibilité...' : 'Checking availability...')
                         : t('checkout.continue')}
                     </Button>
@@ -637,11 +638,10 @@ export default function CheckoutPage() {
                       </h3>
                       <div className="space-y-4">
                         {/* Cash Payment */}
-                        <label className={`flex items-start gap-3 p-4 border rounded-[20px] cursor-pointer transition-colors ${
-                          formData.paymentMethod === 'cash' 
-                            ? 'border-primary bg-primary/5' 
+                        <label className={`flex items-start gap-3 p-4 border rounded-[20px] cursor-pointer transition-colors ${formData.paymentMethod === 'cash'
+                            ? 'border-primary bg-primary/5'
                             : 'border-border hover:border-primary/50'
-                        }`}>
+                          }`}>
                           <input
                             type="radio"
                             name="paymentMethod"
@@ -658,21 +658,20 @@ export default function CheckoutPage() {
                               </span>
                             </div>
                             <p className="text-sm text-muted">
-                              {locale === 'fr' 
-                                ? 'Payez en espèces lors de la prise en charge' 
+                              {locale === 'fr'
+                                ? 'Payez en espèces lors de la prise en charge'
                                 : 'Pay in cash upon pickup'}
                             </p>
                           </div>
                         </label>
 
                         {/* CMI Online Payment */}
-                        <label className={`flex items-start gap-3 p-4 border rounded-[20px] transition-colors ${
-                          !isCMIEnabled 
-                            ? 'opacity-50 cursor-not-allowed bg-gray-50' 
+                        <label className={`flex items-start gap-3 p-4 border rounded-[20px] transition-colors ${!isCMIEnabled
+                            ? 'opacity-50 cursor-not-allowed bg-gray-50'
                             : formData.paymentMethod === 'cmi'
                               ? 'border-primary bg-primary/5 cursor-pointer'
                               : 'border-border hover:border-primary/50 cursor-pointer'
-                        }`}>
+                          }`}>
                           <input
                             type="radio"
                             name="paymentMethod"
@@ -695,8 +694,8 @@ export default function CheckoutPage() {
                               )}
                             </div>
                             <p className="text-sm text-muted">
-                              {locale === 'fr' 
-                                ? 'Payez en ligne de manière sécurisée avec votre carte bancaire' 
+                              {locale === 'fr'
+                                ? 'Payez en ligne de manière sécurisée avec votre carte bancaire'
                                 : 'Pay online securely with your credit card'}
                             </p>
                             {!isCMIEnabled && (
@@ -740,9 +739,9 @@ export default function CheckoutPage() {
                     <div className="space-y-4">
                       {cart.map((item) => {
                         const excursionName = getStringValue(item.excursionName, locale);
-                        const isCircuit = item.excursionId?.toLowerCase().includes('circuit') || 
-                                         item.excursionName?.toLowerCase().includes('circuit');
-                        
+                        const isCircuit = item.excursionId?.toLowerCase().includes('circuit') ||
+                          item.excursionName?.toLowerCase().includes('circuit');
+
                         return (
                           <div key={item.id} className="flex gap-4 pb-4 border-b border-border last:border-b-0">
                             <div className="relative w-20 h-20 flex-shrink-0">
@@ -791,7 +790,7 @@ export default function CheckoutPage() {
             <div className="lg:col-span-1">
               <div className="bg-white rounded-[20px] shadow-md p-6 sticky top-32">
                 <h3 className="text-xl font-display mb-4">{t('checkout.summary.title')}</h3>
-                
+
                 {!hasCircuits && !hasPricesHidden && (
                   <div className="space-y-2 mb-4 pb-4 border-b border-border">
                     <div className="flex justify-between text-lg font-bold">
@@ -804,7 +803,7 @@ export default function CheckoutPage() {
                 {(hasCircuits || hasPricesHidden) && (
                   <div className="mb-4 pb-4 border-b border-border">
                     <p className="text-sm text-muted italic text-center">
-                      {locale === 'fr' 
+                      {locale === 'fr'
                         ? 'Le prix sera confirmé par notre équipe'
                         : 'Price will be confirmed by our team'}
                     </p>
@@ -818,8 +817,8 @@ export default function CheckoutPage() {
                     className="w-full bg-primary hover:bg-primary/90 text-white rounded-full"
                     size="lg"
                   >
-                    {isSubmitting 
-                      ? (locale === 'fr' ? 'Traitement...' : 'Processing...') 
+                    {isSubmitting
+                      ? (locale === 'fr' ? 'Traitement...' : 'Processing...')
                       : (hasCircuits || hasPricesHidden)
                         ? (locale === 'fr' ? 'Envoyer la demande' : 'Send Request')
                         : t('checkout.confirmButton')}

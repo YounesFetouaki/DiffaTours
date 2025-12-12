@@ -31,6 +31,8 @@ interface InvoiceData {
   totalMad: number;
   paymentMethod: string;
   paymentStatus: string;
+  currency?: string;
+  exchangeRate?: number;
 }
 
 // Styles for the PDF
@@ -376,7 +378,6 @@ function getTranslations(locale: string) {
       footer: 'Per qualsiasi domanda, contattaci a contact@diffatours.com',
     },
   };
-
   return translations[locale] || translations.en;
 }
 
@@ -389,6 +390,13 @@ function InvoiceDocument({ data, locale = 'en' }: { data: InvoiceData; locale?: 
       month: 'long',
       day: 'numeric',
     });
+  };
+
+  const formatPrice = (amountMAD: number) => {
+    if (data.currency && data.currency !== 'MAD' && data.exchangeRate) {
+      return `${(amountMAD * data.exchangeRate).toFixed(2)} ${data.currency}`;
+    }
+    return `${amountMAD.toFixed(2)} MAD`;
   };
 
   return (
@@ -470,7 +478,7 @@ function InvoiceDocument({ data, locale = 'en' }: { data: InvoiceData; locale?: 
                 <View style={styles.excursionBody}>
                   <View style={styles.priceRow}>
                     <Text style={styles.priceLabel}>{t.basePrice}:</Text>
-                    <Text style={styles.priceValue}>{item.excursionPrice.toFixed(2)} MAD</Text>
+                    <Text style={styles.priceValue}>{formatPrice(item.excursionPrice)}</Text>
                   </View>
 
                   {item.selectedItems.length > 0 && (
@@ -481,7 +489,7 @@ function InvoiceDocument({ data, locale = 'en' }: { data: InvoiceData; locale?: 
                       <View style={styles.extrasList}>
                         {item.selectedItems.map((extra, i) => (
                           <Text key={i} style={styles.extraItem}>
-                            • {extra.label} - {extra.price.toFixed(2)} MAD
+                            • {extra.label} - {formatPrice(extra.price)}
                           </Text>
                         ))}
                       </View>
@@ -499,7 +507,7 @@ function InvoiceDocument({ data, locale = 'en' }: { data: InvoiceData; locale?: 
                             {ag.ageGroup} (×{ag.count})
                           </Text>
                           <Text style={{ fontSize: 10, fontWeight: 'bold' }}>
-                            {(ag.count * ag.price).toFixed(2)} MAD
+                            {formatPrice(ag.count * ag.price)}
                           </Text>
                         </View>
                       ))}
@@ -509,7 +517,7 @@ function InvoiceDocument({ data, locale = 'en' }: { data: InvoiceData; locale?: 
                   <View style={[styles.priceRow, styles.subtotalRow]}>
                     <Text style={[styles.priceLabel, { fontWeight: 'bold' }]}>{t.subtotal}:</Text>
                     <Text style={[styles.priceValue, { fontSize: 14, color: '#FFB73F' }]}>
-                      {itemSubtotal.toFixed(2)} MAD
+                      {formatPrice(itemSubtotal)}
                     </Text>
                   </View>
                 </View>
@@ -522,7 +530,7 @@ function InvoiceDocument({ data, locale = 'en' }: { data: InvoiceData; locale?: 
         <View style={styles.totalsSection}>
           <View style={styles.grandTotal}>
             <Text style={styles.grandTotalLabel}>{t.total}</Text>
-            <Text style={styles.grandTotalValue}>{data.totalMad.toFixed(2)} MAD</Text>
+            <Text style={styles.grandTotalValue}>{formatPrice(data.totalMad)}</Text>
           </View>
         </View>
 

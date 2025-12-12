@@ -12,6 +12,8 @@ interface EmailTemplateParams {
   badgeQrCodeUrl: string;
   paymentMethod: string;
   status: string;
+  currency?: string;
+  totalInCurrency?: number;
 }
 
 interface EmailTranslations {
@@ -168,6 +170,11 @@ export function generateLocalizedOrderConfirmationEmail(
     )
     .join('');
 
+  // Determine displayed price
+  const displayPrice = params.totalInCurrency && params.currency && params.currency !== 'MAD'
+    ? `${params.totalInCurrency.toFixed(2)} ${params.currency}`
+    : `${params.totalMad.toFixed(2)} MAD`;
+
   return `
 <!DOCTYPE html>
 <html>
@@ -242,7 +249,7 @@ export function generateLocalizedOrderConfirmationEmail(
               <table width="100%" cellpadding="0" cellspacing="0" style="margin: 20px 0;">
                 <tr>
                   <td style="padding: 15px 0; color: #1a1a1a; font-size: 18px; font-weight: 700;">${t.total}:</td>
-                  <td style="padding: 15px 0; color: #FFB73F; font-size: 24px; font-weight: 700; text-align: right;">${params.totalMad.toFixed(2)} MAD</td>
+                  <td style="padding: 15px 0; color: #FFB73F; font-size: 24px; font-weight: 700; text-align: right;">${displayPrice}</td>
                 </tr>
               </table>
               

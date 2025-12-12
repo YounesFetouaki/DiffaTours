@@ -10,7 +10,7 @@ export async function PUT(
 ) {
   try {
     await connectDB();
-    
+
     const { userId } = await auth();
     if (!userId) {
       return NextResponse.json(
@@ -28,7 +28,7 @@ export async function PUT(
       );
     }
 
-    if (requestingUser.role !== 'admin') {
+    if (requestingUser.role !== 'admin' && requestingUser.role !== 'super_admin') {
       return NextResponse.json(
         { error: 'Admin access required', code: 'FORBIDDEN' },
         { status: 403 }
@@ -36,7 +36,7 @@ export async function PUT(
     }
 
     const { id } = await params;
-    
+
     if (!Types.ObjectId.isValid(id)) {
       return NextResponse.json(
         { error: 'Valid ID is required', code: 'INVALID_ID' },
@@ -53,13 +53,29 @@ export async function PUT(
       );
     }
 
+    // Protection Logic: Admin cannot modify Admin or Super Admin
+    if ((targetUser.role === 'admin' || targetUser.role === 'super_admin') && requestingUser.role !== 'super_admin') {
+      return NextResponse.json(
+        { error: 'You do not have permission to modify this user.', code: 'FORBIDDEN_SUPER_ADMIN_ONLY' },
+        { status: 403 }
+      );
+    }
+
     const body = await request.json();
     const { name, email, phone, role } = body;
 
-    if (role && role !== 'user' && role !== 'admin') {
+    if (role && role !== 'user' && role !== 'admin' && role !== 'staff' && role !== 'super_admin') {
       return NextResponse.json(
-        { error: 'Role must be either "user" or "admin"', code: 'INVALID_ROLE' },
+        { error: 'Role must be either "user", "staff", "admin" or "super_admin"', code: 'INVALID_ROLE' },
         { status: 400 }
+      );
+    }
+
+    // Prevent Admin from assigning Super Admin role
+    if (role === 'super_admin' && requestingUser.role !== 'super_admin') {
+      return NextResponse.json(
+        { error: 'Only Super Admin can assign the Super Admin role.', code: 'FORBIDDEN_SUPER_ADMIN_REQUIRED' },
+        { status: 403 }
       );
     }
 
@@ -108,7 +124,7 @@ export async function DELETE(
 ) {
   try {
     await connectDB();
-    
+
     const { userId } = await auth();
     if (!userId) {
       return NextResponse.json(
@@ -126,7 +142,7 @@ export async function DELETE(
       );
     }
 
-    if (requestingUser.role !== 'admin') {
+    if (requestingUser.role !== 'admin' && requestingUser.role !== 'super_admin') {
       return NextResponse.json(
         { error: 'Admin access required', code: 'FORBIDDEN' },
         { status: 403 }
@@ -134,7 +150,7 @@ export async function DELETE(
     }
 
     const { id } = await params;
-    
+
     if (!Types.ObjectId.isValid(id)) {
       return NextResponse.json(
         { error: 'Valid ID is required', code: 'INVALID_ID' },
@@ -148,6 +164,14 @@ export async function DELETE(
       return NextResponse.json(
         { error: 'User not found', code: 'USER_NOT_FOUND' },
         { status: 404 }
+      );
+    }
+
+    // Protection Logic: Admin cannot delete Admin or Super Admin
+    if ((targetUser.role === 'admin' || targetUser.role === 'super_admin') && requestingUser.role !== 'super_admin') {
+      return NextResponse.json(
+        { error: 'You do not have permission to delete this user.', code: 'FORBIDDEN_SUPER_ADMIN_ONLY' },
+        { status: 403 }
       );
     }
 

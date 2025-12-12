@@ -36,7 +36,7 @@ export async function GET(
 ) {
   try {
     await connectDB();
-    
+
     const { userId } = await auth();
     if (!userId) {
       return NextResponse.json({ error: 'Authentication required', code: 'UNAUTHORIZED' }, { status: 401 });
@@ -44,7 +44,7 @@ export async function GET(
 
     const requestingUser = await User.findOne({ clerkId: userId }).lean();
 
-    if (!requestingUser || requestingUser.role !== 'admin') {
+    if (!requestingUser || (requestingUser.role !== 'admin' && requestingUser.role !== 'super_admin')) {
       return NextResponse.json({ error: 'Admin access required', code: 'FORBIDDEN' }, { status: 403 });
     }
 
@@ -63,8 +63,8 @@ export async function GET(
     return NextResponse.json(service);
   } catch (error) {
     console.error('GET service error:', error);
-    return NextResponse.json({ 
-      error: 'Internal server error: ' + (error as Error).message 
+    return NextResponse.json({
+      error: 'Internal server error: ' + (error as Error).message
     }, { status: 500 });
   }
 }
@@ -75,7 +75,7 @@ export async function PUT(
 ) {
   try {
     await connectDB();
-    
+
     const { userId } = await auth();
     if (!userId) {
       return NextResponse.json({ error: 'Authentication required', code: 'UNAUTHORIZED' }, { status: 401 });
@@ -83,7 +83,7 @@ export async function PUT(
 
     const requestingUser = await User.findOne({ clerkId: userId }).lean();
 
-    if (!requestingUser || requestingUser.role !== 'admin') {
+    if (!requestingUser || (requestingUser.role !== 'admin' && requestingUser.role !== 'super_admin')) {
       return NextResponse.json({ error: 'Admin access required', code: 'FORBIDDEN' }, { status: 403 });
     }
 
@@ -107,9 +107,9 @@ export async function PUT(
     if (title !== undefined) {
       const titleValidation = validateMultilingualText(title, 'title');
       if (!titleValidation.valid) {
-        return NextResponse.json({ 
-          error: titleValidation.error, 
-          code: 'INVALID_TITLE_FORMAT' 
+        return NextResponse.json({
+          error: titleValidation.error,
+          code: 'INVALID_TITLE_FORMAT'
         }, { status: 400 });
       }
       updates.title = title;
@@ -118,9 +118,9 @@ export async function PUT(
     if (description !== undefined) {
       const descriptionValidation = validateMultilingualText(description, 'description');
       if (!descriptionValidation.valid) {
-        return NextResponse.json({ 
-          error: descriptionValidation.error, 
-          code: 'INVALID_DESCRIPTION_FORMAT' 
+        return NextResponse.json({
+          error: descriptionValidation.error,
+          code: 'INVALID_DESCRIPTION_FORMAT'
         }, { status: 400 });
       }
       updates.description = description;
@@ -128,9 +128,9 @@ export async function PUT(
 
     if (icon !== undefined) {
       if (typeof icon !== 'string' || icon.trim() === '') {
-        return NextResponse.json({ 
-          error: 'Icon must be a non-empty string', 
-          code: 'INVALID_ICON' 
+        return NextResponse.json({
+          error: 'Icon must be a non-empty string',
+          code: 'INVALID_ICON'
         }, { status: 400 });
       }
       updates.icon = icon.trim();
@@ -138,9 +138,9 @@ export async function PUT(
 
     if (order !== undefined) {
       if (typeof order !== 'number' || order < 0 || !Number.isInteger(order)) {
-        return NextResponse.json({ 
-          error: 'Order must be an integer greater than or equal to 0', 
-          code: 'INVALID_ORDER' 
+        return NextResponse.json({
+          error: 'Order must be an integer greater than or equal to 0',
+          code: 'INVALID_ORDER'
         }, { status: 400 });
       }
       updates.order = order;
@@ -148,9 +148,9 @@ export async function PUT(
 
     if (active !== undefined) {
       if (typeof active !== 'boolean') {
-        return NextResponse.json({ 
-          error: 'Active must be a boolean', 
-          code: 'INVALID_ACTIVE' 
+        return NextResponse.json({
+          error: 'Active must be a boolean',
+          code: 'INVALID_ACTIVE'
         }, { status: 400 });
       }
       updates.active = active;
@@ -161,8 +161,8 @@ export async function PUT(
     return NextResponse.json(updatedService);
   } catch (error) {
     console.error('PUT service error:', error);
-    return NextResponse.json({ 
-      error: 'Internal server error: ' + (error as Error).message 
+    return NextResponse.json({
+      error: 'Internal server error: ' + (error as Error).message
     }, { status: 500 });
   }
 }
@@ -173,7 +173,7 @@ export async function DELETE(
 ) {
   try {
     await connectDB();
-    
+
     const { userId } = await auth();
     if (!userId) {
       return NextResponse.json({ error: 'Authentication required', code: 'UNAUTHORIZED' }, { status: 401 });
@@ -181,7 +181,7 @@ export async function DELETE(
 
     const requestingUser = await User.findOne({ clerkId: userId }).lean();
 
-    if (!requestingUser || requestingUser.role !== 'admin') {
+    if (!requestingUser || (requestingUser.role !== 'admin' && requestingUser.role !== 'super_admin')) {
       return NextResponse.json({ error: 'Admin access required', code: 'FORBIDDEN' }, { status: 403 });
     }
 
@@ -203,8 +203,8 @@ export async function DELETE(
     });
   } catch (error) {
     console.error('DELETE service error:', error);
-    return NextResponse.json({ 
-      error: 'Internal server error: ' + (error as Error).message 
+    return NextResponse.json({
+      error: 'Internal server error: ' + (error as Error).message
     }, { status: 500 });
   }
 }

@@ -265,15 +265,18 @@ export default function Header() {
             <div className="px-5 lg:px-20">
               <div className="h-20 w-full flex items-center">
                 <div className="flex-1 animate-scaleIn">
-                  <Link href="/" className="inline-block hover:scale-105 transition-transform bg-white/10 backdrop-blur-sm p-2 rounded-lg">
+                  <Link href="/" className="inline-flex flex-col items-center bg-white/10 backdrop-blur-sm px-2 py-1 rounded-lg hover:scale-105 transition-transform">
                     <Image
                       src="/logo.png"
                       alt="Diffa Tours"
                       width={80}
                       height={80}
-                      className="h-14 w-auto drop-shadow-lg"
+                      className="h-10 w-auto drop-shadow-lg"
                       priority
                     />
+                    <span className={`text-[10px] font-medium leading-tight ${isScrolled ? 'text-gray-600' : 'text-white'}`}>
+                      Your partner at destination
+                    </span>
                   </Link>
                 </div>
 

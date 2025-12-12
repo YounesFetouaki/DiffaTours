@@ -143,7 +143,11 @@ export async function PATCH(
     if (body.items !== undefined) updateData.items = body.items;
     if (body.availableDays !== undefined) updateData.availableDays = body.availableDays;
     if (body.timeSlots !== undefined) updateData.timeSlots = body.timeSlots;
+    if (body.timeSlots !== undefined) updateData.timeSlots = body.timeSlots;
     if (body.isAdultsOnly !== undefined) updateData.isAdultsOnly = body.isAdultsOnly;
+    if (body.priceIncludes !== undefined) updateData.priceIncludes = body.priceIncludes;
+    if (body.cancellationPolicy !== undefined) updateData.cancellationPolicy = body.cancellationPolicy;
+    if (body.minParticipants !== undefined) updateData.minParticipants = body.minParticipants;
 
     const excursion = await Excursion.findByIdAndUpdate(
       id,

@@ -418,20 +418,28 @@ export default function ExcursionDetailPage() {
                   )}
 
                   <div className="mb-6">
-                    <p className="font-medium mb-2">
-                      {t('excursionDetail.time')}: {getStringValue(excursion.duration, locale)?.split(' ')[0] || '8:00'} - {parseInt(getStringValue(excursion.duration, locale)) + 1 || 5}:30PM
+                    <p className="mb-2">
+                      <span className="font-medium">{t('excursionDetail.time')}: </span>
+                      <span className="text-muted">
+                        {getStringValue(excursion.duration, locale)?.split(' ')[0] || '8:00'} - {parseInt(getStringValue(excursion.duration, locale)) + 1 || 5}:30PM
+                      </span>
                     </p>
+
                     <p className="text-sm font-medium mb-1">
                       {t('excursionDetail.priceIncludes')}
                     </p>
                     <p className="text-sm text-muted mb-4">
-                      {t('excursionDetail.priceIncludesText')}
+                      {getStringValue(excursion.priceIncludes, locale) || t('excursionDetail.priceIncludesText')}
                     </p>
+
                     <p className="text-sm text-muted italic">
-                      {t('excursionDetail.cancellation')}
+                      <span className="font-medium">Cancellation: </span>
+                      {getStringValue(excursion.cancellationPolicy, locale) || t('excursionDetail.cancellation')}
                     </p>
+
                     <p className="text-sm text-muted italic mt-2">
-                      {t('excursionDetail.minParticipants')}
+                      <span className="font-medium">Participants: </span>
+                      {getStringValue(excursion.minParticipants, locale) || t('excursionDetail.minParticipants')}
                     </p>
                   </div>
                 </div>

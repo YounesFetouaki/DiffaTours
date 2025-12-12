@@ -281,7 +281,10 @@ export async function POST(request: NextRequest) {
       totalMad,
       status: status || 'pending',
       paymentStatus: 'pending',
-      locale: body.locale || 'fr', // Add locale support
+      locale: body.locale || 'fr',
+      currency: body.currency || 'MAD',
+      totalInCurrency: body.totalInCurrency,
+      exchangeRate: body.exchangeRate,
     };
 
     const newOrder = await Order.create(insertData);

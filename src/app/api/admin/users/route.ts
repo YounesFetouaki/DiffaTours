@@ -6,7 +6,7 @@ import User from '@/models/User';
 export async function GET(request: NextRequest) {
   try {
     await connectDB();
-    
+
     // Authentication check
     const { userId } = await auth();
     if (!userId) {
@@ -26,8 +26,8 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    // Authorization check - admin only
-    if (requestingUser.role !== 'admin') {
+    // Authorization check - admin or super_admin only
+    if (requestingUser.role !== 'admin' && requestingUser.role !== 'super_admin') {
       return NextResponse.json(
         { error: 'Admin access required', code: 'FORBIDDEN' },
         { status: 403 }

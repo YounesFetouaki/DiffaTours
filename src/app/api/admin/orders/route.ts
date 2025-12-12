@@ -7,7 +7,7 @@ import { auth } from '@clerk/nextjs/server';
 export async function GET(request: NextRequest) {
   try {
     await connectDB();
-    
+
     // Check Clerk authentication
     const { userId: clerkUserId } = await auth();
 
@@ -28,8 +28,8 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    // Check if user is admin
-    if (user.role !== 'admin') {
+    // Check if user is admin or super_admin
+    if (user.role !== 'admin' && user.role !== 'super_admin') {
       return NextResponse.json(
         { error: 'Admin access required', code: 'ADMIN_ACCESS_REQUIRED' },
         { status: 403 }

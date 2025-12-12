@@ -171,9 +171,9 @@ export async function POST(request: NextRequest) {
 
     // Validate that at least one identifier is provided
     if (!orderNumber && !orderId) {
-      return NextResponse.json({ 
+      return NextResponse.json({
         error: "Either orderNumber or orderId must be provided",
-        code: "MISSING_ORDER_IDENTIFIER" 
+        code: "MISSING_ORDER_IDENTIFIER"
       }, { status: 400 });
     }
 
@@ -181,20 +181,20 @@ export async function POST(request: NextRequest) {
     let order;
     if (orderId) {
       order = await Order.findById(orderId).lean();
-      
+
       if (!order) {
-        return NextResponse.json({ 
+        return NextResponse.json({
           error: 'Order not found',
-          code: 'ORDER_NOT_FOUND' 
+          code: 'ORDER_NOT_FOUND'
         }, { status: 404 });
       }
     } else {
       order = await Order.findOne({ orderNumber }).lean();
-      
+
       if (!order) {
-        return NextResponse.json({ 
+        return NextResponse.json({
           error: 'Order not found',
-          code: 'ORDER_NOT_FOUND' 
+          code: 'ORDER_NOT_FOUND'
         }, { status: 404 });
       }
     }
@@ -203,7 +203,7 @@ export async function POST(request: NextRequest) {
     const existingBadge = await TouristBadge.findOne({ orderNumber: order.orderNumber }).lean();
 
     if (existingBadge) {
-      return NextResponse.json({ 
+      return NextResponse.json({
         error: 'Badge already exists for this order',
         code: 'BADGE_ALREADY_EXISTS',
         badge: existingBadge
@@ -221,8 +221,8 @@ export async function POST(request: NextRequest) {
     // Parse cartItems for trip details
     let cartItems: any[] = [];
     try {
-      cartItems = typeof order.cartItems === 'string' 
-        ? JSON.parse(order.cartItems) 
+      cartItems = typeof order.cartItems === 'string'
+        ? JSON.parse(order.cartItems)
         : order.cartItems || [];
     } catch (parseError) {
       console.error('Error parsing cart items:', parseError);
@@ -265,7 +265,7 @@ export async function POST(request: NextRequest) {
     const origin = request.headers.get('origin') || request.headers.get('host') || 'http://localhost:3000';
     const protocol = origin.includes('localhost') ? 'http://' : 'https://';
     const baseUrl = origin.startsWith('http') ? origin : `${protocol}${origin}`;
-    
+
     // Build full badge URL (default to /fr locale)
     const badgeUrl = `${baseUrl}/fr/badge/${badgeCode}`;
 
@@ -306,7 +306,7 @@ export async function POST(request: NextRequest) {
       };
 
       await gmailTransporter.sendMail(mailOptions);
-      
+
       console.log(`Confirmation email sent to ${order.email} with badge ${badgeCode}`);
 
       return NextResponse.json({
@@ -326,8 +326,8 @@ export async function POST(request: NextRequest) {
 
   } catch (error) {
     console.error('POST error:', error);
-    return NextResponse.json({ 
-      error: 'Internal server error: ' + (error as Error).message 
+    return NextResponse.json({
+      error: 'Internal server error: ' + (error as Error).message
     }, { status: 500 });
   }
 }
@@ -338,11 +338,11 @@ export async function GET(request: NextRequest) {
 
     // Get authentication from Clerk
     const { userId: clerkId } = await auth();
-    
+
     if (!clerkId) {
-      return NextResponse.json({ 
+      return NextResponse.json({
         error: 'Authentication required',
-        code: 'AUTHENTICATION_REQUIRED' 
+        code: 'AUTHENTICATION_REQUIRED'
       }, { status: 401 });
     }
 
@@ -350,17 +350,17 @@ export async function GET(request: NextRequest) {
     const user = await User.findOne({ clerkId }).lean();
 
     if (!user) {
-      return NextResponse.json({ 
+      return NextResponse.json({
         error: 'User not found',
-        code: 'USER_NOT_FOUND' 
+        code: 'USER_NOT_FOUND'
       }, { status: 404 });
     }
 
     // Check admin authorization
-    if (user.role !== 'admin') {
-      return NextResponse.json({ 
+    if (user.role !== 'admin' && user.role !== 'super_admin') {
+      return NextResponse.json({
         error: 'Admin access required',
-        code: 'ADMIN_ACCESS_REQUIRED' 
+        code: 'ADMIN_ACCESS_REQUIRED'
       }, { status: 403 });
     }
 
@@ -373,16 +373,16 @@ export async function GET(request: NextRequest) {
 
     // Validate limit and offset
     if (isNaN(limit) || limit < 1) {
-      return NextResponse.json({ 
+      return NextResponse.json({
         error: 'Invalid limit parameter',
-        code: 'INVALID_LIMIT' 
+        code: 'INVALID_LIMIT'
       }, { status: 400 });
     }
 
     if (isNaN(offset) || offset < 0) {
-      return NextResponse.json({ 
+      return NextResponse.json({
         error: 'Invalid offset parameter',
-        code: 'INVALID_OFFSET' 
+        code: 'INVALID_OFFSET'
       }, { status: 400 });
     }
 
@@ -393,9 +393,9 @@ export async function GET(request: NextRequest) {
     if (status) {
       const validStatuses = ['active', 'revoked', 'expired', 'used'];
       if (!validStatuses.includes(status)) {
-        return NextResponse.json({ 
+        return NextResponse.json({
           error: 'Invalid status parameter',
-          code: 'INVALID_STATUS' 
+          code: 'INVALID_STATUS'
         }, { status: 400 });
       }
       filter.status = status;
@@ -444,8 +444,8 @@ export async function GET(request: NextRequest) {
 
   } catch (error) {
     console.error('GET error:', error);
-    return NextResponse.json({ 
-      error: 'Internal server error: ' + (error as Error).message 
+    return NextResponse.json({
+      error: 'Internal server error: ' + (error as Error).message
     }, { status: 500 });
   }
 }

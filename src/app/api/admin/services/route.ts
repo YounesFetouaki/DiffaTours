@@ -32,7 +32,7 @@ function validateMultilingualText(value: any, fieldName: string): { valid: boole
 export async function GET(request: NextRequest) {
   try {
     await connectDB();
-    
+
     const { userId } = await auth();
     if (!userId) {
       return NextResponse.json({ error: 'Authentication required', code: 'UNAUTHORIZED' }, { status: 401 });
@@ -40,7 +40,7 @@ export async function GET(request: NextRequest) {
 
     const requestingUser = await User.findOne({ clerkId: userId });
 
-    if (!requestingUser || requestingUser.role !== 'admin') {
+    if (!requestingUser || (requestingUser.role !== 'admin' && requestingUser.role !== 'super_admin')) {
       return NextResponse.json({ error: 'Admin access required', code: 'FORBIDDEN' }, { status: 403 });
     }
 
@@ -71,8 +71,8 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(parsedResults);
   } catch (error) {
     console.error('GET services error:', error);
-    return NextResponse.json({ 
-      error: 'Internal server error: ' + (error as Error).message 
+    return NextResponse.json({
+      error: 'Internal server error: ' + (error as Error).message
     }, { status: 500 });
   }
 }
@@ -80,7 +80,7 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     await connectDB();
-    
+
     const { userId } = await auth();
     if (!userId) {
       return NextResponse.json({ error: 'Authentication required', code: 'UNAUTHORIZED' }, { status: 401 });
@@ -88,7 +88,7 @@ export async function POST(request: NextRequest) {
 
     const requestingUser = await User.findOne({ clerkId: userId });
 
-    if (!requestingUser || requestingUser.role !== 'admin') {
+    if (!requestingUser || (requestingUser.role !== 'admin' && requestingUser.role !== 'super_admin')) {
       return NextResponse.json({ error: 'Admin access required', code: 'FORBIDDEN' }, { status: 403 });
     }
 
@@ -96,53 +96,53 @@ export async function POST(request: NextRequest) {
     const { title, description, icon, order = 0, active = true } = body;
 
     if (!title) {
-      return NextResponse.json({ 
-        error: 'Title is required', 
-        code: 'MISSING_TITLE' 
+      return NextResponse.json({
+        error: 'Title is required',
+        code: 'MISSING_TITLE'
       }, { status: 400 });
     }
 
     if (!description) {
-      return NextResponse.json({ 
-        error: 'Description is required', 
-        code: 'MISSING_DESCRIPTION' 
+      return NextResponse.json({
+        error: 'Description is required',
+        code: 'MISSING_DESCRIPTION'
       }, { status: 400 });
     }
 
     if (!icon || typeof icon !== 'string' || icon.trim() === '') {
-      return NextResponse.json({ 
-        error: 'Icon is required and must be a non-empty string', 
-        code: 'INVALID_ICON' 
+      return NextResponse.json({
+        error: 'Icon is required and must be a non-empty string',
+        code: 'INVALID_ICON'
       }, { status: 400 });
     }
 
     const titleValidation = validateMultilingualText(title, 'title');
     if (!titleValidation.valid) {
-      return NextResponse.json({ 
-        error: titleValidation.error, 
-        code: 'INVALID_TITLE_FORMAT' 
+      return NextResponse.json({
+        error: titleValidation.error,
+        code: 'INVALID_TITLE_FORMAT'
       }, { status: 400 });
     }
 
     const descriptionValidation = validateMultilingualText(description, 'description');
     if (!descriptionValidation.valid) {
-      return NextResponse.json({ 
-        error: descriptionValidation.error, 
-        code: 'INVALID_DESCRIPTION_FORMAT' 
+      return NextResponse.json({
+        error: descriptionValidation.error,
+        code: 'INVALID_DESCRIPTION_FORMAT'
       }, { status: 400 });
     }
 
     if (typeof order !== 'number' || order < 0 || !Number.isInteger(order)) {
-      return NextResponse.json({ 
-        error: 'Order must be an integer greater than or equal to 0', 
-        code: 'INVALID_ORDER' 
+      return NextResponse.json({
+        error: 'Order must be an integer greater than or equal to 0',
+        code: 'INVALID_ORDER'
       }, { status: 400 });
     }
 
     if (typeof active !== 'boolean') {
-      return NextResponse.json({ 
-        error: 'Active must be a boolean', 
-        code: 'INVALID_ACTIVE' 
+      return NextResponse.json({
+        error: 'Active must be a boolean',
+        code: 'INVALID_ACTIVE'
       }, { status: 400 });
     }
 
@@ -165,8 +165,8 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(parsedService, { status: 201 });
   } catch (error) {
     console.error('POST services error:', error);
-    return NextResponse.json({ 
-      error: 'Internal server error: ' + (error as Error).message 
+    return NextResponse.json({
+      error: 'Internal server error: ' + (error as Error).message
     }, { status: 500 });
   }
 }
