@@ -575,43 +575,47 @@ export default function ExcursionDetailPage() {
                     />
                   </div>
 
-                  {/* Children 4-12 */}
-                  <div>
-                    <label className="text-sm font-medium block mb-2">
-                      {t('excursionDetail.ageGroups.child')} (4-12 {locale === 'fr' ? 'ans' : 'years'})
-                    </label>
-                    <input
-                      type="number"
-                      min="0"
-                      value={ageGroups['4-12']}
-                      onChange={(e) =>
-                        setAgeGroups((prev) => ({
-                          ...prev,
-                          '4-12': Math.max(0, parseInt(e.target.value) || 0)
-                        }))
-                      }
-                      className="w-full px-3 py-2 border border-border rounded-md"
-                    />
-                  </div>
+                  {!excursion.isAdultsOnly && (
+                    <>
+                      {/* Children 4-12 */}
+                      <div>
+                        <label className="text-sm font-medium block mb-2">
+                          {t('excursionDetail.ageGroups.child')} (4-12 {locale === 'fr' ? 'ans' : 'years'})
+                        </label>
+                        <input
+                          type="number"
+                          min="0"
+                          value={ageGroups['4-12']}
+                          onChange={(e) =>
+                            setAgeGroups((prev) => ({
+                              ...prev,
+                              '4-12': Math.max(0, parseInt(e.target.value) || 0)
+                            }))
+                          }
+                          className="w-full px-3 py-2 border border-border rounded-md"
+                        />
+                      </div>
 
-                  {/* Babies 0-4 */}
-                  <div>
-                    <label className="text-sm font-medium block mb-2">
-                      {t('excursionDetail.ageGroups.baby')} (0-4 {locale === 'fr' ? 'ans' : 'years'})
-                    </label>
-                    <input
-                      type="number"
-                      min="0"
-                      value={ageGroups['0-4']}
-                      onChange={(e) =>
-                        setAgeGroups((prev) => ({
-                          ...prev,
-                          '0-4': Math.max(0, parseInt(e.target.value) || 0)
-                        }))
-                      }
-                      className="w-full px-3 py-2 border border-border rounded-md"
-                    />
-                  </div>
+                      {/* Babies 0-4 */}
+                      <div>
+                        <label className="text-sm font-medium block mb-2">
+                          {t('excursionDetail.ageGroups.baby')} (0-4 {locale === 'fr' ? 'ans' : 'years'})
+                        </label>
+                        <input
+                          type="number"
+                          min="0"
+                          value={ageGroups['0-4']}
+                          onChange={(e) =>
+                            setAgeGroups((prev) => ({
+                              ...prev,
+                              '0-4': Math.max(0, parseInt(e.target.value) || 0)
+                            }))
+                          }
+                          className="w-full px-3 py-2 border border-border rounded-md"
+                        />
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
 

@@ -7,9 +7,11 @@ import { Trash2, ShoppingBag, ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useLocale, useTranslations } from '@/lib/i18n/hooks';
+import { useCurrency } from '@/contexts/CurrencyContext';
 
 export default function CartPage() {
   const { cart, removeFromCart, cartTotal, cartCount } = useCart();
+  const { formatPrice } = useCurrency();
   const router = useRouter();
   const locale = useLocale();
   const t = useTranslations();
@@ -53,7 +55,7 @@ export default function CartPage() {
 
   if (cartCount === 0) {
     return (
-      <div 
+      <div
         className="min-h-screen section-overlay"
         style={{
           backgroundImage: 'url(https://miro.medium.com/v2/1*iAu65xDmvpVdBJgps6EDEw.png)',
@@ -241,7 +243,7 @@ export default function CartPage() {
   })();
 
   return (
-    <div 
+    <div
       className="min-h-screen section-overlay"
       style={{
         backgroundImage: 'url(https://miro.medium.com/v2/1*iAu65xDmvpVdBJgps6EDEw.png)',
@@ -268,12 +270,12 @@ export default function CartPage() {
             <div className="lg:col-span-2 space-y-4">
               {cart.map((item) => {
                 const isContactPricing = item.priceMAD === 0 || item.total === 0;
-                const isCircuit = item.excursionId?.toLowerCase().includes('circuit') || 
-                                 item.excursionName?.toLowerCase().includes('circuit');
-                
+                const isCircuit = item.excursionId?.toLowerCase().includes('circuit') ||
+                  item.excursionName?.toLowerCase().includes('circuit');
+
                 return (
-                  <div 
-                    key={item.id} 
+                  <div
+                    key={item.id}
                     className="bg-white/95 backdrop-blur-sm rounded-[20px] shadow-md overflow-hidden border border-white/20"
                   >
                     <div className="flex flex-col sm:flex-row">
@@ -340,7 +342,7 @@ export default function CartPage() {
                               {item.selectedItems.map((selectedItem) => (
                                 <li key={selectedItem.id}>
                                   • {selectedItem.label}
-                                  {!isContactPricing && !isCircuit && ` (+${selectedItem.price} MAD)`}
+                                  {!isContactPricing && !isCircuit && ` (+${formatPrice(selectedItem.price)})`}
                                 </li>
                               ))}
                             </ul>
@@ -356,10 +358,10 @@ export default function CartPage() {
                           ) : (
                             <>
                               <span className="text-sm text-muted">
-                                {basePriceText} {item.priceMAD} MAD
+                                {basePriceText} {formatPrice(item.priceMAD)}
                               </span>
                               <span className="text-xl font-bold text-primary">
-                                {item.total} MAD
+                                {formatPrice(item.total)}
                               </span>
                             </>
                           )}
@@ -388,7 +390,7 @@ export default function CartPage() {
                         {customQuoteMessage}
                       </p>
                     </div>
-                    <Button 
+                    <Button
                       onClick={() => router.push(`/${locale}/checkout`)}
                       className="w-full bg-primary hover:bg-primary/90 text-white rounded-full"
                       size="lg"
@@ -402,7 +404,7 @@ export default function CartPage() {
                     <div className="space-y-3 mb-6 pb-6 border-b border-border">
                       <div className="flex justify-between text-muted">
                         <span>{subtotalText}</span>
-                        <span>{cartTotal} MAD</span>
+                        <span>{formatPrice(cartTotal)}</span>
                       </div>
                       <div className="flex justify-between text-muted">
                         <span>{itemsText}</span>
@@ -412,10 +414,10 @@ export default function CartPage() {
 
                     <div className="flex justify-between items-center mb-6 text-xl font-bold">
                       <span>{totalText}</span>
-                      <span className="text-primary">{cartTotal} MAD</span>
+                      <span className="text-primary">{formatPrice(cartTotal)}</span>
                     </div>
 
-                    <Button 
+                    <Button
                       onClick={() => router.push(`/${locale}/checkout`)}
                       className="w-full bg-primary hover:bg-primary/90 text-white rounded-full"
                       size="lg"

@@ -17,9 +17,12 @@ interface Excursion {
     reviews?: number; // Assuming we might have this later
 }
 
+import { useCurrency } from "@/contexts/CurrencyContext";
+
 const PopularExperiences = () => {
     const t = useTranslations();
     const locale = useLocale();
+    const { formatPrice } = useCurrency();
     const [excursions, setExcursions] = useState<Excursion[]>([]);
     const [isLoading, setIsLoading] = useState(true);
 
@@ -160,7 +163,7 @@ const PopularExperiences = () => {
                                 <div className="mt-auto pt-4 border-t border-border/50 flex items-center justify-between">
                                     <div className="text-xs text-muted-foreground font-medium">From</div>
                                     <div className="text-lg font-bold text-primary">
-                                        {excursion.priceMAD} <span className="text-sm font-normal text-muted-foreground">MAD</span>
+                                        {formatPrice(excursion.priceMAD)}
                                     </div>
                                 </div>
                             </div>

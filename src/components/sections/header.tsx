@@ -267,7 +267,7 @@ export default function Header() {
                 <div className="flex-1 animate-scaleIn">
                   <Link href="/" className="inline-block hover:scale-105 transition-transform bg-white/10 backdrop-blur-sm p-2 rounded-lg">
                     <Image
-                      src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/diffatours-logo2-1764026359909.png"
+                      src="/logo.png"
                       alt="Diffa Tours"
                       width={80}
                       height={80}
@@ -315,7 +315,7 @@ export default function Header() {
 
             <Link href="/" className="absolute left-1/2 -translate-x-1/2">
               <Image
-                src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/diffatours-logo2-1764026359909.png"
+                src="/logo.png"
                 alt="Diffa Tours"
                 width={60}
                 height={60}

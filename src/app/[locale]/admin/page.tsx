@@ -105,6 +105,7 @@ interface Excursion {
   items?: ExcursionItem[];
   availableDays?: string[];
   timeSlots?: TimeSlot[];
+  isAdultsOnly?: boolean;
 }
 
 interface ExcursionSetting {
@@ -218,7 +219,8 @@ export default function AdminDashboard() {
     descriptionEn: '', descriptionFr: '', descriptionEs: '', descriptionIt: '',
     highlightsEn: '', highlightsFr: '', highlightsEs: '', highlightsIt: '',
     includedEn: '', includedFr: '', includedEs: '', includedIt: '',
-    notIncludedEn: '', notIncludedFr: '', notIncludedEs: '', notIncludedIt: ''
+    notIncludedEn: '', notIncludedFr: '', notIncludedEs: '', notIncludedIt: '',
+    isAdultsOnly: false
   });
   const [items, setItems] = useState<ExcursionItem[]>([]);
   const [availableDays, setAvailableDays] = useState<string[]>(['everyday']);
@@ -315,6 +317,7 @@ export default function AdminDashboard() {
     try {
       const token = await getToken();
       const response = await fetch('/api/admin/excursions', {
+        cache: 'no-store',
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -911,7 +914,8 @@ export default function AdminDashboard() {
       descriptionEn: '', descriptionFr: '', descriptionEs: '', descriptionIt: '',
       highlightsEn: '', highlightsFr: '', highlightsEs: '', highlightsIt: '',
       includedEn: '', includedFr: '', includedEs: '', includedIt: '',
-      notIncludedEn: '', notIncludedFr: '', notIncludedEs: '', notIncludedIt: ''
+      notIncludedEn: '', notIncludedFr: '', notIncludedEs: '', notIncludedIt: '',
+      isAdultsOnly: false
     });
     setItems([{ id: 'standard', label: 'Standard Tour', price: 0, defaultChecked: true }]);
     setAvailableDays(['everyday']);
@@ -972,7 +976,8 @@ export default function AdminDashboard() {
       notIncludedEn: getArrayText(excursion.notIncluded, 'en'),
       notIncludedFr: getArrayText(excursion.notIncluded, 'fr'),
       notIncludedEs: getArrayText(excursion.notIncluded, 'es'),
-      notIncludedIt: getArrayText(excursion.notIncluded, 'it')
+      notIncludedIt: getArrayText(excursion.notIncluded, 'it'),
+      isAdultsOnly: excursion.isAdultsOnly || false
     });
     setItems(excursion.items || [{ id: 'standard', label: 'Standard Tour', price: excursion.priceMAD, defaultChecked: true }]);
     setAvailableDays(excursion.availableDays || ['everyday']);
@@ -1071,6 +1076,7 @@ export default function AdminDashboard() {
         notIncluded: notIncludedArray,
         items: items,
         ageGroups: true,
+        isAdultsOnly: excursionFormData.isAdultsOnly,
         availableDays: availableDays,
         timeSlots: timeSlots
       };
@@ -1525,8 +1531,8 @@ export default function AdminDashboard() {
                           <TableCell>{user.phone || '-'}</TableCell>
                           <TableCell>
                             <span className={`px-2 py-1 rounded-full text-xs font-semibold ${user.role === 'admin' ? 'bg-primary/20 text-primary' :
-                                user.role === 'staff' ? 'bg-accent/20 text-accent' :
-                                  'bg-gray-100 text-gray-700'
+                              user.role === 'staff' ? 'bg-accent/20 text-accent' :
+                                'bg-gray-100 text-gray-700'
                               }`}>
                               {user.role.toUpperCase()}
                             </span>
@@ -1630,16 +1636,16 @@ export default function AdminDashboard() {
                           </TableCell>
                           <TableCell>
                             <span className={`px-2 py-1 rounded-full text-xs font-semibold ${order.paymentStatus === 'paid' ? 'bg-green-100 text-green-700' :
-                                order.paymentStatus === 'pending' ? 'bg-yellow-100 text-yellow-700' :
-                                  'bg-gray-100 text-gray-700'
+                              order.paymentStatus === 'pending' ? 'bg-yellow-100 text-yellow-700' :
+                                'bg-gray-100 text-gray-700'
                               }`}>
                               {(order.paymentMethod || 'UNKNOWN').toUpperCase()} - {(order.paymentStatus || 'UNKNOWN').toUpperCase()}
                             </span>
                           </TableCell>
                           <TableCell>
                             <span className={`px-2 py-1 rounded-full text-xs font-semibold ${order.status === 'confirmed' ? 'bg-green-100 text-green-700' :
-                                order.status === 'cancelled' ? 'bg-red-100 text-red-700' :
-                                  'bg-yellow-100 text-yellow-700'
+                              order.status === 'cancelled' ? 'bg-red-100 text-red-700' :
+                                'bg-yellow-100 text-yellow-700'
                               }`}>
                               {(order.status || 'PENDING').toUpperCase()}
                             </span>
@@ -1768,8 +1774,8 @@ export default function AdminDashboard() {
                           <TableCell>{badge.scans_count}</TableCell>
                           <TableCell>
                             <span className={`px-2 py-1 rounded-full text-xs font-semibold ${badge.status === 'active' ? 'bg-green-100 text-green-700' :
-                                badge.status === 'revoked' ? 'bg-red-100 text-red-700' :
-                                  'bg-gray-100 text-gray-700'
+                              badge.status === 'revoked' ? 'bg-red-100 text-red-700' :
+                                'bg-gray-100 text-gray-700'
                               }`}>
                               {(badge.status || 'unknown').toUpperCase()}
                             </span>
@@ -2161,30 +2167,27 @@ export default function AdminDashboard() {
                           className="rounded-[20px]" />
                       </div>
                       <div>
-                        <Label>Highlights (comma-separated, English) *</Label>
+                        <Label>Highlights (comma-separated, English)</Label>
                         <Textarea
                           value={excursionFormData.highlightsEn}
                           onChange={(e) => setExcursionFormData({ ...excursionFormData, highlightsEn: e.target.value })}
                           rows={2}
-                          required
                           className="rounded-[20px]" />
                       </div>
                       <div>
-                        <Label>What's Included (comma-separated, English) *</Label>
+                        <Label>What's Included (comma-separated, English)</Label>
                         <Textarea
                           value={excursionFormData.includedEn}
                           onChange={(e) => setExcursionFormData({ ...excursionFormData, includedEn: e.target.value })}
                           rows={2}
-                          required
                           className="rounded-[20px]" />
                       </div>
                       <div>
-                        <Label>Not Included (comma-separated, English) *</Label>
+                        <Label>Not Included (comma-separated, English)</Label>
                         <Textarea
                           value={excursionFormData.notIncludedEn}
                           onChange={(e) => setExcursionFormData({ ...excursionFormData, notIncludedEn: e.target.value })}
                           rows={2}
-                          required
                           className="rounded-[20px]" />
                       </div>
                     </TabsContent>
@@ -2225,30 +2228,27 @@ export default function AdminDashboard() {
                           className="rounded-[20px]" />
                       </div>
                       <div>
-                        <Label>Highlights (séparés par virgule, Français) *</Label>
+                        <Label>Highlights (séparés par virgule, Français)</Label>
                         <Textarea
                           value={excursionFormData.highlightsFr}
                           onChange={(e) => setExcursionFormData({ ...excursionFormData, highlightsFr: e.target.value })}
                           rows={2}
-                          required
                           className="rounded-[20px]" />
                       </div>
                       <div>
-                        <Label>Inclus (séparés par virgule, Français) *</Label>
+                        <Label>Inclus (séparés par virgule, Français)</Label>
                         <Textarea
                           value={excursionFormData.includedFr}
                           onChange={(e) => setExcursionFormData({ ...excursionFormData, includedFr: e.target.value })}
                           rows={2}
-                          required
                           className="rounded-[20px]" />
                       </div>
                       <div>
-                        <Label>Non inclus (séparés par virgule, Français) *</Label>
+                        <Label>Non inclus (séparés par virgule, Français)</Label>
                         <Textarea
                           value={excursionFormData.notIncludedFr}
                           onChange={(e) => setExcursionFormData({ ...excursionFormData, notIncludedFr: e.target.value })}
                           rows={2}
-                          required
                           className="rounded-[20px]" />
                       </div>
                     </TabsContent>
@@ -2289,30 +2289,27 @@ export default function AdminDashboard() {
                           className="rounded-[20px]" />
                       </div>
                       <div>
-                        <Label>Highlights (separados por coma, Español) *</Label>
+                        <Label>Highlights (separados por coma, Español)</Label>
                         <Textarea
                           value={excursionFormData.highlightsEs}
                           onChange={(e) => setExcursionFormData({ ...excursionFormData, highlightsEs: e.target.value })}
                           rows={2}
-                          required
                           className="rounded-[20px]" />
                       </div>
                       <div>
-                        <Label>Incluido (separados por coma, Español) *</Label>
+                        <Label>Incluido (separados por coma, Español)</Label>
                         <Textarea
                           value={excursionFormData.includedEs}
                           onChange={(e) => setExcursionFormData({ ...excursionFormData, includedEs: e.target.value })}
                           rows={2}
-                          required
                           className="rounded-[20px]" />
                       </div>
                       <div>
-                        <Label>No incluido (separados por coma, Español) *</Label>
+                        <Label>No incluido (separados por coma, Español)</Label>
                         <Textarea
                           value={excursionFormData.notIncludedEs}
                           onChange={(e) => setExcursionFormData({ ...excursionFormData, notIncludedEs: e.target.value })}
                           rows={2}
-                          required
                           className="rounded-[20px]" />
                       </div>
                     </TabsContent>
@@ -2353,30 +2350,27 @@ export default function AdminDashboard() {
                           className="rounded-[20px]" />
                       </div>
                       <div>
-                        <Label>Highlights (separati da virgola, Italiano) *</Label>
+                        <Label>Highlights (separati da virgola, Italiano)</Label>
                         <Textarea
                           value={excursionFormData.highlightsIt}
                           onChange={(e) => setExcursionFormData({ ...excursionFormData, highlightsIt: e.target.value })}
                           rows={2}
-                          required
                           className="rounded-[20px]" />
                       </div>
                       <div>
-                        <Label>Incluso (separati da virgola, Italiano) *</Label>
+                        <Label>Incluso (separati da virgola, Italiano)</Label>
                         <Textarea
                           value={excursionFormData.includedIt}
                           onChange={(e) => setExcursionFormData({ ...excursionFormData, includedIt: e.target.value })}
                           rows={2}
-                          required
                           className="rounded-[20px]" />
                       </div>
                       <div>
-                        <Label>Non incluso (separati da virgola, Italiano) *</Label>
+                        <Label>Non incluso (separati da virgola, Italiano)</Label>
                         <Textarea
                           value={excursionFormData.notIncludedIt}
                           onChange={(e) => setExcursionFormData({ ...excursionFormData, notIncludedIt: e.target.value })}
                           rows={2}
-                          required
                           className="rounded-[20px]" />
                       </div>
                     </TabsContent>
@@ -2504,6 +2498,25 @@ export default function AdminDashboard() {
                   </div>
                 </div>
 
+                {/* Adults Only Toggle */}
+                <div className="flex items-center justify-between p-4 bg-secondary/30 rounded-[20px] border border-border/50 my-4">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 bg-background rounded-full shadow-sm">
+                      <Users className="w-5 h-5 text-primary" />
+                    </div>
+                    <div>
+                      <Label htmlFor="isAdultsOnly" className="text-base font-semibold block">Adults Only Restriction</Label>
+                      <p className="text-xs text-muted-foreground">Only allow bookings for adults (12+ years)</p>
+                    </div>
+                  </div>
+                  <Switch
+                    id="isAdultsOnly"
+                    checked={excursionFormData.isAdultsOnly}
+                    onCheckedChange={(checked) => setExcursionFormData({ ...excursionFormData, isAdultsOnly: checked })}
+                    className="data-[state=checked]:bg-primary data-[state=unchecked]:bg-gray-400"
+                  />
+                </div>
+
                 {/* Schedule Section */}
                 <div className="border-t pt-4">
                   <h3 className="text-base font-semibold mb-4 flex items-center gap-2">
@@ -2519,8 +2532,8 @@ export default function AdminDashboard() {
                         type="button"
                         onClick={() => handleToggleDay('everyday')}
                         className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${availableDays.includes('everyday')
-                            ? 'bg-primary text-white'
-                            : 'bg-secondary text-foreground hover:bg-secondary/80'
+                          ? 'bg-primary text-white'
+                          : 'bg-secondary text-foreground hover:bg-secondary/80'
                           }`}
                       >
                         Every Day
@@ -2531,8 +2544,8 @@ export default function AdminDashboard() {
                           type="button"
                           onClick={() => handleToggleDay(day)}
                           className={`px-4 py-2 rounded-full text-sm font-medium transition-colors capitalize ${availableDays.includes(day) && !availableDays.includes('everyday')
-                              ? 'bg-accent text-white'
-                              : 'bg-secondary text-foreground hover:bg-secondary/80'
+                            ? 'bg-accent text-white'
+                            : 'bg-secondary text-foreground hover:bg-secondary/80'
                             }`}
                         >
                           {day}
@@ -2613,7 +2626,7 @@ export default function AdminDashboard() {
             </DialogContent>
           </Dialog>
         </div>
-      </main>
-    </div>
+      </main >
+    </div >
   );
 }

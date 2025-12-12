@@ -43,6 +43,7 @@ export interface IExcursion extends Document {
   timeSlots: ITimeSlot[];
   createdAt: Date;
   updatedAt: Date;
+  isAdultsOnly: boolean;
 }
 
 const excursionItemSchema = new Schema<IExcursionItem>({
@@ -96,7 +97,7 @@ const excursionSchema = new Schema<IExcursion>(
       type: [String],
       required: [true, 'At least one image is required'],
       validate: {
-        validator: function(v: string[]) {
+        validator: function (v: string[]) {
           return v && v.length > 0;
         },
         message: 'At least one image is required',
@@ -141,6 +142,10 @@ const excursionSchema = new Schema<IExcursion>(
     highlights: {
       type: [Schema.Types.Mixed],
       default: [],
+    },
+    isAdultsOnly: {
+      type: Boolean,
+      default: false,
     },
     included: {
       type: [Schema.Types.Mixed],

@@ -38,15 +38,15 @@ const getValidImageUrl = (imageUrl: string): string => {
   if (!imageUrl || imageUrl === 'test' || imageUrl.trim() === '') {
     return 'https://images.unsplash.com/photo-1539635278303-d4002c07eae3?w=800&q=80';
   }
-  
+
   if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) {
     return imageUrl;
   }
-  
+
   if (imageUrl.startsWith('/')) {
     return imageUrl;
   }
-  
+
   return 'https://images.unsplash.com/photo-539635278303-d4002c07eae3?w=800&q=80';
 };
 
@@ -55,8 +55,8 @@ export default function ReservationContent() {
   const params = useParams();
   const router = useRouter();
   const locale = (params.locale as string) || 'fr';
-  const { currency, convertPrice } = useCurrency();
-  
+  const { currency, convertPrice, formatPrice } = useCurrency();
+
   const [excursions, setExcursions] = useState<Excursion[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
@@ -70,19 +70,19 @@ export default function ReservationContent() {
         setLoading(true);
         const response = await fetch('/api/excursions');
         if (!response.ok) throw new Error('Failed to fetch excursions');
-        
+
         const result = await response.json();
         const data = result.data || [];
-        
+
         // Sort by rating (stars) in descending order
         const sortedByRating = data.sort((a: Excursion, b: Excursion) => {
           const ratingA = a.average_rating || 0;
           const ratingB = b.average_rating || 0;
           return ratingB - ratingA;
         });
-        
+
         setExcursions(sortedByRating);
-        
+
         // Set price range based on fetched data
         if (sortedByRating.length > 0) {
           const prices = sortedByRating.map((e: Excursion) => e.priceMAD);
@@ -134,7 +134,7 @@ export default function ReservationContent() {
         {/* Left Sidebar - Filters */}
         <div className="bg-white rounded-[20px] shadow-md p-6 h-fit sticky top-24">
           <div className="mb-8">
-            <button 
+            <button
               onClick={() => setPriceRange({ min: 0, max: excursions.length > 0 ? Math.max(...excursions.map(e => e.priceMAD)) : 10450 })}
               className="text-primary font-semibold text-sm hover:text-primary/80 transition-colors"
             >
@@ -170,15 +170,15 @@ export default function ReservationContent() {
                   {day.substring(0, 3)}
                 </div>
               ))}
-              
+
               {Array.from({ length: startingDayOfWeek === 0 ? 6 : startingDayOfWeek - 1 }).map((_, i) => (
                 <div key={`empty-${i}`} />
               ))}
-              
+
               {Array.from({ length: daysInMonth }).map((_, i) => {
                 const day = i + 1;
                 const isWeekend = ((startingDayOfWeek + i) % 7 === 0) || ((startingDayOfWeek + i) % 7 === 6);
-                
+
                 return (
                   <button
                     key={day}
@@ -266,12 +266,12 @@ export default function ReservationContent() {
                         </div>
                       )}
                     </div>
-                    
+
                     <div className="p-6">
                       <h3 className="text-sm font-semibold text-foreground mb-3 uppercase tracking-wide">
                         {getLocalizedText(excursion.name, locale)}
                       </h3>
-                      
+
                       <div className="flex items-center gap-4 text-sm text-muted mb-4">
                         <div className="flex items-center gap-1">
                           <Clock className="w-4 h-4" />
@@ -282,7 +282,7 @@ export default function ReservationContent() {
                           <span>{getLocalizedText(excursion.location, locale)}</span>
                         </div>
                       </div>
-                      
+
                       {/* Rating and Review Count */}
                       {excursion.review_count > 0 && (
                         <div className="flex items-center gap-2 mb-4">
@@ -290,11 +290,10 @@ export default function ReservationContent() {
                             {Array.from({ length: 5 }).map((_, i) => (
                               <Star
                                 key={i}
-                                className={`w-4 h-4 ${
-                                  i < Math.floor(excursion.average_rating)
-                                    ? 'fill-primary text-primary'
-                                    : 'fill-gray-200 text-gray-200'
-                                }`}
+                                className={`w-4 h-4 ${i < Math.floor(excursion.average_rating)
+                                  ? 'fill-primary text-primary'
+                                  : 'fill-gray-200 text-gray-200'
+                                  }`}
                               />
                             ))}
                           </div>
@@ -303,12 +302,12 @@ export default function ReservationContent() {
                           </span>
                         </div>
                       )}
-                      
+
                       <div className="flex items-center justify-between">
                         <div className="text-2xl font-bold text-primary">
-                          {convertPrice(excursion.priceMAD)} {currency}
+                          {formatPrice(excursion.priceMAD)}
                         </div>
-                        <button 
+                        <button
                           onClick={() => handleBookNow(excursion.slug)}
                           className="bg-primary text-white px-6 py-2 rounded-full hover:bg-primary/90 transition-colors text-sm font-semibold"
                         >

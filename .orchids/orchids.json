@@ -3,7 +3,7 @@
   "createdAt": 1765309688331,
   "version": "1.0",
   "startupCommands": [
-    "bun install && bun run dev"
+    "bun install; bun run dev"
   ],
   "vercelProjectId": "prj_cZGLqScTKjZCUAPambSW2XeQb4Vf",
   "deployedWithUserToken": false

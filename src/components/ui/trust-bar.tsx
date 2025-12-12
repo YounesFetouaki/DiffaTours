@@ -9,19 +9,19 @@ export const TrustBar = () => {
     const items = [
         {
             icon: <BadgeCheck className="w-6 h-6 md:w-8 md:h-8 text-white" />,
-            label: "Les meilleures activités" // t('trust.bestActivities')
+            label: t('trust.bestActivities')
         },
         {
             icon: <Headset className="w-6 h-6 md:w-8 md:h-8 text-white" />,
-            label: "Service client 24h/24, 7j/7" // t('trust.support')
+            label: t('trust.support')
         },
         {
             icon: <MessageSquareText className="w-6 h-6 md:w-8 md:h-8 text-white" />,
-            label: "Des milliers d'avis" // t('trust.reviews')
+            label: t('trust.reviews')
         },
         {
             icon: <Wallet className="w-6 h-6 md:w-8 md:h-8 text-white" />,
-            label: "Sans surcoûts" // t('trust.noFees')
+            label: t('trust.noFees')
         }
     ];
 

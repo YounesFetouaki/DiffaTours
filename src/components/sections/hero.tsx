@@ -82,7 +82,7 @@ const Hero = () => {
           }}
         >
           <h1
-            className="font-display font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl shadow-sm mb-6 tracking-tight text-white"
+            className="font-display font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl shadow-sm mb-6 tracking-tight text-[#FFB73F]"
             style={{ fontFamily: 'var(--font-display)' }}
           >
             {t('hero.title') || "Discover the real Morocco"}

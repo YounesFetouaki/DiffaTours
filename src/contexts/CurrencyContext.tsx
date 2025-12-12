@@ -19,7 +19,7 @@ const exchangeRates = {
 };
 
 const currencySymbols = {
-  MAD: 'DH',
+  MAD: 'MAD',
   USD: '$',
   EUR: '€',
   GBP: '£',

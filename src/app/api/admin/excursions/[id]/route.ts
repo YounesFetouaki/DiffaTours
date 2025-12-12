@@ -59,6 +59,7 @@ export async function PUT(
 
     const { id } = await params;
     const body = await request.json();
+    console.log('PUT Body received:', JSON.stringify(body, null, 2));
 
     if (!Types.ObjectId.isValid(id)) {
       return NextResponse.json(
@@ -72,7 +73,7 @@ export async function PUT(
     const excursion = await Excursion.findByIdAndUpdate(
       id,
       body,
-      { new: true, runValidators: true, overwrite: true }
+      { new: true, runValidators: true }
     );
 
     if (!excursion) {
@@ -85,7 +86,7 @@ export async function PUT(
     return NextResponse.json({ success: true, data: excursion });
   } catch (error: any) {
     console.error('PUT API Error:', error);
-    
+
     if (error.name === 'ValidationError') {
       return NextResponse.json(
         { success: false, error: error.message },
@@ -123,10 +124,10 @@ export async function PATCH(
     }
 
     await connectDB();
-    
+
     // Build update object with only provided fields
     const updateData: any = {};
-    
+
     if (body.name !== undefined) updateData.name = body.name;
     if (body.section !== undefined) updateData.section = body.section;
     if (body.images !== undefined) updateData.images = body.images;
@@ -142,6 +143,7 @@ export async function PATCH(
     if (body.items !== undefined) updateData.items = body.items;
     if (body.availableDays !== undefined) updateData.availableDays = body.availableDays;
     if (body.timeSlots !== undefined) updateData.timeSlots = body.timeSlots;
+    if (body.isAdultsOnly !== undefined) updateData.isAdultsOnly = body.isAdultsOnly;
 
     const excursion = await Excursion.findByIdAndUpdate(
       id,
@@ -159,7 +161,7 @@ export async function PATCH(
     return NextResponse.json({ success: true, data: excursion });
   } catch (error: any) {
     console.error('PATCH API Error:', error);
-    
+
     if (error.name === 'ValidationError') {
       return NextResponse.json(
         { success: false, error: error.message },
@@ -205,9 +207,9 @@ export async function DELETE(
       );
     }
 
-    return NextResponse.json({ 
-      success: true, 
-      message: 'Excursion deleted successfully' 
+    return NextResponse.json({
+      success: true,
+      message: 'Excursion deleted successfully'
     });
   } catch (error) {
     console.error('API Error:', error);

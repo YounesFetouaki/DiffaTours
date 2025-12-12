@@ -13,6 +13,12 @@
     "myAccount": "Il Mio Account",
     "adminPanel": "Pannello Admin"
   },
+  "trust": {
+    "bestActivities": "Le migliori attività",
+    "support": "Assistenza 24/7",
+    "reviews": "Migliaia di recensioni",
+    "noFees": "Nessun costo nascosto"
+  },
   "hero": {
     "title": "Diffa Tours",
     "subtitle": "Esplora la magia del Marocco con esperienze indimenticabili"
@@ -58,7 +64,8 @@
     }
   },
   "testimonial": {
-    "subtitle": "TESTIMONIANZE DEI NOSTRI VIAGGIATORI",
+    "subtitle": "TESTIMONIANZE",
+    "title": "Cosa dicono i nostri viaggiatori",
     "quote": "Un'esperienza eccezionale con Diffa Tours! L'organizzazione era perfetta, le guide appassionate e le scoperte indimenticabili. Il Marocco ci ha rivelato tutta la sua bellezza grazie a questo team professionale. Lo raccomando vivamente!"
   },
   "amenities": {
