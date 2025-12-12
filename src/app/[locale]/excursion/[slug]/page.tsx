@@ -520,8 +520,8 @@ export default function ExcursionDetailPage() {
                 </div>
               )}
 
-              {/* Item Selection */}
-              {excursion.items && excursion.items.length > 0 && (
+              {/* Item Selection - Hidden as per request */}
+              {/* {excursion.items && excursion.items.length > 0 && (
                 <div className="mb-6">
                   <p className="text-sm font-semibold mb-3 text-[#4a9fb8]">
                     {t('excursionDetail.selectMoreItems')}
@@ -549,7 +549,7 @@ export default function ExcursionDetailPage() {
                     ))}
                   </div>
                 </div>
-              )}
+              )} */}
 
               {/* Number of People */}
               <div className="mb-6">
