@@ -316,15 +316,18 @@ export default function Header() {
               <Menu className={`h-6 w-6 ${isScrolled ? 'text-black' : 'text-white'}`} />
             </button>
 
-            <Link href="/" className="absolute left-1/2 -translate-x-1/2">
+            <Link href="/" className="absolute left-1/2 -translate-x-1/2 inline-flex flex-col items-center">
               <Image
                 src="/logo.png"
                 alt="Diffa Tours"
                 width={60}
                 height={60}
-                className="h-12 w-auto drop-shadow-lg"
+                className="h-10 w-auto drop-shadow-lg"
                 priority
               />
+              <span className={`text-[8px] font-medium leading-tight whitespace-nowrap mt-0.5 ${isScrolled ? 'text-black' : 'text-white'}`}>
+                Your partner at destination
+              </span>
             </Link>
 
             <div className="flex items-center gap-2">
