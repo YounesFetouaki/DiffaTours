@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { connectDB } from '@/lib/mongodb';
 import Order from '@/models/Order';
 import TouristBadge from '@/models/TouristBadge';
-import { gmailTransporter } from '@/lib/gmail';
+import { resend } from '@/lib/resend';
 import { generateQRCode } from '@/lib/qr-code';
 import { sendBookingConfirmation, scheduleReminder } from '@/lib/sms';
 import { sendBookingConfirmationWhatsApp, scheduleWhatsAppReminder } from '@/lib/whatsapp';
@@ -147,21 +147,24 @@ export async function POST(
     };
 
     // Send email
-    const mailOptions = {
-      from: `"DiffaTours Réservations" <${process.env.EMAIL_USER}>`,
+    // Send email using Resend
+    const { data: emailData, error: emailError } = await resend.emails.send({
+      from: 'DiffaTours Réservations <reservations@diffatours.com>',
       to: order.email,
-      replyTo: process.env.EMAIL_USER,
+      reply_to: process.env.EMAIL_USER,
       subject: subjects[locale] || subjects.fr,
       html: emailHtml,
       headers: {
-        'X-Priority': '1',
-        'X-MSMail-Priority': 'High',
-        'Importance': 'high',
-        'X-Mailer': 'DiffaTours Booking System',
+        'X-Entity-Ref-ID': order.orderNumber,
       }
-    };
+    });
 
-    await gmailTransporter.sendMail(mailOptions);
+    if (emailError) {
+      console.error('Resend email error:', emailError);
+      // We log but don't throw, to allow SMS/WhatsApp to proceed
+    } else {
+      console.log('✅ Email sent successfully via Resend:', emailData?.id);
+    }
 
     // Send SMS booking confirmation
     try {

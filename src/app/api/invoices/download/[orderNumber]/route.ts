@@ -69,6 +69,8 @@ export async function GET(
         totalMad: order.totalMad,
         paymentMethod: order.paymentMethod,
         paymentStatus: order.paymentStatus,
+        currency: order.currency,
+        exchangeRate: order.exchangeRate,
       },
       locale
     );

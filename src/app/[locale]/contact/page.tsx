@@ -104,7 +104,7 @@ export default function ContactPage() {
                 </div>
                 <h3 className="font-display text-2xl mb-4 text-foreground group-hover:text-accent transition-colors duration-300">{t('contact.info.phone')}</h3>
                 <a href="tel:+212661822441" className="text-sm text-muted hover:text-primary transition-colors inline-block hover:scale-105 transform">
-                  +212 661 822 441
+                  +212 691-583171
                 </a>
               </div>
 

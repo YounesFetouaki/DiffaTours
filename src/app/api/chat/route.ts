@@ -18,7 +18,7 @@ CRITICAL INSTRUCTION: You MUST ONLY answer questions related to Diffa Tours, the
 COMPANY INFORMATION:
 - Company: Diffa Tours (Palais Riad Berbere)
 - Location: Marrakech, Morocco
-- Contact: +212 661 822 441
+- Contact: +212 691-583171
 - Email: Contact@palaisriadberbere.com
 - Hours: 24/7 available for inquiries
 
@@ -49,7 +49,7 @@ CRITICAL INSTRUCTION: You MUST ONLY answer questions related to Diffa Tours, the
 COMPANY INFORMATION:
 - Company: Diffa Tours (Palais Riad Berbere)
 - Location: Marrakech, Morocco
-- Contact: +212 661 822 441
+- Contact: +212 691-583171
 - Email: Contact@palaisriadberbere.com
 
 STAFF CAPABILITIES:
@@ -76,7 +76,7 @@ CRITICAL INSTRUCTION: You MUST ONLY answer questions related to Diffa Tours, Mor
 COMPANY INFORMATION:
 - Company: Diffa Tours (Palais Riad Berbere)  
 - Location: Marrakech, Morocco
-- Contact: +212 661 822 441
+- Contact: +212 691-583171
 - Email: Contact@palaisriadberbere.com
 - Hours: 24/7 available for inquiries
 
@@ -124,7 +124,7 @@ When asked about specific excursions, their prices, times, or details:
 - Explain that each tour page shows: exact pricing, duration, departure times, included services, and availability calendar
 - Mention that prices are in MAD (Moroccan Dirham) and vary by group size and season
 - Tours typically depart early morning (8-9 AM) but exact times are shown on each tour page
-- Direct them to contact +212 661 822 441 for custom tour arrangements
+- Direct them to contact +212 691-583171 for custom tour arrangements
 
 BOOKING PROCESS:
 1. Browse excursions at /nos-excursions
@@ -179,7 +179,7 @@ INSTRUCCIÓN CRÍTICA: DEBES responder SOLO preguntas relacionadas con Diffa Tou
 INFORMACIÓN DE LA COMPAÑÍA:
 - Empresa: Diffa Tours (Palais Riad Berbere)
 - Ubicación: Marrakech, Marruecos
-- Contacto: +212 661 822 441
+- Contacto: +212 691-583171
 - Correo: Contact@palaisriadberbere.com
 - Horario: 24/7 disponible
 
@@ -209,7 +209,7 @@ INSTRUCCIÓN CRÍTICA: DEBES responder SOLO preguntas relacionadas con Diffa Tou
 INFORMACIÓN DE LA COMPAÑÍA:
 - Empresa: Diffa Tours (Palais Riad Berbere)
 - Ubicación: Marrakech, Marruecos
-- Contacto: +212 661 822 441
+- Contacto: +212 691-583171
 - Correo: Contact@palaisriadberbere.com
 
 CAPACIDADES DE STAFF:
@@ -236,7 +236,7 @@ INSTRUCCIÓN CRÍTICA: DEBES responder SOLO preguntas relacionadas con Diffa Tou
 INFORMACIÓN DE LA COMPAÑÍA:
 - Empresa: Diffa Tours (Palais Riad Berbere)
 - Ubicación: Marrakech, Marruecos
-- Contacto: +212 661 822 441
+- Contacto: +212 691-583171
 - Correo: Contact@palaisriadberbere.com
 - Horario: 24/7 disponible
 
@@ -284,7 +284,7 @@ Cuando pregunten sobre excursiones específicas, precios, horarios o detalles:
 - Explica que cada página de tour muestra: precios exactos, duración, horarios de salida, servicios incluidos y calendario de disponibilidad
 - Menciona que los precios están en MAD (Dirham marroquí) y varían según tamaño de grupo y temporada
 - Los tours generalmente salen temprano en la mañana (8-9 AM) pero los horarios exactos se muestran en cada página de tour
-- Dirígelos a contactar +212 661 822 441 para arreglos de tours personalizados
+- Dirígelos a contactar +212 691-583171 para arreglos de tours personalizados
 
 PROCESO DE RESERVA:
 1. Explora excursiones en /nos-excursions
@@ -339,7 +339,7 @@ INSTRUCTION CRITIQUE: Vous DEVEZ répondre UNIQUEMENT aux questions liées à Di
 INFORMATIONS SUR L'ENTREPRISE:
 - Entreprise: Diffa Tours (Palais Riad Berbere)
 - Localisation: Marrakech, Maroc
-- Contact: +212 661 822 441
+- Contact: +212 691-583171
 - Email: Contact@palaisriadberbere.com
 - Horaires: 24/7 disponible
 
@@ -369,7 +369,7 @@ INSTRUCTION CRITIQUE: Vous DEVEZ répondre UNIQUEMENT aux questions liées à Di
 INFORMATIONS SUR L'ENTREPRISE:
 - Entreprise: Diffa Tours (Palais Riad Berbere)
 - Localisation: Marrakech, Maroc
-- Contact: +212 661 822 441
+- Contact: +212 691-583171
 - Email: Contact@palaisriadberbere.com
 
 CAPACITÉS STAFF:
@@ -396,7 +396,7 @@ INSTRUCTION CRITIQUE: Vous DEVEZ répondre UNIQUEMENT aux questions liées à Di
 INFORMATIONS SUR L'ENTREPRISE:
 - Entreprise: Diffa Tours (Palais Riad Berbere)
 - Localisation: Marrakech, Maroc
-- Contact: +212 661 822 441
+- Contact: +212 691-583171
 - Email: Contact@palaisriadberbere.com
 - Horaires: 24/7 disponible
 
@@ -444,7 +444,7 @@ Lorsqu'on vous interroge sur des excursions spécifiques, leurs prix, horaires o
 - Expliquez que chaque page de tour affiche: prix exacts, durée, heures de départ, services inclus et calendrier de disponibilité
 - Mentionnez que les prix sont en MAD (Dirham marocain) et varient selon la taille du groupe et la saison
 - Les tours partent généralement tôt le matin (8-9h) mais les horaires exacts sont affichés sur chaque page de tour
-- Dirigez-les pour contacter +212 661 822 441 pour des arrangements de tours personnalisés
+- Dirigez-les pour contacter +212 691-583171 pour des arrangements de tours personnalisés
 
 PROCESSUS DE RÉSERVATION:
 1. Parcourez les excursions sur /nos-excursions
@@ -499,7 +499,7 @@ ISTRUZIONE CRITICA: DEVI rispondere SOLO a domande relative a Diffa Tours, al si
 INFORMAZIONI SULL'AZIENDA:
 - Azienda: Diffa Tours (Palais Riad Berbere)
 - Posizione: Marrakech, Marocco
-- Contatto: +212 661 822 441
+- Contatto: +212 691-583171
 - Email: Contact@palaisriadberbere.com
 - Orari: 24/7 disponibile
 
@@ -529,7 +529,7 @@ ISTRUZIONE CRITICA: DEVI rispondere SOLO a domande relative a Diffa Tours, al si
 INFORMAZIONI SULL'AZIENDA:
 - Azienda: Diffa Tours (Palais Riad Berbere)
 - Posizione: Marrakech, Marocco
-- Contatto: +212 661 822 441
+- Contatto: +212 691-583171
 - Email: Contact@palaisriadberbere.com
 
 CAPACITÀ STAFF:
@@ -556,7 +556,7 @@ ISTRUZIONE CRITICA: DEVI rispondere SOLO a domande relative a Diffa Tours, viagg
 INFORMAZIONI SULL'AZIENDA:
 - Azienda: Diffa Tours (Palais Riad Berbere)
 - Posizione: Marrakech, Marocco
-- Contatto: +212 661 822 441
+- Contatto: +212 691-583171
 - Email: Contact@palaisriadberbere.com
 - Orari: 24/7 disponibile
 
@@ -604,7 +604,7 @@ Quando vengono chieste informazioni su escursioni specifiche, prezzi, orari o de
 - Spiega che ogni pagina del tour mostra: prezzi esatti, durata, orari di partenza, servizi inclusi e calendario disponibilità
 - Menziona che i prezzi sono in MAD (Dirham marocchino) e variano in base a dimensione gruppo e stagione
 - I tour partono generalmente di prima mattina (8-9 AM) ma gli orari esatti sono mostrati su ogni pagina del tour
-- Indirizzali a contattare +212 661 822 441 per organizzazioni di tour personalizzati
+- Indirizzali a contattare +212 691-583171 per organizzazioni di tour personalizzati
 
 PROCESSO DI PRENOTAZIONE:
 1. Sfoglia escursioni su /nos-excursions

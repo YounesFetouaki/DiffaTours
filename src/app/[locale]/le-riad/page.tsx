@@ -7,7 +7,7 @@ export default function LeRiadPage() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      
+
       <main>
         {/* Hero Section */}
         <section className="relative h-[60vh] min-h-[400px] flex items-center justify-center">
@@ -42,13 +42,13 @@ export default function LeRiadPage() {
               Un havre de paix au cœur du Maroc
             </h2>
             <p className="text-body-lg text-[#5C5C5C] leading-[1.8] mb-6">
-              <strong className="text-[#2C2C2C]">Diffa Tours</strong> est bien plus qu'une simple agence de voyage. 
-              C'est une invitation à découvrir l'essence même de l'hospitalité marocaine dans un cadre exceptionnel 
+              <strong className="text-[#2C2C2C]">Diffa Tours</strong> est bien plus qu'une simple agence de voyage.
+              C'est une invitation à découvrir l'essence même de l'hospitalité marocaine dans un cadre exceptionnel
               qui célèbre l'architecture traditionnelle et le savoir-faire ancestral.
             </p>
             <p className="text-body-lg text-[#5C5C5C] leading-[1.8]">
-              Niché dans un écrin de verdure, notre riad offre une expérience unique où chaque détail a été 
-              pensé pour votre confort et votre bien-être. Des patios ombragés aux jardins luxuriants, 
+              Niché dans un écrin de verdure, notre riad offre une expérience unique où chaque détail a été
+              pensé pour votre confort et votre bien-être. Des patios ombragés aux jardins luxuriants,
               en passant par nos piscines scintillantes, chaque espace respire la sérénité.
             </p>
           </div>
@@ -66,13 +66,13 @@ export default function LeRiadPage() {
                   Un chef-d'œuvre architectural
                 </h3>
                 <p className="text-body-regular text-[#5C5C5C] leading-[1.7] mb-4">
-                  Notre riad est un véritable témoignage de l'artisanat marocain traditionnel. 
-                  Les arches élégantes, les colonnes finement sculptées et les zellige colorés 
+                  Notre riad est un véritable témoignage de l'artisanat marocain traditionnel.
+                  Les arches élégantes, les colonnes finement sculptées et les zellige colorés
                   créent une atmosphère intemporelle qui transporte nos hôtes dans un autre monde.
                 </p>
                 <p className="text-body-regular text-[#5C5C5C] leading-[1.7]">
-                  Chaque coin de notre riad raconte une histoire, des plafonds en bois 
-                  peint aux fontaines en mosaïque, en passant par les lanterne en fer forgé 
+                  Chaque coin de notre riad raconte une histoire, des plafonds en bois
+                  peint aux fontaines en mosaïque, en passant par les lanterne en fer forgé
                   qui illuminent nos espaces communs d'une lumière chaleureuse.
                 </p>
               </div>
@@ -103,14 +103,14 @@ export default function LeRiadPage() {
                   Jardins et piscines d'exception
                 </h3>
                 <p className="text-body-regular text-[#5C5C5C] leading-[1.7] mb-4">
-                  Nos espaces extérieurs sont une ode à la beauté naturelle du Maroc. 
-                  Des jardins luxuriants plantés de palmiers et d'oliviers entourent nos 
+                  Nos espaces extérieurs sont une ode à la beauté naturelle du Maroc.
+                  Des jardins luxuriants plantés de palmiers et d'oliviers entourent nos
                   piscines intérieure et extérieure, créant des oasis de fraîcheur et de tranquillité.
                 </p>
                 <p className="text-body-regular text-[#5C5C5C] leading-[1.7]">
-                  Que vous souhaitiez vous détendre sur un transat au bord de la piscine, 
-                  vous promener dans nos jardins parfumés ou profiter d'un moment de lecture 
-                  sous une pergola ombragée, nos espaces extérieurs offrent le cadre idéal 
+                  Que vous souhaitiez vous détendre sur un transat au bord de la piscine,
+                  vous promener dans nos jardins parfumés ou profiter d'un moment de lecture
+                  sous une pergola ombragée, nos espaces extérieurs offrent le cadre idéal
                   pour la relaxation.
                 </p>
               </div>
@@ -129,7 +129,7 @@ export default function LeRiadPage() {
                 Des équipements de qualité
               </h2>
             </div>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               <div className="text-center p-6">
                 <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center">
@@ -194,8 +194,8 @@ export default function LeRiadPage() {
                   Idéalement situé
                 </h3>
                 <p className="text-body-regular text-[#5C5C5C] leading-[1.7] mb-8">
-                  Diffa Tours bénéficie d'un emplacement privilégié, 
-                  à proximité des principales attractions touristiques tout en offrant 
+                  Diffa Tours bénéficie d'un emplacement privilégié,
+                  à proximité des principales attractions touristiques tout en offrant
                   le calme et la tranquillité nécessaires à un séjour relaxant.
                 </p>
 
@@ -214,7 +214,7 @@ export default function LeRiadPage() {
                     <Phone size={24} className="text-[#C9B382] flex-shrink-0 mt-1" />
                     <div>
                       <h5 className="font-display text-[16px] text-[#2C2C2C] mb-1">Téléphone</h5>
-                      <p className="text-sm text-[#5C5C5C]">+212 661 822 441</p>
+                      <p className="text-sm text-[#5C5C5C]">+212 691-583171</p>
                     </div>
                   </div>
 
@@ -270,18 +270,18 @@ export default function LeRiadPage() {
               Venez découvrir notre riad
             </h2>
             <p className="text-body-lg text-[#5C5C5C] mb-8">
-              Nous serions ravis de vous accueillir et de vous faire découvrir notre havre de paix. 
+              Nous serions ravis de vous accueillir et de vous faire découvrir notre havre de paix.
               Contactez-nous pour organiser une visite ou réserver votre séjour.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a 
-                href="#" 
+              <a
+                href="#"
                 className="inline-block bg-[#C9B382] text-white px-8 py-3 text-[14px] font-medium rounded-full hover:bg-primary transition-colors duration-300"
               >
                 Réserver maintenant
               </a>
-              <a 
-                href="#" 
+              <a
+                href="#"
                 className="inline-block bg-transparent border-2 border-[#C9B382] text-[#C9B382] px-8 py-3 text-[14px] font-medium rounded-full hover:bg-primary transition-colors duration-300"
               >
                 Nous contacter
@@ -290,7 +290,7 @@ export default function LeRiadPage() {
           </div>
         </section>
       </main>
-      
+
       <Footer />
     </div>
   );

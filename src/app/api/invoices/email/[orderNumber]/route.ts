@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { connectDB } from '@/lib/mongodb';
 import Order from '@/models/Order';
 import { generateInvoicePDF } from '@/lib/invoice-generator';
-import { gmailTransporter } from '@/lib/gmail';
+import { resend } from '@/lib/resend';
 
 export const maxDuration = 60;
 
@@ -92,6 +92,8 @@ export async function POST(
         totalMad: order.totalMad,
         paymentMethod: order.paymentMethod,
         paymentStatus: order.paymentStatus,
+        currency: order.currency,
+        exchangeRate: order.exchangeRate,
       },
       locale
     );
@@ -176,8 +178,9 @@ export async function POST(
     console.log('[EMAIL] Subject:', t.subject);
 
     // Send email with Gmail Transporter
-    const mailOptions = {
-      from: `"DiffaTours Facturation" <${process.env.EMAIL_USER}>`,
+    // Send email using Resend
+    const { data: emailData, error: emailError } = await resend.emails.send({
+      from: 'DiffaTours Facturation <billing@diffatours.com>',
       to: order.email,
       subject: t.subject,
       html: `
@@ -243,11 +246,14 @@ export async function POST(
           content: pdfBuffer,
         },
       ],
-    };
+    });
 
-    await gmailTransporter.sendMail(mailOptions);
+    if (emailError) {
+      console.error('Resend invoice email error:', emailError);
+      throw new Error(`Resend error: ${emailError.message}`);
+    }
 
-    console.log('[EMAIL] Email sent successfully via Gmail');
+    console.log('[EMAIL] Invoice email sent successfully via Resend:', emailData?.id);
 
     return NextResponse.json({
       success: true,

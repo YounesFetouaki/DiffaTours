@@ -7,7 +7,7 @@ export default function LeRestaurantPage() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      
+
       <main>
         {/* Hero Section */}
         <section className="relative h-[60vh] min-h-[400px] flex items-center justify-center">
@@ -42,14 +42,14 @@ export default function LeRestaurantPage() {
               Un voyage culinaire au cœur du Maroc
             </h2>
             <p className="text-body-lg text-[#5C5C5C] leading-[1.8] mb-6">
-              Le restaurant de <strong className="text-[#2C2C2C]">Diffa Tours</strong> vous invite à découvrir 
-              une cuisine raffinée qui célèbre les traditions culinaires marocaines tout en s'ouvrant aux 
+              Le restaurant de <strong className="text-[#2C2C2C]">Diffa Tours</strong> vous invite à découvrir
+              une cuisine raffinée qui célèbre les traditions culinaires marocaines tout en s'ouvrant aux
               influences méditerranéennes et internationales.
             </p>
             <p className="text-body-lg text-[#5C5C5C] leading-[1.8]">
-              Notre chef et son équipe préparent chaque jour des plats authentiques avec des ingrédients 
-              frais et locaux, sélectionnés avec soin pour garantir une qualité exceptionnelle. 
-              De nos tajines traditionnels à nos grillades savoureuses, chaque plat est une célébration 
+              Notre chef et son équipe préparent chaque jour des plats authentiques avec des ingrédients
+              frais et locaux, sélectionnés avec soin pour garantir une qualité exceptionnelle.
+              De nos tajines traditionnels à nos grillades savoureuses, chaque plat est une célébration
               des saveurs et des arômes du Maroc.
             </p>
           </div>
@@ -67,15 +67,15 @@ export default function LeRestaurantPage() {
                   Des plats traditionnels marocains
                 </h3>
                 <p className="text-body-regular text-[#5C5C5C] leading-[1.7] mb-4">
-                  Notre carte met à l'honneur les grands classiques de la cuisine marocaine : 
-                  tajines mijotés aux saveurs subtiles, couscous royal généreux, pastillas délicates 
-                  et méchoui fondant. Chaque recette est préparée selon les méthodes traditionnelles 
+                  Notre carte met à l'honneur les grands classiques de la cuisine marocaine :
+                  tajines mijotés aux saveurs subtiles, couscous royal généreux, pastillas délicates
+                  et méchoui fondant. Chaque recette est préparée selon les méthodes traditionnelles
                   transmises de génération en génération.
                 </p>
                 <p className="text-body-regular text-[#5C5C5C] leading-[1.7]">
-                  Nous utilisons des épices soigneusement sélectionnées - cumin, safran, gingembre, 
-                  cannelle - qui apportent à nos plats cette complexité aromatique caractéristique 
-                  de la gastronomie marocaine. Nos légumes proviennent des jardins locaux et notre 
+                  Nous utilisons des épices soigneusement sélectionnées - cumin, safran, gingembre,
+                  cannelle - qui apportent à nos plats cette complexité aromatique caractéristique
+                  de la gastronomie marocaine. Nos légumes proviennent des jardins locaux et notre
                   viande est choisie auprès des meilleurs fournisseurs de la région.
                 </p>
               </div>
@@ -106,13 +106,13 @@ export default function LeRestaurantPage() {
                   Un cadre élégant et chaleureux
                 </h3>
                 <p className="text-body-regular text-[#5C5C5C] leading-[1.7] mb-4">
-                  Notre salle de restaurant combine l'architecture traditionnelle marocaine avec 
-                  un confort moderne. Les arches élégantes, les lanternes en cuivre et les zelliges 
+                  Notre salle de restaurant combine l'architecture traditionnelle marocaine avec
+                  un confort moderne. Les arches élégantes, les lanternes en cuivre et les zelliges
                   colorés créent une atmosphère intime et raffinée, parfaite pour des repas mémorables.
                 </p>
                 <p className="text-body-regular text-[#5C5C5C] leading-[1.7]">
-                  Vous pouvez également choisir de dîner en terrasse, sous les étoiles, dans le cadre 
-                  enchanteur de notre patio fleuri. Le service attentionné de notre équipe et l'ambiance 
+                  Vous pouvez également choisir de dîner en terrasse, sous les étoiles, dans le cadre
+                  enchanteur de notre patio fleuri. Le service attentionné de notre équipe et l'ambiance
                   tamisée contribuent à faire de chaque repas un moment d'exception.
                 </p>
               </div>
@@ -131,7 +131,7 @@ export default function LeRestaurantPage() {
                 Moments de restauration
               </h2>
             </div>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="text-center p-6">
                 <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center">
@@ -144,7 +144,7 @@ export default function LeRestaurantPage() {
                   7h00 - 11h00
                 </p>
                 <p className="text-sm text-[#5C5C5C]">
-                  Buffet continental avec spécialités marocaines, pains frais, confitures maison, 
+                  Buffet continental avec spécialités marocaines, pains frais, confitures maison,
                   fruits de saison et jus fraîchement pressés.
                 </p>
               </div>
@@ -160,7 +160,7 @@ export default function LeRestaurantPage() {
                   12h30 - 15h00
                 </p>
                 <p className="text-sm text-[#5C5C5C]">
-                  Menu du jour et carte avec salades fraîches, grillades, tajines et 
+                  Menu du jour et carte avec salades fraîches, grillades, tajines et
                   spécialités méditerranéennes. Service à la carte ou formules.
                 </p>
               </div>
@@ -176,7 +176,7 @@ export default function LeRestaurantPage() {
                   19h00 - 22h30
                 </p>
                 <p className="text-sm text-[#5C5C5C]">
-                  Expérience gastronomique complète avec menu dégustation ou à la carte. 
+                  Expérience gastronomique complète avec menu dégustation ou à la carte.
                   Cuisine raffinée dans une ambiance intimiste aux chandelles.
                 </p>
               </div>
@@ -211,7 +211,7 @@ export default function LeRestaurantPage() {
                     Tajine d'agneau aux pruneaux
                   </h4>
                   <p className="text-sm text-[#5C5C5C]">
-                    Viande tendre mijotée avec amandes, pruneaux et miel, relevée d'un mélange 
+                    Viande tendre mijotée avec amandes, pruneaux et miel, relevée d'un mélange
                     subtil d'épices marocaines.
                   </p>
                 </div>
@@ -231,7 +231,7 @@ export default function LeRestaurantPage() {
                     Couscous royal berbère
                   </h4>
                   <p className="text-sm text-[#5C5C5C]">
-                    Semoule fine accompagnée de sept légumes, viandes variées et bouillon parfumé. 
+                    Semoule fine accompagnée de sept légumes, viandes variées et bouillon parfumé.
                     Une tradition familiale généreuse.
                   </p>
                 </div>
@@ -251,7 +251,7 @@ export default function LeRestaurantPage() {
                     Pastilla au poulet
                   </h4>
                   <p className="text-sm text-[#5C5C5C]">
-                    Feuilleté croustillant garni de poulet aux amandes, œufs et épices douces, 
+                    Feuilleté croustillant garni de poulet aux amandes, œufs et épices douces,
                     saupoudré de sucre glace et cannelle.
                   </p>
                 </div>
@@ -273,12 +273,12 @@ export default function LeRestaurantPage() {
               Une sélection de vins soigneusement choisie
             </h3>
             <p className="text-body-regular text-[#5C5C5C] leading-[1.7] mb-6">
-              Notre carte des vins propose une sélection de crus marocains et internationaux, 
-              choisis pour accompagner parfaitement nos plats. Du Médaillon de Meknès aux grands 
+              Notre carte des vins propose une sélection de crus marocains et internationaux,
+              choisis pour accompagner parfaitement nos plats. Du Médaillon de Meknès aux grands
               crus français, notre sommelier saura vous conseiller.
             </p>
             <p className="text-body-regular text-[#5C5C5C] leading-[1.7]">
-              Nous proposons également une gamme complète de boissons non alcoolisées, incluant 
+              Nous proposons également une gamme complète de boissons non alcoolisées, incluant
               nos thés à la menthe traditionnels, jus de fruits frais, sodas et eaux minérales.
             </p>
           </div>
@@ -330,11 +330,11 @@ export default function LeRestaurantPage() {
                       Réservations recommandées
                     </h4>
                     <p className="text-sm text-[#5C5C5C] mb-4">
-                      Pour garantir votre table, nous vous recommandons de réserver, 
+                      Pour garantir votre table, nous vous recommandons de réserver,
                       particulièrement pour le dîner et les week-ends.
                     </p>
                     <p className="text-sm text-[#5C5C5C]">
-                      <strong>Téléphone:</strong> +212 661 822 441
+                      <strong>Téléphone:</strong> +212 691-583171
                     </p>
                   </div>
                 </div>
@@ -343,7 +343,7 @@ export default function LeRestaurantPage() {
 
             <div className="mt-8 text-center">
               <p className="text-sm text-[#5C5C5C] mb-6">
-                <strong>Note:</strong> Nous pouvons accommoder les régimes spéciaux et les allergies alimentaires. 
+                <strong>Note:</strong> Nous pouvons accommoder les régimes spéciaux et les allergies alimentaires.
                 Merci de nous informer lors de votre réservation.
               </p>
             </div>
@@ -360,14 +360,14 @@ export default function LeRestaurantPage() {
               Contactez-nous dès maintenant pour vérifier les disponibilités et profiter de nos offres spéciales.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a 
-                href="#" 
+              <a
+                href="#"
                 className="inline-block bg-[#C9B382] text-white px-8 py-3 text-[14px] font-medium rounded-full hover:bg-primary transition-colors duration-300"
               >
                 Réserver maintenant
               </a>
-              <a 
-                href="#" 
+              <a
+                href="#"
                 className="inline-block bg-transparent border-2 border-[#C9B382] text-[#C9B382] px-8 py-3 text-[14px] font-medium rounded-full hover:bg-[#C9B382] hover:text-white transition-colors duration-300"
               >
                 Voir le menu complet
@@ -376,7 +376,7 @@ export default function LeRestaurantPage() {
           </div>
         </section>
       </main>
-      
+
       <Footer />
     </div>
   );
