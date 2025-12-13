@@ -114,8 +114,8 @@ export default function ContactPage() {
                   <Mail className="w-10 h-10 text-primary" />
                 </div>
                 <h3 className="font-display text-2xl mb-4 text-foreground group-hover:text-primary transition-colors duration-300">{t('contact.info.email')}</h3>
-                <a href="mailto:Contact@palaisriadberbere.com" className="text-sm text-muted hover:text-primary transition-colors break-all inline-block hover:scale-105 transform">
-                  Contact@palaisriadberbere.com
+                <a href="mailto:contact@diffatours.com" className="text-sm text-muted hover:text-primary transition-colors break-all inline-block hover:scale-105 transform">
+                  contact@diffatours.com
                 </a>
               </div>
 

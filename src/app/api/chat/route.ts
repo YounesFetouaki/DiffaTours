@@ -19,7 +19,7 @@ COMPANY INFORMATION:
 - Company: Diffa Tours (Palais Riad Berbere)
 - Location: Marrakech, Morocco
 - Contact: +212 691-583171
-- Email: Contact@palaisriadberbere.com
+- Email: contact@diffatours.com
 - Hours: 24/7 available for inquiries
 
 ADMIN CAPABILITIES:
@@ -50,7 +50,7 @@ COMPANY INFORMATION:
 - Company: Diffa Tours (Palais Riad Berbere)
 - Location: Marrakech, Morocco
 - Contact: +212 691-583171
-- Email: Contact@palaisriadberbere.com
+- Email: contact@diffatours.com
 
 STAFF CAPABILITIES:
 - You can answer questions about tours, pricing, and bookings
@@ -77,7 +77,7 @@ COMPANY INFORMATION:
 - Company: Diffa Tours (Palais Riad Berbere)  
 - Location: Marrakech, Morocco
 - Contact: +212 691-583171
-- Email: Contact@palaisriadberbere.com
+- Email: contact@diffatours.com
 - Hours: 24/7 available for inquiries
 
 AVAILABLE TOURS & DESTINATIONS:
@@ -180,7 +180,7 @@ INFORMACIÓN DE LA COMPAÑÍA:
 - Empresa: Diffa Tours (Palais Riad Berbere)
 - Ubicación: Marrakech, Marruecos
 - Contacto: +212 691-583171
-- Correo: Contact@palaisriadberbere.com
+- Correo: contact@diffatours.com
 - Horario: 24/7 disponible
 
 CAPACIDADES DE ADMIN:
@@ -210,7 +210,7 @@ INFORMACIÓN DE LA COMPAÑÍA:
 - Empresa: Diffa Tours (Palais Riad Berbere)
 - Ubicación: Marrakech, Marruecos
 - Contacto: +212 691-583171
-- Correo: Contact@palaisriadberbere.com
+- Correo: contact@diffatours.com
 
 CAPACIDADES DE STAFF:
 - Puedes responder preguntas sobre tours, precios y reservas
@@ -237,7 +237,7 @@ INFORMACIÓN DE LA COMPAÑÍA:
 - Empresa: Diffa Tours (Palais Riad Berbere)
 - Ubicación: Marrakech, Marruecos
 - Contacto: +212 691-583171
-- Correo: Contact@palaisriadberbere.com
+- Correo: contact@diffatours.com
 - Horario: 24/7 disponible
 
 TOURS Y DESTINOS DISPONIBLES:
@@ -340,7 +340,7 @@ INFORMATIONS SUR L'ENTREPRISE:
 - Entreprise: Diffa Tours (Palais Riad Berbere)
 - Localisation: Marrakech, Maroc
 - Contact: +212 691-583171
-- Email: Contact@palaisriadberbere.com
+- Email: contact@diffatours.com
 - Horaires: 24/7 disponible
 
 CAPACITÉS ADMIN:
@@ -370,7 +370,7 @@ INFORMATIONS SUR L'ENTREPRISE:
 - Entreprise: Diffa Tours (Palais Riad Berbere)
 - Localisation: Marrakech, Maroc
 - Contact: +212 691-583171
-- Email: Contact@palaisriadberbere.com
+- Email: contact@diffatours.com
 
 CAPACITÉS STAFF:
 - Vous pouvez répondre aux questions sur les tours, les prix et les réservations
@@ -397,7 +397,7 @@ INFORMATIONS SUR L'ENTREPRISE:
 - Entreprise: Diffa Tours (Palais Riad Berbere)
 - Localisation: Marrakech, Maroc
 - Contact: +212 691-583171
-- Email: Contact@palaisriadberbere.com
+- Email: contact@diffatours.com
 - Horaires: 24/7 disponible
 
 TOURS ET DESTINATIONS DISPONIBLES:
@@ -500,7 +500,7 @@ INFORMAZIONI SULL'AZIENDA:
 - Azienda: Diffa Tours (Palais Riad Berbere)
 - Posizione: Marrakech, Marocco
 - Contatto: +212 691-583171
-- Email: Contact@palaisriadberbere.com
+- Email: contact@diffatours.com
 - Orari: 24/7 disponibile
 
 CAPACITÀ ADMIN:
@@ -530,7 +530,7 @@ INFORMAZIONI SULL'AZIENDA:
 - Azienda: Diffa Tours (Palais Riad Berbere)
 - Posizione: Marrakech, Marocco
 - Contatto: +212 691-583171
-- Email: Contact@palaisriadberbere.com
+- Email: contact@diffatours.com
 
 CAPACITÀ STAFF:
 - Puoi rispondere a domande su tour, prezzi e prenotazioni
@@ -557,7 +557,7 @@ INFORMAZIONI SULL'AZIENDA:
 - Azienda: Diffa Tours (Palais Riad Berbere)
 - Posizione: Marrakech, Marocco
 - Contatto: +212 691-583171
-- Email: Contact@palaisriadberbere.com
+- Email: contact@diffatours.com
 - Orari: 24/7 disponibile
 
 TOUR E DESTINAZIONI DISPONIBILI:

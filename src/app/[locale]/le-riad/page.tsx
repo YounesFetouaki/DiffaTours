@@ -222,7 +222,7 @@ export default function LeRiadPage() {
                     <Mail size={24} className="text-[#C9B382] flex-shrink-0 mt-1" />
                     <div>
                       <h5 className="font-display text-[16px] text-[#2C2C2C] mb-1">Email</h5>
-                      <p className="text-sm text-[#5C5C5C]">Contact@palaisriadberbere.com</p>
+                      <p className="text-sm text-[#5C5C5C]">contact@diffatours.com</p>
                     </div>
                   </div>
                 </div>
