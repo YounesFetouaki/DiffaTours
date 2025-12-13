@@ -38,7 +38,7 @@ export default function Header() {
   const { user, isLoaded } = useUser();
   const { signOut } = useClerk();
 
-  const isAdmin = userRole === 'admin';
+  const isAdmin = userRole === 'admin' || userRole === 'super_admin';
   const isStaff = userRole === 'staff';
   const isStaffOrAdmin = isAdmin || isStaff;
 
